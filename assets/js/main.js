@@ -1,34 +1,27 @@
-/*
-	Miniport by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+;(function($) {
 
-(function($) {
+    $(document).ready( function() {
+        $(document).on('click', '.header-area .show-menu', function() {
+            $(this).toggleClass('active');
+            $(".header-area .navbar").toggleClass('active');
+        });
+        // $(document).on('click', '.header-area .navbar .close-menu', function() {
+        //     $(".header-area .navbar").removeClass('active');
+        // });
 
-	var	$window = $(window),
-		$body = $('body'),
-		$nav = $('#nav');
-
-	// Breakpoints.
-		breakpoints({
-			xlarge:  [ '1281px',  '1680px' ],
-			large:   [ '981px',   '1280px' ],
-			medium:  [ '737px',   '980px'  ],
-			small:   [ null,      '736px'  ]
-		});
-
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
-
-	// Scrolly.
-		$('#nav a, .scrolly').scrolly({
-			speed: 1000,
-			offset: function() { return $nav.height(); }
-		});
+        AOS.init({
+            duration: 1500,
+            once: true,
+        })
+    });
 
 })(jQuery);
+
+
+var div = document.createElement("div");
+    div.id="preloader",
+    div.className="preloader",
+    div.innerHTML='<div class="black_wall"></div><div class="loader"></div>',
+    document.body.insertBefore(div,document.body.firstChild),window.onload=function() {
+    document.getElementById("preloader").classList.add("off")
+};
