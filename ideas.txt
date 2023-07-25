@@ -1,0 +1,22 @@
+
+all this can be connected with the home page
+    for movies.html
+    different color according to ranking
+    some hyper links of imdb 
+    more years of movies can be added
+    ranking can be change from the preview
+    pop up can be used also here
+
+
+
+    for learniing.html
+    some certificates can be added
+    new skills can be added
+    what i want to learn next can be added
+    some on going projects can be added
+
+    Hobbies.html upcoming page
+    travels, food, coin collection can be added here
+
+projects can be in one page with small photos with detail and there can be a pop up and cross button
+
