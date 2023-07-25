@@ -1,13 +1,13 @@
 
 all this can be connected with the home page
-    for movies.html
+all of these html can be password protected
+
+    for movies.html  ==> can be merge with hobbies and add book reading too
     different color according to ranking
     some hyper links of imdb 
     more years of movies can be added
     ranking can be change from the preview
     pop up can be used also here
-
-
 
     for learniing.html
     some certificates can be added
@@ -16,7 +16,20 @@ all this can be connected with the home page
     some on going projects can be added
 
     Hobbies.html upcoming page
-    travels, food, coin collection can be added here
+    travels, food, coin collection can be added here ==> use images from social media
+
+    to do list ?? possible in the future??
+
+
 
 projects can be in one page with small photos with detail and there can be a pop up and cross button
 
+watch more websites of famous people to improve
+
+jump and jump to other websites can be added
+
+Use creativity
+
+BACKEND can be added to the github and backend should be deployed in cyberta or ngnix
+
+Toggle CSS mode 
