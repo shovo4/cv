@@ -1,6 +1,6 @@
 
 all this can be connected with the home page
-all of these html can be password protected
+all of these html can be password protected ==> on it
 
     for movies.html  ==> can be merge with hobbies and add book reading too
     different color according to ranking
@@ -9,7 +9,7 @@ all of these html can be password protected
     ranking can be change from the preview
     pop up can be used also here
 
-    for learniing.html
+    for learniing.html ===> on it 
     some certificates can be added
     new skills can be added
     what i want to learn next can be added
