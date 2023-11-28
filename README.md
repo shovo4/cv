@@ -28,6 +28,7 @@ Whether you're a potential employer, a fellow developer, or just curious about m
 
 ## Website Screenshots
 ![Website Screenshot 1](assets/images/website.png)
+
 ![Website Screenshot 2](assets/images/website2.png)
 
 ## Future Enhancements
