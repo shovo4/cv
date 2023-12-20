@@ -67,7 +67,14 @@ a {
     transform-origin: bottom;
     z-index: 111111
 }
+.certificate-links {
+    display: flex;
+    justify-content: space-around; /* This will space out the links evenly */
+}
 
+.certificate-links a {
+    margin-right: 10px; /* Add some space between the links */
+}
 .preloader .black_wall {
     height: 100%;
     background-color: #222;
