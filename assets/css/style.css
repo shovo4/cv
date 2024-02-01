@@ -2016,7 +2016,7 @@ ol {
 .navbar-cred a {
     display: inline-block;
     padding: 10px 20px; /* Padding inside each link for spacing */
-    margin: 0 10px; /* Space between links */
+    margin: 0 5px; /* Space between links */
     background-color: #323232; /* Background color of links */
     color: #fff; /* Text color */
     text-decoration: none; /* Remove underline */
