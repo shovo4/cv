@@ -137,6 +137,7 @@ ol {
     position: relative;
     border-radius: 30px;
     background: #0F0F0F;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added transition for transform and box-shadow */
 }
 .shadow-box::after {
     content: '';
@@ -171,6 +172,7 @@ ol {
 .shadow-box * {
     z-index: 2;
     position: relative;
+    transition: transform 0.3s ease-in-out;
 }
 .section-heading {
     color: #ffffff;
@@ -539,7 +541,7 @@ ol {
     position: relative;
     width: 100%;
     max-width: 100%;
-    height: 19px;
+    height: 25px;
     overflow-x: hidden;
 }
 
@@ -548,7 +550,7 @@ ol {
     position: absolute;
     white-space: nowrap;
     will-change: transform;
-    font-size: 12px;
+    font-size: 18px;
 
     animation: marquee 8s linear infinite;
 }
@@ -594,7 +596,7 @@ ol {
 }
 .about-area .about-details .about-details-inner h1 {
     color: #ffffff;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 500;
 }
 .about-area .about-details .about-details-inner p {
@@ -1897,6 +1899,7 @@ ol {
     .breadcrumb-area .breadcrumb-content .section-heading {
         font-size: 24px;
     }
+    
     .project-details-wrap .project-details-3-img,
     .project-details-wrap .project-details-2-img {
         height: 250px;
@@ -1970,4 +1973,61 @@ ol {
     .blog-details-area .blog-details-content .comments-and-form-wrap .comments .children {
         padding-left: 0;
     }
+}
+/* Hover effect for pop-up sections */
+.about-me-box, .about-crenditials-box, .about-blog-box, .about-project-box, .about-profile-box {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.about-me-box:hover, .about-crenditials-box:hover, .about-blog-box:hover, .about-project-box:hover, .about-profile-box:hover {
+    transform: scale(1.05); /* Slightly scale up the box */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+/* Ensure content inside boxes remains crisp during scaling */
+.about-me-box *, .about-crenditials-box *, .about-blog-box *, .about-project-box *, .about-profile-box * {
+    transition: transform 0.3s ease-in-out;
+    transform: scale(calc(1 / 1.05));
+}
+
+.shadow-box:hover {
+    transform: scale(1.05); /* Slightly scales up on hover */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Adds shadow for depth on hover */
+}
+
+
+
+.shadow-box:hover * {
+    transform: scale(0.95); /* Counteracts the parent's scale to maintain crisp content */
+}
+.navbar-cred {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    background-color: #0F0F0F; /* Adjust based on your theme */
+    z-index: 100; /* Ensure it's above other content */
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-bottom: 1px solid #333; /* Optional */
+}
+
+
+.navbar-cred a {
+    display: inline-block;
+    padding: 10px 20px; /* Padding inside each link for spacing */
+    margin: 0 10px; /* Space between links */
+    background-color: #323232; /* Background color of links */
+    color: #fff; /* Text color */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px; /* Text size */
+    border-radius: 5px; /* Rounded corners for the link boxes */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+}
+
+.navbar-cred a:hover, .navbar-cred a:focus {
+    background-color: #5B78F6; /* Change background color on hover/focus */
+    color: #ffffff; /* Optional: Change text color on hover/focus */
+    transform: translateY(-2px); /* Slightly raise the link for effect */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Add shadow to lifted link */
 }
