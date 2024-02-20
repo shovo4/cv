@@ -669,10 +669,10 @@ ol {
     border-radius: 30px;
 }
 .projects-area .project-item .project-info p {
-    color: #BCBCBC;
+    color: #80e7a2;
     opacity: 0.5;
-    font-size: 14px;
-    text-transform: uppercase;
+    font-size: 12px;
+    text-transform: inherit;
     margin-bottom: 2px;
 }
 .projects-area .project-item .project-info h1 {
