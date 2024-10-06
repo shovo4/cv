@@ -2073,3 +2073,342 @@ ol {
         flex: 0 1 100%; /* Stacks the projects on very small screens */
     }
 }
+
+/* # overview bold colors */
+.color-transition {
+    animation: color-change 3s infinite alternate;
+}
+
+@keyframes color-change {
+    0% {
+        color: lightgreen;
+    }
+    100% {
+        color: lightblue;
+    }
+}
+/* # job titles */
+body {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text for readability */
+}
+
+.job-titles-container {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.job-box {
+    width: 200px;
+    height: 200px;
+    background-color: #222; /* Dark background for job boxes */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff; /* White text inside the boxes */
+    animation: fadeInUp 1s ease; /* Fade in animation */
+    cursor: pointer;
+    position: relative;
+}
+
+.job-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 20px rgba(0, 255, 255, 0.5);
+}
+
+.job-box img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.job-box h3 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.shadow-box {
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1); /* Light shadow */
+}
+
+/* Keyframe animation for fadeInUp */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Transition colors for better visuals */
+.job-box:hover h3 {
+    color: #00ffcc; /* Light green on hover */
+}
+
+/* Container for the whole timeline */
+.timeline {
+    position: relative;
+    padding: 20px 0;
+    margin: 0 auto;
+    max-width: 1200px; /* Increase width for more spacing */
+    background-color: black; /* Set background to black */
+}
+
+/* Timeline Item */
+.timeline-item {
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+    align-items: flex-start;
+    padding: 40px 0; /* Add more space between items */
+    position: relative;
+}
+
+/* Timeline line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 60%; /* Shift the tree line to the right */
+    width: 2px;
+    height: 100%;
+    background-color: #0dcaf0; /* Tree line color */
+    top: 0;
+    z-index: 1;
+}
+
+/* Timeline content on the left */
+.timeline-content {
+    width: 55%; /* Content takes up more space */
+    text-align: left;
+    background-color: #1e1e1e; /* Darker shade for contrast */
+    color: #fff;
+    padding: 20px;
+    margin-right: 10%; /* Push content to the left of the tree line */
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid #0dcaf0; /* Add a subtle border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+    transition: all 0.3s ease-in-out; /* Add smooth transition */
+}
+
+/* Hover effect for timeline content */
+.timeline-content:hover {
+    transform: translateX(10px); /* Slide right on hover */
+    background-color: #292b2c; /* Slightly lighter on hover */
+}
+
+/* Timeline date on the right */
+.timeline-date {
+    width: 20%;
+    text-align: left;
+    font-size: 12px; /* Smaller font size for the date */
+    color: #0dcaf0; /* Light blue color for the date */
+    padding: 10px;
+    position: absolute;
+    left: 65%; /* Align it to the right, close to the tree */
+    top: 10px;
+    z-index: 2; /* Make sure date is above the line */
+}
+
+/* Timeline dot */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 60%; /* Position dot on the timeline line */
+    width: 20px;
+    height: 20px;
+    background-color: #198754; /* Green for the dot */
+    border-radius: 50%;
+    border: 2px solid #0dcaf0; /* Blue border */
+    transform: translateX(-50%);
+    z-index: 3; /* Ensure dot is above line */
+}
+
+/* Timeline dot animation */
+.timeline-item::before {
+    animation: pulse 1.5s infinite; /* Pulsing dot animation */
+}
+
+/* Keyframe animation for dot pulsing */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Adjusting the job description font and bullet points */
+.timeline-content h3 {
+    font-size: 18px;
+    color: var(--primary_color); /* Maintain consistency with the theme color */
+}
+
+.timeline-content h5 {
+    font-size: 14px;
+    color: #BCBCBC;
+    opacity: 0.6;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.timeline-content ul.job-responsibilities {
+    margin-left: 20px; /* Indent the bullet points */
+    padding-left: 0;
+    list-style-type: disc; /* Change bullet point style */
+    font-size: 16px; /* Slightly increase font size for better readability */
+    color: #FFFFFF;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+.timeline-content ul.job-responsibilities li {
+    margin-bottom: 10px;
+}
+
+/* Adjusting the date font and alignment */
+.timeline-date h4 {
+    font-size: 10px;
+    color: #0dcaf0; /* Light blue color */
+    font-weight: 500;
+}
+
+/* Green colored tree style for the Education timeline */
+
+/* Container for the whole education timeline */
+.timeline-education {
+    position: relative;
+    padding: 20px 0;
+    margin: 0 auto;
+    max-width: 1200px;
+    background-color: black; /* Set background to black */
+}
+
+/* Timeline line */
+.timeline-education::before {
+    content: '';
+    position: absolute;
+    left: 60%; /* Shift the tree line to the right */
+    width: 2px;
+    height: 100%;
+    background-color: #4CAF50; /* Green color for the tree line */
+    top: 0;
+    z-index: 1;
+}
+
+/* Timeline item */
+.timeline-item-education {
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+    align-items: flex-start;
+    padding: 40px 0; /* Space between items */
+    position: relative;
+}
+
+/* Timeline content on the left */
+.timeline-content-education {
+    width: 55%; /* Content width */
+    text-align: left;
+    background-color: #1e1e1e; /* Darker shade for contrast */
+    color: #fff;
+    padding: 20px;
+    margin-right: 10%; /* Push content to the left of the tree line */
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid #4CAF50; /* Green border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* Font styling for consistency */
+.timeline-content-education h3 {
+    font-size: 18px;
+    color: #4CAF50; /* Green color for the title */
+    font-weight: 600;
+}
+
+.timeline-content-education h5 {
+    font-size: 14px;
+    color: #BCBCBC;
+    opacity: 0.6;
+}
+
+.timeline-content-education p {
+    font-size: 16px;
+    color: #FFFFFF;
+    opacity: 0.8;
+    line-height: 1.56;
+}
+
+/* Timeline date on the right */
+.timeline-date-education {
+    width: 20%;
+    text-align: left;
+    font-size: 12px; /* Smaller font size for the date */
+    color: #4CAF50; /* Green color for the date */
+    padding: 10px;
+    position: absolute;
+    left: 65%; /* Align the date to the right, close to the tree */
+    top: 10px;
+    z-index: 2; /* Ensure date is above the line */
+}
+.timeline-date-education h4 {
+    font-size: 12px;
+    color: #4CAF50; /* Green color for the date */
+    font-weight: 500;
+}
+/* Timeline dot */
+.timeline-item-education::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 60%; /* Position dot on the timeline line */
+    width: 20px;
+    height: 20px;
+    background-color: #4CAF50; /* Green for the dot */
+    border-radius: 50%;
+    border: 2px solid #4CAF50; /* Green border */
+    transform: translateX(-50%);
+    z-index: 3; /* Ensure dot is above the line */
+}
+
+/* Hover effect for timeline content */
+.timeline-content-education:hover {
+    transform: translateX(10px); /* Slide right on hover */
+    background-color: #292b2c; /* Slightly lighter on hover */
+}
+
+/* Pulsing animation for the dot */
+@keyframes pulse-education {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Adding pulse effect to the dot */
+.timeline-item-education::before {
+    animation: pulse-education 1.5s infinite; /* Pulsing dot animation */
+}
