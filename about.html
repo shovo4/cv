@@ -2,54 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shovo-Introduction</title>
+    <title>Shovo's Portfolio</title>
 
-    <!-- Fonts -->
+    <!-- Fonts and Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
-
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/aos.css">
-
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 
-    <main class="main-aboutpage">
+    <!-- Header with Navigation -->
+    <header class="header-area">
+        <div class="container">
+            <nav class="navbar">
+                <ul class="menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experiences & Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#contact" class="theme-btn">Let's talk</a>
+            </nav>
+        </div>
+    </header>
 
-        <!-- Header -->
-        <header class="header-area">
+    <!-- Main Content -->
+    <main class="main-homepage">
+
+        <!-- Home Section -->
+        <section id="home" class="home-section">
             <div class="container">
-                <div class="gx-row d-flex align-items-center justify-content-between">
-                    <nav class="navbar">
-                        <ul class="menu">
-                            <li><a href="index.html">Home</a></li>
-                            <li class="active"><a href="about.html">About</a></li>
-                            <li><a href="credentials.html">Experiences & Skills</a></li>
-                            <li><a href="works.html">Projects</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                        <a href="./contact.html" class="theme-btn">Let's talk</a>
-                    </nav>
-
-                    <a href="./contact.html" class="theme-btn">Let's talk</a>
-
-                    <div class="show-menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="about-me-box">
+                            <img src="./assets/images/me.jpeg" alt="Saiful Islam Shovo">
+                            <h1>Saiful Islam Shovo</h1>
+                            <p>A dedicated Computing Science graduate from the University of Alberta with a passion for full-stack development.</p>
+                            <a href="#about" class="about-btn">Learn More</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </header>
+        </section>
 
-        <!-- About -->
-        <section class="about-area">
+        <!-- About Section (Content from about.html) -->
+        <section id="about" class="about-area">
             <div class="container">
                 <div class="d-flex about-me-wrap align-items-start gap-24">
                     <div data-aos="zoom-in">
@@ -66,26 +71,24 @@
                             <a href="./assets/files/resume.pdf" target="_blank" rel="noopener noreferrer" class="overlay-link"></a>
                             <img src="./assets/images/bg1.png" alt="BG" class="bg-img">    
                             <div class="about-details-inner shadow-box">
-                                    <img src="./assets/images/icon2.png" alt="Star">
-                                    <p>I am</p>
-                                    <h1>MD Saiful Islam Shovo,</h1>
-                                    <p>A dedicated full-stack developer skilled in front-end and back-end technologies such as Django, React.js, Next.js, and Node.js, with expertise in databases like PostgreSQL, MongoDB, and Firebase. Proficient in languages including Python, Java, and JavaScript, I hold a B.Sc. in Computing Science from the University of Alberta. I've enhanced my skills in HTML, CSS, AWS, and Docker, and explored machine learning. Adept at teamwork and using GitHub, I'm eager to leverage my skills in challenging projects to contribute to organizational success.</p>
-                                </div>
-                                           
+                                <img src="./assets/images/icon2.png" alt="Star">
+                                <p>I am</p>
+                                <h1>MD Saiful Islam Shovo,</h1>
+                                <p>A dedicated full-stack developer skilled in front-end and back-end technologies such as Django, React.js, Next.js, and Node.js, with expertise in databases like PostgreSQL, MongoDB, and Firebase. Proficient in languages including Python, Java, and JavaScript, I hold a B.Sc. in Computing Science from the University of Alberta. I've enhanced my skills in HTML, CSS, AWS, and Docker, and explored machine learning. Adept at teamwork and using GitHub, I'm eager to leverage my skills in challenging projects to contribute to organizational success.</p>
+                            </div>
                         </div>
                         <a href="./assets/files/resume.pdf" target="_blank" class="about-btn" style="position: absolute; right: 20px; bottom: 20px;">
                             View Resume <img src="./assets/images/icon.svg" alt="Button">
-                       </a>      
+                        </a>      
                     </div>
                 </div>
 
                 <div class="row mt-24">
                     <div class="col-md-6" data-aos="zoom-in">
                         <div class="about-edc-exp about-experience shadow-box">
-                            <a class="overlay-link" href="./credentials.html"></a>
+                            <a class="overlay-link" href="#experience"></a>
                             <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
                             <h3>EXPERIENCE</h3>
-
                             <ul>
                                 <li>
                                     <p class="date">May 2022- Present</p>
@@ -98,17 +101,16 @@
                                     <p class="type">IlmHub</p>
                                 </li>
                             </ul>
-                            <a href="./credentials.html" class="about-btn" style="position: absolute; right: 20px; bottom: 20px;">
+                            <a href="#experience" class="about-btn" style="position: absolute; right: 20px; bottom: 20px;">
                                 View More Details <img src="./assets/images/icon.svg" alt="Button">
                             </a>
                         </div>
                     </div>
                     <div class="col-md-6" data-aos="zoom-in">
                         <div class="about-edc-exp about-education shadow-box">
-                            <a class="overlay-link" href="./credentials.html"></a>
+                            <a class="overlay-link" href="#experience"></a>
                             <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
                             <h3>EDUCATION</h3>
-
                             <ul>
                                 <li>
                                     <p class="date">2019 - 2023</p>
@@ -121,38 +123,94 @@
                                     <p class="type">Dhaka College</p>
                                 </li>
                             </ul>
-                            <a href="./credentials.html" class="about-btn" style="position: absolute; right: 20px; bottom: 20px;">
+                            <a href="#experience" class="about-btn" style="position: absolute; right: 20px; bottom: 20px;">
                                 View More Details <img src="./assets/images/icon.svg" alt="Button">
                             </a>
                         </div>
-                        
                     </div>
                 </div>
             </div>
         </section>
 
-
-        <!-- Footer -->
-        <footer class="footer-area">
+        <!-- Experience & Skills Section -->
+        <section id="experience" class="experience-section">
             <div class="container">
-                <div class="footer-content text-center">
-                    <a href="./index.html" class="logo">
-                        <img src="./assets/images/logo.gif" alt="Logo" width="300" height="250">
-                    </a>
-                    <ul class="footer-menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="credentials.html">Experiences & Skills</a></li>
-                        <li><a href="works.html">Projects</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                <h2>Experiences & Skills</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Experience</h3>
+                        <ul>
+                            <li>
+                                <h4>Full Stack Developer (Contract - Project-based)</h4>
+                                <p>Connection Hub Ltd, Edmonton, AB</p>
+                                <p>May 2022 - Present</p>
+                            </li>
+                            <li>
+                                <h4>Full-Stack Developer (Intern)</h4>
+                                <p>IlmHub, Edmonton, AB</p>
+                                <p>2023 - 2023</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Skills</h3>
+                        <ul>
+                            <li>Python, C, Java, JavaScript, TypeScript, PHP, MIPS</li>
+                            <li>AWS, Docker, Heroku, Nginx</li>
+                            <li>React.js, Angular, Next.js, HTML, CSS</li>
+                            <li>Django, Fast API, Express.js</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </footer>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="projects-wrapper">
+                    <div class="project-item">
+                        <h3>IlmHub - Pronunciation App</h3>
+                        <p>Django, React.js, Material UI, Docker, PostgreSQL, Cybera</p>
+                        <a href="https://github.com/shovo4/pronunciation-practice" target="_blank">View on GitHub</a>
+                    </div>
+                    <div class="project-item">
+                        <h3>Keeper App</h3>
+                        <p>React.js, Redux, Fast API, Docker</p>
+                        <a href="https://github.com/shovo4/keeper-app" target="_blank">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact</h2>
+                <ul>
+                    <li>Email: <a href="mailto:saifulislamshovo4@gmail.com">saifulislamshovo4@gmail.com</a></li>
+                    <li>Phone: <a href="tel:+15875666172">+1 587-566-6172</a></li>
+                    <li>Location: Edmonton, AB, Canada</li>
+                </ul>
+                <h3>Social Links</h3>
+                <ul class="social-links">
+                    <li><a href="https://www.linkedin.com/in/saifulshovo/">LinkedIn</a></li>
+                    <li><a href="https://github.com/shovo4">GitHub</a></li>
+                </ul>
+            </div>
+        </section>
 
     </main>
-    
 
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="container">
+            <p>&copy; 2024 Saiful Islam Shovo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="./assets/js/jquery-3.6.4.js"></script>
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/aos.js"></script>

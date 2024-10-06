@@ -4,210 +4,683 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shovo</title>
+    <title>Shovo's Portfolio</title>
 
-    <!-- Fonts -->
+    <!-- Fonts and Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
-
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/aos.css">
-
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 
-    <main class="main-homepage">
+    <!-- Header with Navigation -->
+    <header class="header-area">
+        <div class="container">
+            <nav class="navbar">
+                <ul class="menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experiences & Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#contact" class="theme-btn">Let's talk</a>
+            </nav>
+        </div>
+    </header>
 
-        <!-- Header -->
-        <header class="header-area">
-            <div class="container">
-                <div class="gx-row d-flex align-items-center justify-content-between">
-                    <nav class="navbar">
-                        <ul class="menu">
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="credentials.html">Experiences & Skills</a></li>
 
-                            <li><a href="works.html">Projects</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                        <a href="./contact.html" class="theme-btn">Let's talk</a>
-                    </nav>
 
-                    <a href="./contact.html" class="theme-btn">Let's talk</a>
-
-                    <div class="show-menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+<!-- About Section (Content from about.html) -->
+<section id="about" class="about-area">
+    <div class="container">
+        <div class="d-flex about-me-wrap align-items-start gap-24">
+            <div data-aos="zoom-in">
+                <div class="about-image-box shadow-box">
+                    <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                    <div class="image-inner">
+                        <img src="./assets/images/me.jpeg" alt="About Me">
                     </div>
                 </div>
             </div>
-        </header>
 
-        <!-- About -->
-        <section class="about-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6" data-aos="zoom-in">
-                        <div class="about-me-box shadow-box">
-                            <a class="overlay-link" href="./about.html"></a>
-                            <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
-                            <div class="img-box">
-                                <img src="./assets/images/me.jpeg" alt="About Me">
-                            </div>
-                            <div class="infos">
-                                <!-- <h4>FULL STACK DEVELOPER</h4> -->
-                                <h1>Saiful Islam Shovo</h1>
-                                <p>I am a dedicated Computing Science graduate from University of Alberta. </p>
-                                <a href="#" class="about-btn">
-                                    <img src="./assets/images/icon.svg" alt="Button">
-                                </a>
-                            </div>
-                        </div>
+            <div class="about-details" data-aos="zoom-in">
+                <div class="about-blog-box info-box shadow-box h-full">
+                    <a href="./assets/files/resume.pdf" target="_blank" rel="noopener noreferrer" class="overlay-link"></a>
+                    <img src="./assets/images/bg1.png" alt="BG" class="bg-img">    
+                    <div class="about-details-inner shadow-box">
+                        <img src="./assets/images/icon2.png" alt="Star">
+                        <p>I am</p>
+                        <h1>MD Saiful Islam Shovo,</h1>
+                        <p>A dedicated full-stack developer skilled in front-end and back-end technologies such as Django, React.js, Next.js, and Node.js, with expertise in databases like PostgreSQL, MongoDB, and Firebase. Proficient in languages including Python, Java, and JavaScript, I hold a B.Sc. in Computing Science from the University of Alberta. I've enhanced my skills in HTML, CSS, AWS, and Docker, and explored machine learning. Adept at teamwork and using GitHub, I'm eager to leverage my skills in challenging projects to contribute to organizational success.</p>
                     </div>
+                </div>
+                <a href="./assets/files/resume.pdf" target="_blank" class="about-btn" style="position: absolute; right: 20px; bottom: 20px;">
+                    View Resume <img src="./assets/images/icon.svg" alt="Button">
+                </a>      
+            </div>
+        </div>
+    </div>
+</section>
 
-                    <div class="col-md-6">
-                        <div class="about-credentials-wrap">
-
-                            <div class="gx-row d-flex gap-24">
-                                <div data-aos="zoom-in">
-                                    <div class="about-crenditials-box info-box shadow-box h-full">
-                                        <a class="overlay-link" href="./credentials.html"></a>
-                                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
-                                        <img src="./assets/images/sign.png" alt="Sign" width="300" height="200">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="infos">
-                                                <h4>more about me</h4>
-                                                <h1>Experiences & Skills</h1>
-                                            </div>
-    
-                                            <a href="./credentials.html" class="about-btn">
-                                                <img src="./assets/images/icon.svg" alt="Button">
-                                            </a>
-    
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+<!-- Experience & Skills Section -->
+<section class="credential-area">
+    <div class="container">
+        <div class="gx-row d-flex">
+            <div class="credential-sidebar-wrap" data-aos="zoom-in">
+                <div class="credential-sidebar text-center">
+                    <div class="shadow-box">
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="img-box">
+                            <img src="./assets/images/me.jpeg" alt="About Me">
                         </div>
+                        <h2>MD Saiful Islam Shovo</h2>
+                        <p>@shovo4</p>
+
+                        <ul class="social-links d-flex justify-content-center">
+                            <li><a href="https://www.linkedin.com/in/saifulshovo/"><i class="iconoir-linkedin"></i></a></li>
+                            <li><a href="https://github.com/shovo4"><i class="iconoir-github"></i></a></li>
+                            <li><a href="https://instagram.com/shovo_4"><i class="iconoir-instagram"></i></a></li>
+                            <li><a href="https://twitter.com/sshovo4"><i class="iconoir-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/saifulislamshovo4/"><i class="iconoir-facebook-tag"></i></a></li>
+                        </ul>                                
+
+                        <a href="./assets/files/resume.pdf" target="_blank" class="theme-btn">View Resume</a>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="credential-content flex-1">
+                <div class="navbar-cred">
+                    <a href="#experience">Experience</a>
+                    <a href="#education">Education</a>
+                    <a href="#certificates">Certificates</a>
+                    <a href="#skills">Skills</a>
+                </div>
+
+                <div class="credential-edc-exp credential-experience">
+                    <h2 data-aos="fade-up">Experience</h2>
+                    <div id="experience" class="credential-edc-exp-item" data-aos="zoom-in">
+                        <h4>May 2022- Present</h4>
+                        <h3>Full Stack Developer (Contract - Project-based)</h3>
+                        <h5><a href="https://connectionhub.ca/" target="_blank">Connection Hub Ltd</a>, Edmonton, AB</h5> 
+                        <p>I skillfully designed and developed the company's website using WordPress, emphasizing a custom theme and meticulous hand coding for a unique touch. I focused on enhancing secure communication within the Django and Postgres backend, successfully reducing processing time by 25%. The website boasts a responsive interface, seamlessly integrated with the WordPress CMS for optimal user experience. Moreover, I customized various website features, employing a blend of WordPress plugins and coding expertise in PHP, HTML, CSS, and JavaScript, to create a dynamic and engaging online presence.</p>
+                    </div>
+                    <div class="credential-edc-exp-item" data-aos="zoom-in">
+                        <h4>2023 - 2023</h4>
+                        <h3>Full-Stack Developer (Intern)</h3>
+                        <h5><a href="https://ilmhub.com/" target="_blank">IlmHub</a>, Edmonton, AB</h5>
+                        <p>I collaborated with a team of four to develop a website that enables users to learn new languages through pronunciation. Our platform offers users lessons from teachers, opportunities to practice and receive feedback, and the ability to share their progress with parents. To build this project, we used Django for the backend, React js for the frontend, and Postgres for the database. We successfully deployed the backend on Cybera and the frontend on Heroku.</p>
                     </div>
                 </div>
 
-                <div class="row mt-24">
-                    <div class="col-md-12">
-                        <div class="blog-service-profile-wrap d-flex gap-24">
-                            <div data-aos="zoom-in">
-                                <div class="about-blog-box info-box shadow-box h-full">
-                                    <a href="./assets/files/resume.pdf" target="_blank" rel="noopener noreferrer" class="overlay-link"></a>
-                                    <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
-                                    <img src="./assets/images/resume.png" alt="GFonts" width="224" height="126">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="infos">
-                                            <h4>PDF</h4>
-                                            <h1>Resume</h1>
-                                        </div>
-                                        
-                                        <a href="./assets/files/resume.pdf" target="_blank" rel="noopener noreferrer" class="about-btn">
-                                            <img src="./assets/images/icon.svg" alt="Button">
-                                        </a>
-    
-                                    </div>
-                                </div>
-                            </div>
+                <div id="education" class="credential-edc-exp credential-education">
+                    <h2 data-aos="fade-up">Education</h2>
+                    <div class="credential-edc-exp-item" data-aos="zoom-in">
+                        <h4>2019 - 2023</h4>
+                        <h3>Bachelor Degree in Computer Science Software Specialization</h3>
+                        <h5>University of Alberta, Edmonton, AB</h5>
+                        <p>Located in the vibrant city of Edmonton, Alberta, the University of Alberta is a highly regarded state university that is recognized as one of Canada's top institutions of higher learning. With its outstanding academic programs and exceptional research opportunities, the University of Alberta attracts students from all over the world who are eager to pursue their passions and achieve their goals.</p>
+                    </div>
+                    <div class="credential-edc-exp-item" data-aos="zoom-in">
+                        <h4>2016 - 2017</h4>
+                        <h3>Higher Secondary Certificate</h3>
+                        <h5>Dhaka College, Dhaka, Bangladesh</h5>
+                        <p>Nestled in the bustling city of Dhaka, Bangladesh, lies one of the most esteemed public colleges in the region. It was at this distinguished institution where I pursued my studies in Science during my 11th and 12th years of education. The college's commitment to academic excellence, coupled with its vibrant campus community, provided me with an unparalleled learning experience that has continued to shape my life and career.</p>
+                    </div>
+                    <div class="credential-edc-exp-item" data-aos="zoom-in">
+                        <h4>2005 - 2015</h4>
+                        <h3>Secondary School Certificate</h3>
+                        <h5>Ideal School & College, Dhaka, Bangladesh</h5>
+                        <p>Imbued with a rich legacy of academic excellence, one of the finest public schools in Bangladesh served as my educational home for a decade, where I studied until the 10th grade. The institution's unwavering commitment to nurturing well-rounded individuals through a robust curriculum and a plethora of extracurricular activities helped me to cultivate a lifelong love of learning and laid a strong foundation for my future pursuits. The memories and values I gained from my time at this remarkable school will forever be cherished.</p>
+                    </div>
+                </div>
 
-                            <div data-aos="zoom-in">
-                                    <div class="about-project-box info-box shadow-box h-full">
-                                        <a class="overlay-link" href="./works.html"></a>
-                                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
-                                        <img src="./assets/images/my-works.png" alt="My Works" width="500" height="226">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="infos">
-                                                <h4>SHOWCASE</h4>
-                                                <h1>Projects</h1>
-                                            </div>
-    
-                                            <a href="#" class="about-btn">
-                                                <img src="./assets/images/icon.svg" alt="Button">
-                                            </a>
-    
-                                        </div>
-                                    </div>
-                                </div>
+                
 
-                            <div data-aos="zoom-in">
-                                <div class="about-profile-box info-box shadow-box h-full">
-                                    <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
-                                    <div class="inner-profile-icons shadow-box">
-                                        <a href="https://github.com/shovo4">
-                                            <i class="iconoir-github"></i>
-                                        </a>
-                                        <a href="https://www.linkedin.com/in/saifulshovo/">
-                                            <i class="iconoir-linkedin"></i>
-                                        </a>
+                <div id="certificates" class="container about-experience">
+                    <div class="credential-content flex-1">
+                        <h2 data-aos="fade-up" style="color: #fff; margin-bottom: 22px;">Certificates</h2>
+                
+                        <!-- Certificate 1: Bachelors Degree in Computing Science Specialization -->
+                        <div class="about-credentials-wrap" data-aos="zoom-in">
+                            <ul>
+                
+                                <!-- AWS Cloud Practitioner -->
+                                <li class="shadow-box" style="padding: 30px; margin-bottom: 24px; text-align: center;">
+                                    <div class="date" style="color: #BCBCBC; opacity: 0.6; font-size: 16px; font-weight: 500; margin-bottom: 12px;">Dec 2023</div>
+                                    <h2 style="font-size: 18px; color: #fff; opacity: 0.9; margin-bottom: 20px;">AWS Certified Cloud Practitioner</h2>
+                                    <div style="margin-bottom: 20px;">
+                                        <p>Amazon Web Services Training and Certification,
+                                            This validates my fundamental knowledge of AWS cloud services and architecture.</p>
+
+                                        <a href="https://www.credly.com/badges/1b6b6e75-c438-475d-ad05-51953b479722/public_url" target="_blank" style="display: inline-block; margin-right: 15px;">View Credly Certificate</a>
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="infos">
-                                            <h4>Connect with me</h4>
-                                            <h1>Contacts</h1>
-                                        </div>
-    
-                                        <a href="./contact.html" class="about-btn">
-                                            <img src="./assets/images/icon.svg" alt="Button">
-                                        </a>
-    
+                                    <div style="margin-bottom: 20px;">
+                                        <img src="./assets/images/aws-certified-cloud-practitioner.png" alt="AWS Cloud Practitioner Badge" style="width: 100px; margin-bottom: 20px;"/>
                                     </div>
-                                </div>
-                            </div>
-                            
-                        </div><br> <br> <br>
-                        <div data-aos="zoom-in">
-                            <div class="banner shadow-box">
-                                <div class="marquee">
+                                    <div style="margin-bottom: 20px;">
+                                        <a href="https://udemy-certificate.s3.amazonaws.com/pdf/UC-78fc53d3-d320-416d-9c49-700cb9157e6b.pdf" target="_blank" style="display: block; margin-bottom: 15px;">View Udemy Certificate</a>
+                                    </div>
                                     <div>
-                                      <span>SEEKING <b>SOFTWARE DEVELOPER JOBS</b> <img src="./assets/images/star1.svg" alt="Star"> WORKING ON PROJECT <b>JOB TRACKER APP</b>  <img src="./assets/images/star1.svg" alt="Star"> GRADUATED <b>2023</b> <img src="./assets/images/star1.svg" alt="Star"> LEARNING <b>Node.js</b> LATEST WORK  <img src="./assets/images/star1.svg" alt="Star"></span>
+                                        <a href="https://drive.google.com/file/d/19BPEHNqgShfqpJ95fsnc2270gsNAeItY/view?usp=sharing" target="_blank">View AWS Skill Builder</a>
                                     </div>
-                                  </div>
-                            </div>
+                                </li>
+                                
+                
+                                <!-- AWS Developer Associate -->
+                                <li class="shadow-box" style="padding: 30px; margin-bottom: 24px; text-align: center;">
+                                    <div class="date" style="color: #BCBCBC; opacity: 0.6; font-size: 16px; font-weight: 500; margin-bottom: 12px;">Jan 2024</div>
+                                    <h2 style="font-size: 18px; color: #fff; opacity: 0.9; margin-bottom: 20px;">AWS Certified Developer Associate</h2>
+                                    <div style="margin-bottom: 20px;">
+                                        <p>This certification signifies my expertise in developing applications on the Amazon Web Services (AWS) platform. It demonstrates my ability to design, build, and deploy cloud-based applications using AWS services. This accomplishment validates my proficiency in cloud application development and showcases my knowledge of AWS development tools and best practices.</p>
+                                        <a href="https://www.credly.com/badges/8809085e-0360-403d-9708-d442e0e73b18/public_url" target="_blank" style="display: block; margin-bottom: 15px;">View Credly Certificate</a>
+                                    </div>
+                                    <div>
+                                        <img src="./assets/images/aws-certified-developer-associate.png" alt="AWS Developer Associate Badge" style="width: 100px;"/>
+                                    </div>
+                                </li>
+                                
+                
+                                <!-- Web Development Bootcamp -->
+                                <li class="shadow-box" style="padding: 30px; margin-bottom: 24px; text-align: center;">
+                                    <div class="date" style="color: #BCBCBC; opacity: 0.6; font-size: 16px; font-weight: 500; margin-bottom: 12px;">Dec 2023</div>
+                                    <h2 style="font-size: 18px; color: #fff; opacity: 0.9; margin-bottom: 20px;">Web Development Bootcamp</h2>
+                                    <div>
+                                        <a href="https://www.udemy.com/certificate/UC-64be9f0d-2a6a-4f72-b124-97e411098b48/" target="_blank" style="display: block; margin-bottom: 15px;">View Web Development Certificate</a>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                
 
+
+
+                
+
+                <div id="skills" class="skills-wrap">
+                    <h2 data-aos="fade-up">Skills</h2>
+                    <div class="d-grid skill-items gap-24 flex-wrap">
+                        <div class="skill-category">
+                            <h4 data-aos="zoom-in">Languages</h4>
+                            <p>Python, C, Java, JavaScript, TypeScript, PHP, MIPS</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4 data-aos="zoom-in">Cloud</h4>
+                            <p>AWS, Docker, Cybera, Heroku, Nginx</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4 data-aos="zoom-in">Frontend</h4>
+                            <p>React.js, Next.js, Angular, HTML, CSS</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4 data-aos="zoom-in">Backend</h4>
+                            <p>Django, Fast API, Express.js, Node.js</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4 data-aos="zoom-in">Databases</h4>
+                            <p>PostgreSQL, MongoDB, Firebase, SQLite, MySQL</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4 data-aos="zoom-in">APIs</h4>
+                            <p>Rest APIs</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4 data-aos="zoom-in">Libraries</h4>
+                            <p>Material UI, Bootstrap, Tailwind, Redux</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4 data-aos="zoom-in">Developer Tools</h4>
+                            <p>VS code, Android Studio, IntelliJ, Git, Linux</p>
+                        </div>
+                        <!-- Uncomment if you want to include Design Tools -->
+                        <!-- <div class="skill-category">
+                            <h4 data-aos="zoom-in">Design Tools</h4>
+                            <p>Figma, Draw.io, Lucid Chart</p>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div><br>
+                <p data-aos="zoom-in" align="left"> <a href="https://developer.android.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android" width="40" height="40"/> </a> <a href="https://angular.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-original-wordmark.svg" alt="angularjs" width="40" height="40"/> </a> <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/> </a> <a href="https://azure.microsoft.com/en-in/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg" alt="azure" width="40" height="40"/> </a> <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> <a href="https://www.cprogramming.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="40" height="40"/> </a> <a href="https://www.w3schools.com/cpp/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="cplusplus" width="40" height="40"/> </a> <a href="https://www.w3schools.com/cs/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://www.cypress.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/6e46ec1fc23b60c8fd0d2f2ff46db82e16dbd75f/icons/cypress.svg" alt="cypress" width="40" height="40"/> </a> <a href="https://www.djangoproject.com/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://heroku.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" alt="heroku" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://jestjs.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jestjsio/jestjsio-icon.svg" alt="jest" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://nestjs.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nestjs/nestjs-plain.svg" alt="nestjs" width="40" height="40"/> </a> <a href="https://www.nginx.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg" alt="nginx" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://www.php.net" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="php" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://reactnative.dev/" target="_blank" rel="noreferrer"> <img src="https://reactnative.dev/img/header_logo.svg" alt="reactnative" width="40" height="40"/> </a> <a href="https://redis.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg" alt="redis" width="40" height="40"/> </a> <a href="https://redux.js.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" width="40" height="40"/> </a> <a href="https://www.selenium.dev" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/detain/svg-logos/780f25886640cef088af994181646db2f6b1a3f8/svg/selenium-logo.svg" alt="selenium" width="40" height="40"/> </a> <a href="https://www.sqlite.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" alt="sqlite" width="40" height="40"/> </a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/> </a> <a href="https://www.tensorflow.org" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="tensorflow" width="40" height="40"/> </a> <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a> </p>
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-area">
+            <div class="container">
+                <!-- Sticky Project Navbar -->
+                <div class="navbar-cred sticky-navbar">
+                    <a href="#all" class="skill-filter active" data-skill="all">All</a>
+                    <a href="#frontend" class="skill-filter" data-skill="frontend">Frontend</a>
+                    <a href="#backend" class="skill-filter" data-skill="backend">Backend</a>
+                    <a href="#database" class="skill-filter" data-skill="database">Database</a>
+                    <a href="#devops" class="skill-filter" data-skill="devops">DevOps</a>
+                    <a href="#ml" class="skill-filter" data-skill="ml">ML</a>
+                    <a href="#design" class="skill-filter" data-skill="design">Design</a>
+                </div>
+        
+                <!-- Project Items -->
+                <div class="projects-wrapper">
+                    <!-- Project 1: IlmHub - Pronunciation App -->
+                    <div class="project-item shadow-box" data-skill="frontend backend database devops">
+                        <a class="overlay-link" href="https://github.com/shovo4/pronunciation-practice" target="_blank"></a>
+                        <img src="./assets/images/project1.jpeg" alt="Project" width="500" height="220">
+                        <div class="project-info">
+                            <h1>IlmHub - Pronunciation App</h1>
+                            <p>Django, React.js, Material UI, Docker, PostgreSQL, Cybera, Ngnix, Heroku</p>
+                        </div>
+                        <a href="https://github.com/shovo4/pronunciation-practice" class="project-btn" target="_blank">
+                            GitHub<img src="./assets/images/icon.svg" alt="Button">
+                        </a>
+                    </div>
+        
+                    <!-- Project 2: Keeper App -->
+                    <div class="project-item shadow-box" data-skill="frontend backend database devops">
+                        <a class="overlay-link" href="https://github.com/shovo4/keeper-app" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/project2.jpeg" alt="Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>JavsScript, React.js, Redux, Fast API, Docker</p>
+                                <h1>Keeper App</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/keeper-app" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: TV-Shows App -->
+                    <div class="project-item shadow-box" data-skill="backend database devops">
+                        <a class="overlay-link" href="https://github.com/shovo4/API-Calls-Django" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/project7.jpeg" alt="Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>Djanggo, REST API, SQL, Cybera, Ngnix</p>
+                                <h1>TV-Shows App</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/API-Calls-Django" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Sudoku Solver -->
+                    <div class="project-item shadow-box" data-skill="ml">
+                        <a class="overlay-link" href="https://github.com/shovo4/CMPUT-366/tree/main/Assignments/Assignment%202/starter" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/project10.jpeg" alt="Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>Python, Matplotlib, Algorithms, Machine Learning</p>
+                                <h1>Sodoku Solver</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/CMPUT-366/tree/main/Assignments/Assignment%202/starter" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: ER Diagram & Database -->
+                    <div class="project-item shadow-box" data-skill="database">
+                        <a class="overlay-link" href="https://docs.google.com/document/d/1fQNbZ-NAzWuoktO71CQBr3bG3g-FnwaoZ7PtoJGQbHQ/edit" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/project13.jpeg" alt="Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <!-- Updated skills list -->
+                                <p>SQL (MySQL, PostgreSQL, SQLite), NoSQL (MongoDB, Redis, DynamoDB)</p>
+                                <h1>ER diagram & Database Table</h1>
+                            </div>
+                            <a href="https://docs.google.com/document/d/1fQNbZ-NAzWuoktO71CQBr3bG3g-FnwaoZ7PtoJGQbHQ/edit" class="project-btn" target="_blank">
+                                Drive<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <!-- Project 6: Trip Planning App -->
+                    <div class="project-item shadow-box" data-skill="frontend backend database devops">
+                        <a class="overlay-link" href="https://github.com/shovo4/Trip-Planning-Hackathon" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/project3.jpeg" alt="Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>JavaScript, Django, React js, MongoDB, Docker</p>
+                                <h1>Trip Planning App</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/Trip-Planning-Hackathon" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 7: NoGo and Go -->
+                    <div class="project-item shadow-box" data-skill="ml">
+                        <a class="overlay-link" href="https://github.com/shovo4/CMPUT455" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/project4.jpeg" alt="Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>Python, Algorithms (Heuristic, Monte-Carlo Simulation, Upper Confidence Bound), Machine Learning</p>
+                                <h1>Go Games and Solver</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/CMPUT455" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 8: Study up app -->
+                    <div class="project-item shadow-box" data-skill="design frontend">
+                        <a class="overlay-link" href="https://drive.google.com/file/d/1oTsttGcNOuugBOBHbQCu1A3o8oJQ-pUT/view" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/project5.jpeg" alt="Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>Figma, User Interface Design, User Experience Design, Color Theory, Protyping, Wareframing</p>
+                                <h1>Study Up App</h1>
+                            </div>
+                            <a href="https://drive.google.com/file/d/1oTsttGcNOuugBOBHbQCu1A3o8oJQ-pUT/view" class="project-btn" target="_blank">
+                                Demo<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 9: Social Dist -->
+                    <div class="project-item shadow-box" data-skill="frontend backend database devops">
+                        <a class="overlay-link" href="https://github.com/shovo4/group-cmput404-project" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/project14.jpeg" alt="Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>Django, REST API, JavaScript, HTML, CSS, Bootstrap, PostgreSQL, Docker, Heroku </p>
+                                <h1>Social Distribution</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/group-cmput404-project" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
                         </div>
                     </div>
                     
+                    <!-- Project 9: CSS-HELL -->
+                    <div class="project-item shadow-box" data-skill="frontend design">
+                        <a class="overlay-link" href="https://github.com/shovo4/CMPUT404-assignment-css-hell" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/project8.jpeg" alt="Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <!-- Updated skills with designing libraries -->
+                                <p>CSS, HTML, Bootstrap, Tailwind CSS, Animate.css, Materialize, Skeleton, Material-UI </p>
+                                <h1>CSS-Hell</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/CMPUT404-assignment-css-hell" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+
+                     <!-- Project 10: QR hunter -->
+                     <div class="project-item shadow-box" data-skill="frontend backend database">
+                        <a class="overlay-link" href="https://github.com/shovo4/QRHunter" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/project15.jpeg" alt="Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>Java, Android Studio, React Native, Flutter, FireBase</p>
+                                <h1>QR Hunter</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/QRHunter" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Roll The Dice Project -->
+                    <div class="project-item shadow-box" data-skill="frontend">
+                        <a class="overlay-link" href="https://github.com/shovo4/RollTheDice" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/dice.jpeg" alt="Roll The Dice Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>HTML, CSS, JavaScript</p>
+                                <h1>Roll The Dice</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/RollTheDice" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Simon Game Project -->
+                    <div class="project-item shadow-box" data-skill="frontend">
+                        <a class="overlay-link" href="https://github.com/shovo4/Simon-Game" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/simon.jpeg" alt="Simon Game Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>HTML, CSS, JavaScript, Bootstrap</p>
+                                <h1>Simon Game</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/Simon-Game" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Piano Fun Project -->
+                    <div class="project-item shadow-box" data-skill="frontend">
+                        <a class="overlay-link" href="https://github.com/shovo4/pianofun" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/piano.png" alt="Piano Fun Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>HTML, CSS, JavaScript</p>
+                                <h1>Piano Fun</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/pianofun" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Blog API Project -->
+                    <div class="project-item shadow-box" data-skill="backend">
+                        <a class="overlay-link" href="https://github.com/shovo4/blogAPI" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/blog.png" alt="Blog API Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>Node.js, Express.js, Axios, EJS</p>
+                                <h1>Blog API</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/blogAPI" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Student Registration Project -->
+                    <div class="project-item shadow-box" data-skill="frontend backend databse">
+                        <a class="overlay-link" href="https://github.com/shovo4/StudentRegistrationApp" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <!-- Note: Update the src attribute to the path where your image is stored -->
+                            <img src="https://user-images.githubusercontent.com/77365934/237019336-2617e194-f1e2-4ed4-8b80-9cc365a8139c.png" alt="Student Registration Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>Django, Angular, SQL</p>
+                                <h1>Student Registration</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/StudentRegistrationApp" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- File Manager Project -->
+                    <div class="project-item shadow-box" data-skill="frontend">
+                        <a class="overlay-link" href="https://github.com/shovo4/File-manager" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/filemanager.jpg" alt="File Manager Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>React.js</p>
+                                <h1>File Manager</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/File-manager" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Secrets Project -->
+                    <div class="project-item shadow-box" data-skill="backend">
+                        <a class="overlay-link" href="https://github.com/shovo4/Secrets" target="_blank"></a>
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="project-img">
+                            <img src="./assets/images/secrets.png" alt="Secrets Project" width="500" height="220">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="project-info">
+                                <p>Node.js, Express.js</p>
+                                <h1>Secrets</h1>
+                            </div>
+                            <a href="https://github.com/shovo4/Secrets" class="project-btn" target="_blank">
+                                GitHub<img src="./assets/images/icon.svg" alt="Button">
+                            </a>
+                        </div>
+                    </div>
+
+
+                    
+        
+                    <!-- Additional projects follow the same structure... -->
                 </div>
-
-
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="footer-area">
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
             <div class="container">
-                <div class="footer-content text-center">
-                    <a href="./index.html" class="logo">
-                        <img src="./assets/images/logo.gif" alt="Logo" width="300" height="250">
-                    </a>
-                    <ul class="footer-menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="credentials.html">Experiences & Skills</a></li>
-                        <li><a href="works.html">Projects</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
+                <h2>Contact</h2>
+                <ul>
+                    <li>Email: <a href="mailto:saifulislamshovo4@gmail.com">saifulislamshovo4@gmail.com</a></li>
+                    <li>Phone: <a href="tel:+15875666172">+1 587-566-6172</a></li>
+                    <li>Location: Edmonton, AB, Canada</li>
+                </ul>
+                <h3>Social Links</h3>
+                <ul class="social-links">
+                    <li><a href="https://www.linkedin.com/in/saifulshovo/">LinkedIn</a></li>
+                    <li><a href="https://github.com/shovo4">GitHub</a></li>
+                </ul>
             </div>
-        </footer>
+        </section>
 
     </main>
-    
 
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="container">
+            <p>&copy; 2024 Saiful Islam Shovo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="./assets/js/jquery-3.6.4.js"></script>
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/aos.js"></script>
     <script src="./assets/js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Attach click event listeners to each filter link
+            document.querySelectorAll('.skill-filter').forEach(filter => {
+                filter.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default anchor behavior
+        
+                    const skill = this.getAttribute('data-skill'); // Get the skill from data-skill attribute
+                    const projects = document.querySelectorAll('.project-item');
+        
+                    console.log("Filtering by skill: ", skill); // Debugging
+        
+                    projects.forEach(project => {
+                        const projectSkills = project.getAttribute('data-skill');
+                        
+                        // Check if the project has the data-skill attribute
+                        if (projectSkills) {
+                            const projectSkillsArray = projectSkills.split(' '); // Split the skills into an array
+                            console.log("Project skills: ", projectSkillsArray); // Debugging
+        
+                            if (skill === 'all' || projectSkillsArray.includes(skill)) {
+                                project.style.display = ''; // Show the project
+                            } else {
+                                project.style.display = 'none'; // Hide the project
+                            }
+                        } else {
+                            console.warn("Project item missing data-skill attribute: ", project);
+                        }
+                    });
+        
+                    // Remove 'active' class from all filters and add it to the clicked one
+                    document.querySelectorAll('.skill-filter').forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+        </script>
+        
+        
 </body>
 </html>
