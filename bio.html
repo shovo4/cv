@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biodata Page</title>
+  <title>Biodata</title>
   <style>
     :root {
       --bg: #080808;
       --card: #111111;
-      --card-2: #171717;
       --gold: #d4af37;
       --gold-soft: #f2df9b;
       --gold-deep: #8f6a10;
@@ -275,19 +274,6 @@
       letter-spacing: 0.8px;
     }
 
-    .editable-hint {
-      max-width: 980px;
-      margin: 18px auto 0;
-      background: #101010;
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      border-radius: 14px;
-      color: #e7e0c8;
-      padding: 14px 16px;
-      font-family: "Times New Roman", Times, serif;
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
     @media (max-width: 860px) {
       .content {
         padding: 28px 20px 36px;
@@ -299,6 +285,11 @@
 
       .side-panel {
         padding-top: 0;
+        order: -1;
+      }
+
+      .left-column {
+        order: 2;
       }
 
       .header h1 {
@@ -332,7 +323,7 @@
     <div class="content">
       <header class="header">
         <div class="symbol">❦</div>
-        <h1>Bio Data</h1>
+        <h1>Biodata</h1>
         <div class="subtitle">Elegant Personal Profile</div>
       </header>
 
@@ -391,7 +382,7 @@
           <div class="photo-card">
             <div class="photo-frame">
               <div class="photo">
-                <img src="./assets/images/bio.jpg" alt="Profile photo" />
+                <img src="./assets/images/me.jpeg" alt="Profile photo" />
               </div>
             </div>
             <div class="photo-label">Profile Photo</div>
@@ -409,6 +400,5 @@
 
     <div class="ornament-bar"></div>
   </div>
-
 </body>
 </html>
