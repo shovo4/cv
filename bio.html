@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biodata Page</title>
+  <style>
+    :root {
+      --bg: #080808;
+      --card: #111111;
+      --card-2: #171717;
+      --gold: #d4af37;
+      --gold-soft: #f2df9b;
+      --gold-deep: #8f6a10;
+      --text: #f5f5f5;
+      --muted: #d7d7d7;
+      --line: rgba(212, 175, 55, 0.28);
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Times New Roman", Times, serif;
+      background:
+        radial-gradient(circle at top, rgba(212, 175, 55, 0.12), transparent 26%),
+        linear-gradient(180deg, #040404 0%, #0b0b0b 35%, #050505 100%);
+      color: var(--text);
+      padding: 38px 16px;
+      letter-spacing: 0.2px;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+        var(--card);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 20px 45px var(--shadow),
+        0 0 0 1px rgba(212, 175, 55, 0.08) inset;
+      position: relative;
+    }
+
+    .page::before,
+    .page::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.8), transparent);
+      z-index: 0;
+    }
+
+    .page::before {
+      top: 88px;
+    }
+
+    .page::after {
+      bottom: 34px;
+    }
+
+    .ornament-bar {
+      height: 22px;
+      background:
+        linear-gradient(90deg, rgba(212,175,55,0.92), rgba(242,223,155,0.95), rgba(212,175,55,0.92));
+      position: relative;
+    }
+
+    .ornament-bar::after {
+      content: "✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: #3a2a00;
+      font-size: 12px;
+      letter-spacing: 7px;
+      white-space: nowrap;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 42px 54px 52px;
+      background:
+        radial-gradient(circle at top right, rgba(212,175,55,0.06), transparent 22%),
+        radial-gradient(circle at bottom left, rgba(212,175,55,0.05), transparent 22%);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .header .symbol {
+      font-size: 34px;
+      color: var(--gold-soft);
+      margin-bottom: 10px;
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.18);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-shadow:
+        0 1px 0 #fff2bf,
+        0 0 18px rgba(212, 175, 55, 0.16);
+    }
+
+    .header .subtitle {
+      margin-top: 10px;
+      font-size: 17px;
+      color: #eadfb9;
+      letter-spacing: 1px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) 240px;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .left-column {
+      display: grid;
+      gap: 24px;
+    }
+
+    .section {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px 24px 18px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: 26px;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 110px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .info-table tr:not(:last-child) td {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+    }
+
+    .info-table td {
+      padding: 10px 0;
+      vertical-align: top;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .label {
+      width: 36%;
+      padding-right: 16px;
+      color: #fff7dc;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .colon {
+      width: 26px;
+      text-align: center;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .value {
+      color: var(--muted);
+    }
+
+    .side-panel {
+      display: grid;
+      gap: 22px;
+      padding-top: 8px;
+    }
+
+    .photo-card,
+    .mini-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+
+    .photo-frame {
+      width: 195px;
+      height: 195px;
+      margin: 0 auto 14px;
+      padding: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #fff0b8, var(--gold-deep));
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #222;
+      border: 4px solid #101010;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-label {
+      color: var(--gold-soft);
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .mini-card h3 {
+      margin: 0 0 10px;
+      color: var(--gold-soft);
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      text-align: center;
+      color: #dacd9d;
+      font-size: 15px;
+      letter-spacing: 0.8px;
+    }
+
+    .editable-hint {
+      max-width: 980px;
+      margin: 18px auto 0;
+      background: #101010;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 14px;
+      color: #e7e0c8;
+      padding: 14px 16px;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 860px) {
+      .content {
+        padding: 28px 20px 36px;
+      }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        padding-top: 0;
+      }
+
+      .header h1 {
+        font-size: 38px;
+      }
+
+      .section-title {
+        font-size: 22px;
+      }
+
+      .info-table td {
+        font-size: 16px;
+      }
+
+      .label {
+        width: 42%;
+        white-space: normal;
+      }
+
+      .photo-frame {
+        width: 175px;
+        height: 175px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="ornament-bar"></div>
+
+    <div class="content">
+      <header class="header">
+        <div class="symbol">❦</div>
+        <h1>Bio Data</h1>
+        <div class="subtitle">Elegant Personal Profile</div>
+      </header>
+
+      <div class="main-grid">
+        <div class="left-column">
+          <section class="section">
+            <h2 class="section-title">Personal Details</h2>
+            <table class="info-table">
+              <tr><td class="label">Name</td><td class="colon">:</td><td class="value">Saiful Islam Shovo</td></tr>
+              <tr><td class="label">Date of Birth</td><td class="colon">:</td><td class="value">15 February 2000</td></tr>
+              <tr><td class="label">Place of Birth</td><td class="colon">:</td><td class="value">Dhaka</td></tr>
+              <tr><td class="label">Religion</td><td class="colon">:</td><td class="value">Muslim</td></tr>
+              <tr><td class="label">Height</td><td class="colon">:</td><td class="value">5 feet 8 inches</td></tr>
+              <tr><td class="label">Weight</td><td class="colon">:</td><td class="value">74 kgs</td></tr>
+              <tr><td class="label">Complexion</td><td class="colon">:</td><td class="value">Brown</td></tr>
+              <tr>
+                <td class="label">Education</td>
+                <td class="colon">:</td>
+                <td class="value">
+                  • BSc in Computer Science, University of Alberta — CGPA 3.2<br>
+                  • HSC, Dhaka College — GPA 5.0<br>
+                  • SSC, Ideal School and College — GPA 5.0
+                </td>
+              </tr>
+              <tr><td class="label">Occupation</td><td class="colon">:</td><td class="value">IT Administrative Assistant</td></tr>
+              <tr><td class="label">Languages Known</td><td class="colon">:</td><td class="value">Bengali, English</td></tr>
+            </table>
+          </section>
+
+          <section class="section">
+            <h2 class="section-title">Family Details</h2>
+            <table class="info-table">
+              <tr><td class="label">Father's Name</td><td class="colon">:</td><td class="value">MD Shahidul Islam Babul</td></tr>
+              <tr><td class="label">Father's Occupation</td><td class="colon">:</td><td class="value">Section Officer, Department of Mathematics, Jagannath University</td></tr>
+              <tr><td class="label">Mother's Name</td><td class="colon">:</td><td class="value">Shahanaz Begum</td></tr>
+              <tr><td class="label">Mother's Occupation</td><td class="colon">:</td><td class="value">Housewife</td></tr>
+              <tr><td class="label">Sister</td><td class="colon">:</td><td class="value">Fahmida Sumiya Srabony</td></tr>
+              <tr><td class="label">Sister's Education</td><td class="colon">:</td><td class="value">MBBS, Samorita Hospital, Tejgaon</td></tr>
+              <tr><td class="label">Family Status</td><td class="colon">:</td><td class="value">Educated and respectable family</td></tr>
+            </table>
+          </section>
+
+          <section class="section">
+            <h2 class="section-title">Contact Details</h2>
+            <table class="info-table">
+              <tr><td class="label">Contact Number</td><td class="colon">:</td><td class="value">+8801722242968</td></tr>
+              <tr><td class="label">Email</td><td class="colon">:</td><td class="value">msaifulislamshovo2000@gmail.com</td></tr>
+              <tr><td class="label">Permanent Address</td><td class="colon">:</td><td class="value">F-134, Road 10/7, South Banasree, Dhaka 1219, Bangladesh</td></tr>
+              <tr><td class="label">Village Home</td><td class="colon">:</td><td class="value">Brahmanbaria, Bangladesh</td></tr>
+              <tr><td class="label">Present Address</td><td class="colon">:</td><td class="value">Apt-109, 10131 159 St NW, Edmonton, AB, Canada, T5P 3A1</td></tr>
+            </table>
+          </section>
+        </div>
+
+        <aside class="side-panel">
+          <div class="photo-card">
+            <div class="photo-frame">
+              <div class="photo">
+                <img src="./assets/images/bio.jpg" alt="Profile photo" />
+              </div>
+            </div>
+            <div class="photo-label">Profile Photo</div>
+          </div>
+
+          <div class="mini-card">
+            <h3>About</h3>
+            <p>
+              Well-educated, respectful, and family-oriented individual with a professional career in Canada.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="footer-note">Prepared with care for matrimonial consideration.</div>
+    </div>
+
+    <div class="ornament-bar"></div>
+  </div>
+
+</body>
+</html>
