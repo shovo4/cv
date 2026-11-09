@@ -73,3 +73,13 @@ textarea { min-height:280px; resize:vertical; font-family:ui-monospace,Menlo,mon
 .hide { display:none !important; }
 input[type=date] { color-scheme: dark; cursor: pointer; }
 input[type=date]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .9; }
+
+/* typography polish */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+h1, h2, h3, .b-title, .post-card h2, .panel h2 { font-family: 'Sora', 'Inter', sans-serif; letter-spacing: -0.02em; }
+h1.b-title { font-weight: 800; letter-spacing: -0.035em; }
+::selection { background: rgba(91,120,246,.45); color: #fff; }
+::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-track { background: #0F0F0F; } ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 999px; border: 2px solid #0F0F0F; }
+.b-brand { font-family: 'Sora', sans-serif; }
+.prose { font-size: 17.5px; line-height: 1.75; }
+.prose h2, .prose h3 { font-family: 'Sora', sans-serif; letter-spacing: -0.02em; }
