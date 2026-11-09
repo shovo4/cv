@@ -53,8 +53,13 @@
 <section class="hx-hero">
     <div class="container">
         <p class="hx-kicker" data-aos="fade-up">Hey, I'm</p>
-        <h1 class="hx-name" data-aos="fade-up" data-aos-delay="50">Shovo<span>.</span></h1>
-        <p class="hx-tagline" data-aos="fade-up" data-aos-delay="100">Tech problem solver &middot; IT &amp; software developer &middot; Edmonton, Canada</p>
+        <h1 class="hx-name" data-aos="fade-up" data-aos-delay="50"><span class="hx-word">Shovo<span>.</span></span>
+            <span class="hx-flags" aria-label="Bangladesh and Canada">
+                <svg class="hx-flag" viewBox="0 0 40 40" role="img" aria-label="Bangladesh"><title>Bangladesh</title><circle cx="20" cy="20" r="20" fill="#006a4e"/><circle cx="18" cy="20" r="11" fill="#f42a41"/></svg>
+                <svg class="hx-flag" viewBox="0 0 40 40" role="img" aria-label="Canada"><title>Canada</title><defs><clipPath id="hxc"><circle cx="20" cy="20" r="20"/></clipPath></defs><g clip-path="url(#hxc)"><rect width="40" height="40" fill="#fff"/><rect width="10" height="40" fill="#d80621"/><rect x="30" width="10" height="40" fill="#d80621"/><path fill="#d80621" d="M20 9.5l1.6 3.1 2.2-.6-.5 2.4 2.6 2.1-1.4.6.5 2.3-2.7-.5-.2 1.2 1.6 1.7h-3.3l.3 3.7h-1.4l.3-3.7h-3.3l1.6-1.7-.2-1.2-2.7.5.5-2.3-1.4-.6 2.6-2.1-.5-2.4 2.2.6z"/></g></svg>
+            </span>
+        </h1>
+        <p class="hx-tagline" data-aos="fade-up" data-aos-delay="100">IT Systems Administrator &middot; Software developer &middot; Edmonton, Canada</p>
         <div class="hx-hero-actions" data-aos="fade-up" data-aos-delay="150">
             <a href="#blog" class="theme-btn hx-btn">Read the blog</a>
             <a href="#about" class="theme-btn hx-btn hx-ghost">About me</a>
@@ -63,20 +68,66 @@
 </section>
 
 <!-- Latest Blog -->
-<section id="blog" class="hx-section">
+<section id="blog" class="hx-section hx-framed">
     <div class="container">
-        <h2 class="hx-heading" data-aos="fade-up">Latest from the Blog</h2>
+        <div class="hx-frame-head" data-aos="fade-up"><span class="hx-eyebrow">Writing</span><h2 class="hx-heading">Latest from the Blog</h2><p class="hx-blurb">Notes, lessons and things I&rsquo;m figuring out.</p></div>
         <div id="hx-blog" class="hx-blog-grid"><p class="hx-status">Loading&hellip;</p></div>
-        <div class="hx-more-row"><a href="./blogs.html" id="hx-blog-more" class="theme-btn hx-btn" style="display:none">See all posts &rarr;</a></div>
+        <div class="hx-more-row"><a href="./blogs.html" id="hx-blog-more" class="theme-btn hx-btn">See all posts &rarr;</a></div>
     </div>
 </section>
 
 <!-- Recent Memories -->
-<section id="memories" class="hx-section">
+<section id="memories" class="hx-section hx-framed hx-framed-alt">
     <div class="container">
-        <h2 class="hx-heading" data-aos="fade-up">Memories</h2>
+        <div class="hx-frame-head" data-aos="fade-up"><span class="hx-eyebrow">Moments</span><h2 class="hx-heading">Memories</h2><p class="hx-blurb">Small snapshots from along the way.</p></div>
         <div id="hx-mem" class="hx-mem-grid"><p class="hx-status">Loading&hellip;</p></div>
-        <div class="hx-more-row"><a href="./memories.html" id="hx-mem-more" class="theme-btn hx-btn" style="display:none">See more memories &rarr;</a></div>
+        <div class="hx-more-row"><a href="./memories.html" id="hx-mem-more" class="theme-btn hx-btn">See more memories &rarr;</a></div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="hx-section hx-about2">
+    <div class="container">
+        <div class="hx-about-card" data-aos="fade-up">
+            <div class="hx-about-media">
+                <div class="hx-portrait">
+                    <img src="./assets/images/me.jpeg" alt="Shovo">
+                    <span class="hx-portrait-badge"><i class="iconoir-map-pin"></i> Edmonton, AB</span>
+                </div>
+                <div class="hx-journey">
+                    <span>🇧🇩 Dhaka</span><i class="iconoir-arrow-right"></i><span>🇨🇦 Edmonton</span>
+                </div>
+            </div>
+
+            <div class="hx-about-body">
+                <span class="hx-eyebrow">About me</span>
+                <h2 class="hx-heading hx-left">Hey, I&rsquo;m Shovo &mdash; I keep tech running <span>and</span> build what&rsquo;s next.</h2>
+                <p class="hx-lead">I&rsquo;m an IT &amp; software person who likes both sides of the stack: the cables, networks and devices that keep a company moving, and the web apps that make the work easier.</p>
+                <p>By day I&rsquo;m an <b>IT Systems Administrator at Ketek Group Inc.</b> in Edmonton &mdash; running servers, VMware and Active Directory, keeping the network secure, and helping people get unstuck. I started there in IT support and was promoted in 2026. Before that I built full-stack apps with <b>Django, React and Next.js</b> for WareMatch and Connection Hub, and ran a Subway store along the way, which taught me more about people and pressure than any textbook.</p>
+                <p>I studied <b>Computing Science (Software Specialization)</b> at the University of Alberta and hold two AWS certifications. Outside work I&rsquo;m usually tinkering with a side project, writing on the blog below, or exploring Alberta with a camera.</p>
+
+                <div class="hx-facts">
+                    <div class="hx-fact"><i class="iconoir-graduation-cap"></i><div><b>B.Sc. Computing Science</b><small>University of Alberta &middot; 2019&ndash;2023</small></div></div>
+                    <div class="hx-fact"><i class="iconoir-server"></i><div><b>IT Systems Administrator</b><small>Ketek Group Inc. &middot; promoted Oct 2026</small></div></div>
+                    <div class="hx-fact"><i class="iconoir-cloud"></i><div><b>AWS Certified &times;2</b><small>Cloud Practitioner &middot; Developer Associate</small></div></div>
+                    <div class="hx-fact"><i class="iconoir-code"></i><div><b>Python &middot; Java &middot; JS</b><small>Django, React, Next.js, PostgreSQL, MongoDB</small></div></div>
+                </div>
+
+                <div class="hx-about-actions">
+                    <a href="#skills-block" class="theme-btn hx-btn">See my experience</a>
+                    <a href="#contact" class="theme-btn hx-btn hx-ghost">Let&rsquo;s talk</a>
+                </div>
+            </div>
+        </div>
+
+        <p class="hx-chip-caption" data-aos="fade-up">What I do &mdash; <em>tap one</em></p>
+        <div class="job-titles-container hx-chips" data-aos="fade-up">
+            <button type="button" class="job-box" data-confetti="burst"><img src="https://img.icons8.com/?size=100&id=123383&format=png&color=ffffff" alt=""><h3>IT Systems Admin</h3></button>
+            <button type="button" class="job-box" data-confetti="code"><img src="https://img.icons8.com/?size=100&id=FVDBGC3QPi3J&format=png&color=ffffff" alt=""><h3>Software Developer</h3></button>
+            <button type="button" class="job-box" data-confetti="stars"><img src="https://img.icons8.com/?size=100&id=RtciaGLvcpOm&format=png&color=ffffff" alt=""><h3>Web Developer</h3></button>
+            <button type="button" class="job-box" data-confetti="rain"><img src="https://img.icons8.com/?size=100&id=gtJlIVpnqQyS&format=png&color=ffffff" alt=""><h3>Cloud Architect</h3></button>
+            <button type="button" class="job-box" data-confetti="fireworks"><img src="https://img.icons8.com/?size=100&id=cQ0emn3GZS6M&format=png&color=ffffff" alt=""><h3>UX Designer</h3></button>
+        </div>
     </div>
 </section>
 
@@ -128,174 +179,164 @@
                     <a href="#skills">Skills</a>
                 </div>
 
-                <div id="experience" class="credential-edc-exp credential-experience">
-                    <h2 data-aos="fade-up">Experience</h2>
-                    
-                    <div class="timeline">
-                        
-                        <!-- Experience Item 1 - IT Support at Ketek Group Inc -->
-                        <div class="timeline-item">
-                            <div class="timeline-content">
-                                <h3>IT Support</h3>
-                                <h5><a href="https://ketek.ca/" target="_blank">Ketek Group Inc</a>, Edmonton, AB</h5> 
-                                <ul class="job-responsibilities">
-                                    <li>Installing and maintaining company data cabling and network infrastructure.</li>
-                                    <li>Installing and servicing hardware, including computers, thin clients, laptops, servers, scanners, and printers.</li>
-                                    <li>Maintaining software across company devices, including Virtual Private Networks (VPNs) and security applications.</li>
-                                    <li>Assisting in managing company networks, computer accounts, emails, landlines, and mobile devices.</li>
-                                    <li>Troubleshooting and resolved software/hardware issues for employees.</li>
-                                    <li>Testing and evaluating new technologies for business operations.</li>
-                                    <li>Walking employees through IT issue resolution and providing technical support.</li>
-                                    <li>Documenting solutions and responding to inquiries in a timely manner.</li>
-                                </ul>
-                            </div>
-                            <div class="timeline-date">
-                                <h4>Feb 2025 - Present</h4>
-                                <img src="./assets/images/ketek-logo.jpeg" alt="Ketek Group Inc" class="company-logo"
-                                     style="display: block; width: 80px; height: 70px; border-radius: 50%; margin-top: 5px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                            </div>
-                        </div>
-                
-                        <!-- Experience Item 2 - Subway -->
-                        <div class="timeline-item">
-                            <div class="timeline-content">
-                                <h3>Store Manager</h3>
-                                <h5>Subway, Edmonton, AB</h5>
-                                <ul class="job-responsibilities">
-                                    <li>Food safety management</li>
-                                    <li>Inventory and order management</li>
-                                    <li>Employee training and scheduling</li>
-                                    <li>Point of Sale (POS) systems</li>
-                                    <li>Customer service</li>
-                                </ul>
-                            </div>
-                            <div class="timeline-date">
-                                <h4>July 2023 - Feb 2025</h4>
-                                <img src="./assets/images/subway-logo.jpg" alt="Subway" class="company-logo"
-                                     style="display: block; width: 50px; height: 50px; border-radius: 50%; margin-top: 5px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                            </div>
-                        </div>
-                
-                        <!-- Experience Item 3 - Web Developer at WareMatch -->
-                        <div class="timeline-item">
-                            <div class="timeline-content">
-                                <h3>Web Developer</h3>
-                                <h5><a href="https://warematch.com/" target="_blank">WareMatch</a>, Quebec, Canada (Remote)</h5> 
-                                <ul class="job-responsibilities">
-                                    <li>Developed web applications using Next.js and JavaScript for the frontend.</li>
-                                    <li>Built and maintained backend services with Django.</li>
-                                    <li>Managed containerized environments using Docker.</li>
-                                    <li>Handled data storage and retrieval with PostgreSQL.</li>
-                                    <li>Designed responsive and user-friendly interfaces using Material UI.</li>
-                                    <li>Collaborated with cross-functional teams to ensure seamless integration of front and backend systems.</li>
-                                    <li>Optimized application performance and scalability.</li>
-                                    <li>Participated in code reviews and contributing to team knowledge sharing.</li>
-                                </ul>
-                            </div>
-                            <div class="timeline-date">
-                                <h4>Sep 2024 - Dec 2024</h4>
-                                <img src="./assets/images/warematch-logo.webp" alt="WareMatch" class="company-logo"
-                                     style="display: block; width: 50px; height: 50px; border-radius: 80%; margin-top: 5px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                            </div>
-                        </div>
-                
-                        <!-- Experience Item 4 - Full Stack Developer at Connection Hub Ltd -->
-                        <div class="timeline-item">
-                            <div class="timeline-content">
-                                <h3>Full Stack Developer (Contract - Project-based)</h3>
-                                <h5><a href="https://connectionhub.ca/" target="_blank">Connection Hub Ltd</a>, Edmonton, AB</h5>
-                                <ul class="job-responsibilities">
-                                    <li>Designed and developed the company's website using WordPress.</li>
-                                    <li>Created a custom theme with hand coding for a unique touch.</li>
-                                    <li>Enhanced secure communication in Django and Postgres backend.</li>
-                                    <li>Reduced processing time by 25%.</li>
-                                    <li>Integrated the WordPress CMS for an optimal user experience.</li>
-                                    <li>Customized website features using PHP, HTML, CSS, and JavaScript.</li>
-                                </ul>
-                            </div>
-                            <div class="timeline-date">
-                                <h4>May 2022 - Oct 2023</h4>
-                                <img src="./assets/images/connectionhub-logo.png" alt="Connection Hub" class="company-logo"
-                                     style="display: block; width: 90px; height: 30px; border-radius: 50%; margin-top: 5px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                            </div>
-                        </div>
-                
-                        <!-- Experience Item 5 - Full Stack Developer (Intern) at IlmHub -->
-                        <div class="timeline-item">
-                            <div class="timeline-content">
-                                <h3>Full-Stack Developer (Intern)</h3>
-                                <h5><a href="https://ilmhub.com/" target="_blank">IlmHub</a>, Edmonton, AB</h5>
-                                <ul class="job-responsibilities">
-                                    <li>Collaborated with a team of four to develop a language learning platform.</li>
-                                    <li>Implemented a system enabling users to learn new languages through pronunciation lessons.</li>
-                                    <li>Integrated features for users to practice, receive feedback, and share progress with parents.</li>
-                                    <li>Utilized Django for backend development and React.js for the frontend.</li>
-                                    <li>Deployed the backend on Cybera and the frontend on Heroku.</li>
-                                    <li>Used PostgreSQL as the database for efficient data management.</li>
-                                </ul>
-                            </div>
-                            <div class="timeline-date">
-                                <h4>Jan 2023 - May 2023</h4>
-                                <img src="./assets/images/ilmhub-logo.webp" alt="IlmHub" class="company-logo"
-                                     style="display: block; width: 50px; height: 50px; border-radius: 50%; margin-top: 5px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                            </div>
-                        </div>
-                
+                <div id="experience" class="xp-section">
+    <div class="xp-section-head" data-aos="fade-up">
+        <span class="hx-eyebrow">Career</span>
+        <h2 class="hx-heading hx-left">Experience</h2>
+        <p class="hx-blurb">From full-stack internships to running the systems a company depends on.</p>
+    </div>
+    <div class="xp-timeline">
+        <article class="xp-item is-current" data-aos="fade-up">
+            <div class="xp-rail"><span class="xp-dot"></span></div>
+            <div class="xp-card">
+                <header class="xp-head">
+                    <img src="./assets/images/ketek-logo.jpeg" alt="Ketek Group Inc logo" class="xp-logo">
+                    <div>
+                        <h3><a href="https://ketek.ca/" target="_blank" rel="noopener">Ketek Group Inc</a></h3>
+                        <p class="xp-meta">Edmonton, AB &middot; Permanent full-time &middot; On-site &middot; since Feb 2025</p>
                     </div>
+                </header>
+                <div class="xp-role is-current">
+                    <div class="xp-role-head">
+                        <h4>IT Systems Administrator</h4>
+                        <span class="xp-dates">Oct 2026 &ndash; <em>Present</em></span>
+                    </div>
+                    <ul><li>Managing enterprise servers, storage, networking and VMware virtualization infrastructure.</li><li>Administering VMware Horizon virtual desktop infrastructure (VDI) and thin-client environments.</li><li>Managing Windows imaging, deployment and device provisioning with SmartDeploy.</li><li>Administering Active Directory, authentication systems and IT automation.</li><li>Monitoring data-centre operations, system performance and backup solutions.</li><li>Managing cybersecurity operations, endpoint security and threat prevention.</li><li>Planning and implementing infrastructure upgrades and long-term IT improvements.</li></ul>
                 </div>
-                
-                
-
-                <div id="education" class="credential-edc-exp credential-education">
-                    <h2 data-aos="fade-up">Education</h2>
-                
-                    <!-- Education Item 1 -->
-                    <div class="timeline-item-education">
-                        <div class="timeline-content-education">
-                            <h3>Bachelor Degree in Computer Science Software Specialization</h3>
-                            <h5>University of Alberta, AB, Canada</h5>
-                            <p>GPA: 3.4/4.0</p>
-                        </div>
-                        <div class="timeline-date-education">
-                            <h4>2019 - 2023</h4>
-                            <img src="./assets/images/uofa-logo.webp" alt="UAlberta" class="company-logo"
-                                     style="display: block; width: 50px; height: 50px; border-radius: 50%; margin-top: 5px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                        </div>
+                <div class="xp-role">
+                    <div class="xp-role-head">
+                        <h4>IT Support Specialist</h4>
+                        <span class="xp-dates">Feb 2025 &ndash; Oct 2026</span>
                     </div>
-                
-                    <!-- Education Item 2 -->
-                    <div class="timeline-item-education">
-                        <div class="timeline-content-education">
-                            <h3>Higher Secondary Certificate</h3>
-                            <h5>Dhaka College, Dhaka, Bangladesh</h5>
-                            <p>GPA: 5.0/5.0</p>
-                        </div>
-                        <div class="timeline-date-education">
-                            <h4>2016 - 2018</h4>
-                            <img src="./assets/images/dc-logo.png" alt="DC" class="company-logo"
-                                     style="display: block; width: 50px; height: 50px; border-radius: 50%; margin-top: 5px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                        </div>
-                    </div>
-                
-                    <!-- Education Item 3 -->
-                    <div class="timeline-item-education">
-                        <div class="timeline-content-education">
-                            <h3>Secondary School Certificate</h3>
-                            <h5>Ideal School & College, Dhaka, Bangladesh</h5>
-                            <p>GPA: 5.0/5.0</p>
-                        </div>
-                        <div class="timeline-date-education">
-                            <h4>2005 - 2015</h4>
-                            <img src="./assets/images/ideal-logo.png" alt="Ideal" class="company-logo"
-                                     style="display: block; width: 50px; height: 50px; border-radius: 50%; margin-top: 5px; transition: transform 0.3s ease-in-out; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                        </div>
-                    </div>
+                    <ul><li>Installed and maintained company data cabling and network infrastructure.</li><li>Installed and serviced hardware: computers, thin clients, laptops, servers, scanners and printers.</li><li>Maintained software across company devices, including VPNs and security applications.</li><li>Helped manage company networks, accounts, email, landlines and mobile devices.</li><li>Troubleshot and resolved software/hardware issues and walked employees through fixes.</li><li>Tested new technologies for business operations and documented solutions.</li></ul>
                 </div>
-                
+                <div class="xp-tags"><span>VMware</span><span>VDI</span><span>Active Directory</span><span>SmartDeploy</span><span>Networking</span><span>Cybersecurity</span><span>Backups</span></div>
+            </div>
+        </article>
+        <article class="xp-item" data-aos="fade-up">
+            <div class="xp-rail"><span class="xp-dot"></span></div>
+            <div class="xp-card">
+                <header class="xp-head">
+                    <img src="./assets/images/subway-logo.jpg" alt="Subway logo" class="xp-logo">
+                    <div>
+                        <h3>Subway</h3>
+                        <p class="xp-meta">Edmonton, AB &middot; Store Manager &middot; Jul 2023 &ndash; Feb 2025</p>
+                    </div>
+                </header>
+                <div class="xp-role">
+                    <div class="xp-role-head">
+                        <h4>Store Manager</h4>
+                        <span class="xp-dates">Jul 2023 &ndash; Feb 2025</span>
+                    </div>
+                    <ul><li>Ran day-to-day operations: food safety, inventory and ordering.</li><li>Trained and scheduled staff; handled POS systems and customer service.</li></ul>
+                </div>
+                <div class="xp-tags"><span>Operations</span><span>Leadership</span><span>POS</span></div>
+            </div>
+        </article>
+        <article class="xp-item" data-aos="fade-up">
+            <div class="xp-rail"><span class="xp-dot"></span></div>
+            <div class="xp-card">
+                <header class="xp-head">
+                    <img src="./assets/images/warematch-logo.webp" alt="WareMatch logo" class="xp-logo">
+                    <div>
+                        <h3><a href="https://warematch.com/" target="_blank" rel="noopener">WareMatch</a></h3>
+                        <p class="xp-meta">Quebec, Canada (Remote) &middot; Contract &middot; Sep 2024 &ndash; Dec 2024</p>
+                    </div>
+                </header>
+                <div class="xp-role">
+                    <div class="xp-role-head">
+                        <h4>Web Developer</h4>
+                        <span class="xp-dates">Sep 2024 &ndash; Dec 2024</span>
+                    </div>
+                    <ul><li>Built web apps with Next.js and JavaScript on the frontend and Django services on the backend.</li><li>Managed Docker environments and PostgreSQL storage; designed responsive Material UI interfaces.</li><li>Optimized performance and scalability; took part in code reviews and knowledge sharing.</li></ul>
+                </div>
+                <div class="xp-tags"><span>Next.js</span><span>Django</span><span>Docker</span><span>PostgreSQL</span><span>Material UI</span></div>
+            </div>
+        </article>
+        <article class="xp-item" data-aos="fade-up">
+            <div class="xp-rail"><span class="xp-dot"></span></div>
+            <div class="xp-card">
+                <header class="xp-head">
+                    <img src="./assets/images/connectionhub-logo.png" alt="Connection Hub Ltd logo" class="xp-logo">
+                    <div>
+                        <h3><a href="https://connectionhub.ca/" target="_blank" rel="noopener">Connection Hub Ltd</a></h3>
+                        <p class="xp-meta">Edmonton, AB &middot; Contract, project-based &middot; May 2022 &ndash; Oct 2023</p>
+                    </div>
+                </header>
+                <div class="xp-role">
+                    <div class="xp-role-head">
+                        <h4>Full Stack Developer</h4>
+                        <span class="xp-dates">May 2022 &ndash; Oct 2023</span>
+                    </div>
+                    <ul><li>Designed and built the company website on WordPress with a hand-coded custom theme.</li><li>Hardened secure communication in a Django + Postgres backend, cutting processing time by 25%.</li><li>Customized features with PHP, HTML, CSS and JavaScript.</li></ul>
+                </div>
+                <div class="xp-tags"><span>WordPress</span><span>PHP</span><span>Django</span><span>Postgres</span></div>
+            </div>
+        </article>
+        <article class="xp-item" data-aos="fade-up">
+            <div class="xp-rail"><span class="xp-dot"></span></div>
+            <div class="xp-card">
+                <header class="xp-head">
+                    <img src="./assets/images/ilmhub-logo.webp" alt="IlmHub logo" class="xp-logo">
+                    <div>
+                        <h3><a href="https://ilmhub.com/" target="_blank" rel="noopener">IlmHub</a></h3>
+                        <p class="xp-meta">Edmonton, AB &middot; Internship &middot; Jan 2023 &ndash; May 2023</p>
+                    </div>
+                </header>
+                <div class="xp-role">
+                    <div class="xp-role-head">
+                        <h4>Full-Stack Developer (Intern)</h4>
+                        <span class="xp-dates">Jan 2023 &ndash; May 2023</span>
+                    </div>
+                    <ul><li>Worked in a team of four on a language-learning platform built around pronunciation lessons.</li><li>Added practice, feedback and parent progress-sharing features.</li><li>Django + React.js, PostgreSQL; backend on Cybera, frontend on Heroku.</li></ul>
+                </div>
+                <div class="xp-tags"><span>Django</span><span>React.js</span><span>PostgreSQL</span><span>Heroku</span></div>
+            </div>
+        </article>
+    </div>
+</div>
 
-                
+<div id="education" class="xp-section edu-section">
+    <div class="xp-section-head" data-aos="fade-up">
+        <span class="hx-eyebrow">Learning</span>
+        <h2 class="hx-heading hx-left">Education</h2>
+        <p class="hx-blurb">Dhaka to Edmonton &mdash; the classrooms along the way.</p>
+    </div>
+    <div class="edu-list">
+        <article class="edu-item" data-aos="fade-up">
+            <div class="edu-logo"><img src="./assets/images/uofa-logo.webp" alt="University of Alberta logo"></div>
+            <div class="edu-body">
+                <span class="edu-years">2019 &ndash; 2023</span>
+                <h3>B.Sc. Computing Science, Software Specialization</h3>
+                <p class="edu-school">University of Alberta &middot; Edmonton, AB</p>
+                <p class="edu-note">Software engineering, databases, networks and cloud &mdash; plus the IlmHub capstone project.</p>
+            </div>
+            <div class="edu-gpa"><b>3.4<span>/4.0</span></b><small>GPA</small></div>
+        </article>
+        <article class="edu-item" data-aos="fade-up">
+            <div class="edu-logo"><img src="./assets/images/dc-logo.png" alt="Dhaka College logo"></div>
+            <div class="edu-body">
+                <span class="edu-years">2016 &ndash; 2018</span>
+                <h3>Higher Secondary Certificate (HSC)</h3>
+                <p class="edu-school">Dhaka College &middot; Dhaka, Bangladesh</p>
+                <p class="edu-note">Science stream, perfect GPA.</p>
+            </div>
+            <div class="edu-gpa"><b>5.0<span>/5.0</span></b><small>GPA</small></div>
+        </article>
+        <article class="edu-item" data-aos="fade-up">
+            <div class="edu-logo"><img src="./assets/images/ideal-logo.png" alt="Ideal School &amp; College logo"></div>
+            <div class="edu-body">
+                <span class="edu-years">2005 &ndash; 2015</span>
+                <h3>Secondary School Certificate (SSC)</h3>
+                <p class="edu-school">Ideal School &amp; College &middot; Dhaka, Bangladesh</p>
+                <p class="edu-note">Ten years at one school, from the first class to a perfect SSC.</p>
+            </div>
+            <div class="edu-gpa"><b>5.0<span>/5.0</span></b><small>GPA</small></div>
+        </article>
+    </div>
+</div>
 
-                <div id="certificates" class="container about-experience">
+<div id="certificates" class="container about-experience">
                     <div class="credential-content flex-1">
                         <h2 data-aos="fade-up" style="color: #fff; margin-bottom: 22px;">Certificates</h2>
                 
@@ -1000,121 +1041,43 @@
 </section>
 
 <!-- Contact Section -->
-<!-- Contact Section -->
-<section id="contact" class="contact-section shadow-box">
+<section id="contact" class="hx-section hx-contact">
     <div class="container">
-        <h2 class="section-heading" data-aos="fade-up">Contact</h2>
+        <div class="hx-contact-card" data-aos="fade-up">
+            <div class="hx-contact-glow"></div>
+            <span class="hx-eyebrow">Get in touch</span>
+            <h2 class="hx-heading">Let&rsquo;s build something <span>together.</span></h2>
+            <p class="hx-blurb">Open to IT, software and freelance work &mdash; or just a good conversation about tech.</p>
 
-        <!-- Contact Info -->
-        <div class="contact-details">
-            <ul class="info-list">
-                <li>Email: <a href="mailto:msaifulislamshovo2000@gmail.com" class="highlighted-text">msaifulislamshovo2000@gmail.com</a></li>
-                <li>Location: <span class="highlighted-text">Edmonton, AB, Canada</span></li>
-            </ul>
-        </div>
-
-        <!-- Social Media Links -->
-        <h3 class="section-heading-small" data-aos="zoom-in">Connect with me</h3>
-        <div class="social-links-container">
-            <ul class="social-list">
-                <li><a href="https://www.linkedin.com/in/saifulshovo/" target="_blank" class="social-link-box"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                <li><a href="https://instagram.com/shovo_4" target="_blank" class="social-link-box"><i class="fab fa-instagram"></i> Instagram</a></li>
-                <li><a href="https://www.facebook.com/saifulislamshovo4/" target="_blank" class="social-link-box"><i class="fab fa-facebook"></i> Facebook</a></li>
-            </ul>
-        </div>
-
-        <!-- Contact Form (optional, remove if not needed) -->
-        <!-- <div data-aos="zoom-in" class="contact-form">
-            <div class="shadow-box">
-                <img src="./assets/images/icon3.png" alt="Icon" class="contact-icon">
-                <h1>Let’s work <span>together.</span></h1>
-                <form method="POST" action="mailer.php">
-                    <div class="input-group">
-                        <input type="text" name="full-name" id="full-name" placeholder="Your Name *">
-                    </div>
-                    <div class="input-group">
-                        <input type="email" name="email" id="email" placeholder="Your Email *">
-                    </div>
-                    <div class="input-group">
-                        <input type="text" name="subject" id="subject" placeholder="Subject *">
-                    </div>
-                    <div class="input-group">
-                        <textarea name="message" id="message" placeholder="Your Message *"></textarea>
-                    </div>
-                    <div class="input-group">
-                        <button class="theme-btn submit-btn" name="submit" type="submit">Send Message</button>
-                    </div>
-                </form>
+            <div class="hx-contact-rows">
+                <a class="hx-contact-row" href="mailto:msaifulislamshovo2000@gmail.com">
+                    <span class="hx-ci"><i class="iconoir-mail"></i></span>
+                    <span><small>Email</small>msaifulislamshovo2000@gmail.com</span>
+                </a>
+                <div class="hx-contact-row">
+                    <span class="hx-ci"><i class="iconoir-map-pin"></i></span>
+                    <span><small>Location</small>Edmonton, AB, Canada</span>
+                </div>
             </div>
-        </div> -->
+
+            <div class="hx-socials">
+                <a href="https://www.linkedin.com/in/saifulshovo/" target="_blank" rel="noopener" class="hx-social li" aria-label="LinkedIn" title="LinkedIn"><i class="iconoir-linkedin"></i></a>
+                <a href="https://instagram.com/shovo_4" target="_blank" rel="noopener" class="hx-social ig" aria-label="Instagram" title="Instagram"><i class="iconoir-instagram"></i></a>
+                <a href="https://www.facebook.com/saifulislamshovo4/" target="_blank" rel="noopener" class="hx-social fb" aria-label="Facebook" title="Facebook"><i class="iconoir-facebook"></i></a>
+                <a href="https://github.com/shovo4" target="_blank" rel="noopener" class="hx-social gh" aria-label="GitHub" title="GitHub"><i class="iconoir-github"></i></a>
+            </div>
+        </div>
     </div>
 </section>
-
-
-
-
-
-    
-<!-- About Section -->
-<section id="about" class="about-area hx-about">
-    <div class="container"><h2 class="hx-heading" data-aos="fade-up">About Me</h2></div>
-    <div class="container">
-        <div class="d-flex about-me-wrap align-items-start gap-24">
-            <div class="about-details" data-aos="zoom-in">
-                <div class="about-blog-box info-box shadow-box h-full">
-                    <!-- <a href="./assets/files/resume.pdf" target="_blank" rel="noopener noreferrer" class="overlay-link"></a> -->
-                    <img src="./assets/images/bg1.png" alt="BG" class="bg-img">    
-                    <div class="about-details-inner shadow-box">
-                        <img src="./assets/images/icon2.png" alt="Star">
-                        <p>Hey, I'm</p>
-                        <h1>Shovo,</h1>
-                        <p>– your <b class="color-transition">tech problem solver</b>! 🛠️ With a <b class="color-transition">B.Sc. in Computing Science</b> 🎓 from the University of Alberta, I bridge the gap between <b class='color-transition'>IT infrastructure</b> & <b class='color-transition'>software development</b>.</p>
-
-                        <p>At <b class="color-transition">Ketek Group Inc.</b>, I provide <b>IT Support</b>—keeping networks secure, troubleshooting hardware & software, and ensuring smooth operations. 🔧 But my expertise doesn't stop there! From Python 🐍 and Java ☕ to React & Django, I thrive on <b class='color-transition'>building robust solutions</b> and <b class='color-transition'>optimizing tech systems</b>.</p>
-
-                        <p>Currently working with <b class='color-transition'>PostgreSQL, MongoDB, and AWS ☁️</b>, I enjoy solving challenges across IT and software engineering. Let’s build & secure something incredible! 🚀 Reach me at <b class="color-transition">msaifulislamshovo2000@gmail.com</b> – let’s make tech magic happen! ✨👨‍💻</p>
-                    </div>
-                </div>    
-            </div>
-            
-        </div>
-
-        <!-- Job Titles Section -->
-        <div class="job-titles-container d-flex flex-wrap justify-content-around gap-20">
-            <div class="job-box shadow-box">
-                <img src="https://img.icons8.com/?size=100&id=123383&format=png&color=000000" alt="IT Support">
-                <h3>IT Support</h3>
-            </div>
-            
-            <div class="job-box shadow-box">
-                <img src="https://img.icons8.com/?size=100&id=FVDBGC3QPi3J&format=png&color=000000" alt="Software Developer">
-                <h3>Software Developer</h3>
-            </div>
-            <div class="job-box shadow-box">
-                <img src="https://img.icons8.com/?size=100&id=RtciaGLvcpOm&format=png&color=000000" alt="Web Developer">
-                <h3>Web Developer</h3>
-            </div>
-            <div class="job-box shadow-box">
-                <img src="https://img.icons8.com/?size=100&id=gtJlIVpnqQyS&format=png&color=000000" alt="Cloud Architect">
-                <h3>Cloud Architect</h3>
-            </div>
-            <div class="job-box shadow-box">
-                <img src="https://img.icons8.com/?size=100&id=cQ0emn3GZS6M&format=png&color=000000" alt="UX Designer">
-                <h3>UX Designer</h3>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-
-
 
 <!-- Footer -->
-    <footer class="footer-area">
+    <footer class="footer-area hx-footer">
         <div class="container">
-            <p>&copy; 2024 Shovo4. All rights reserved.</p>
+            <div class="hx-footer-left">
+                <p class="hx-footer-line">Hand-built in Edmonton since <b>2024</b> &mdash; still shipping updates at midnight. <span class="hx-footer-dot">&#9679;</span> &copy; <span id="hx-year">2026</span> Shovo</p>
+                <p class="hx-footer-sub">Built with HTML, CSS, a bit of JavaScript and too much coffee <span class="hx-coffee">&#9749;</span></p>
+            </div>
+            <a href="#" class="hx-top" aria-label="Back to top"><i class="iconoir-arrow-up"></i></a>
         </div>
     </footer>
 
@@ -1127,6 +1090,7 @@
     <script src="./assets/js/supabase-config.js"></script>
     <script src="./assets/js/blog.js"></script>
     <script src="./assets/js/home-feed.js"></script>
+    <script src="./assets/js/confetti.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {

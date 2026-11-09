@@ -1,5 +1,7 @@
 /* Home page: collapsible sections + recent blog posts and memories */
 (function () {
+  var top = document.querySelector('.hx-top'); if (top) top.addEventListener('click', function (e) { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); });
+  var y = document.getElementById('hx-year'); if (y) y.textContent = new Date().getFullYear();
   function refreshAnim() { try { if (window.AOS) (AOS.refreshHard || AOS.refresh)(); } catch (e) {} }
 
   /* ---------- collapsible sections ---------- */
@@ -48,6 +50,31 @@
     });
   });
 
+  /* ---------- project cards: tech list -> chips, drive links ---------- */
+  document.querySelectorAll('.projects-area .project-item').forEach(function (card) {
+    // normalise the card: image -> title -> tags -> buttons (the original markup varied)
+    var overlay = card.querySelector('.overlay-link');
+    var img = card.querySelector('.project-img img') || card.querySelector(':scope > img:not(.bg-img)');
+    var h1 = card.querySelector('.project-info h1'), tags = card.querySelector('.project-info p');
+    var btns = Array.prototype.slice.call(card.querySelectorAll('.project-btn'));
+    if (img && h1) {
+      var info = document.createElement('div'); info.className = 'project-info';
+      info.appendChild(h1); if (tags) info.appendChild(tags);
+      var actions = document.createElement('div'); actions.className = 'project-actions';
+      btns.forEach(function (b) { actions.appendChild(b); });
+      card.innerHTML = '';
+      if (overlay) card.appendChild(overlay);
+      img.className = 'project-cover'; img.removeAttribute('width'); img.removeAttribute('height'); img.loading = 'lazy';
+      card.appendChild(img); card.appendChild(info); card.appendChild(actions);
+    }
+    var p = card.querySelector('.project-info p');
+    if (p && !p.querySelector('.tag')) {
+      var items = p.textContent.split(/,(?![^(]*\))/).map(function (t) { return t.trim(); }).filter(Boolean);
+      if (items.length) p.innerHTML = items.map(function (t) { return '<span class="tag">' + t.replace(/</g, '&lt;') + '</span>'; }).join('');
+    }
+    card.querySelectorAll('.project-btn').forEach(function (b) { if (!/github/i.test(b.textContent)) b.classList.add('is-drive'); });
+  });
+
   /* ---------- recent posts + memories ---------- */
   if (!window.Blog) {
     ['hx-blog','hx-mem'].forEach(function (id) { var el = document.getElementById(id); if (el) el.innerHTML = '<p class="hx-status">Couldn\'t load right now.</p>'; });
@@ -67,7 +94,6 @@
           (p.cover_url ? '<img loading="lazy" src="' + esc(p.cover_url) + '" alt="">' : '') + '</div><div class="hx-info"><h3>' + esc(p.title) + '</h3>' +
           (p.excerpt ? '<p>' + esc(p.excerpt) + '</p>' : '') + '<div class="hx-meta">' + fmt(p.created_at) + '</div></div></a>';
       }).join('');
-      if (rows.length > 3) moreBtn.style.display = '';
     } catch (e) { box.innerHTML = '<p class="hx-status">Couldn\'t load posts right now.</p>'; }
     refreshAnim();
   })();
@@ -83,7 +109,6 @@
         return '<a class="hx-mem" href="./memories.html"><img loading="lazy" src="' + esc(m.image_url) + '" alt="' + esc(m.caption || 'Memory') + '">' +
           (m.caption ? '<span>' + esc(m.caption) + '</span>' : '') + '</a>';
       }).join('');
-      if (rows.length > 8) moreBtn.style.display = '';
     } catch (e) { box.innerHTML = '<p class="hx-status">Couldn\'t load memories right now.</p>'; }
     refreshAnim();
   })();
