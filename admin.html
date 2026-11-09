@@ -2,200 +2,179 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/css/blog.css"><title>Admin</title></head><body>
-<header class="b-header"><div class="b-wrap"><a class="b-brand" href="./index.html">&larr; Shovo</a><nav><a href="./blogs.html">Blog</a><a href="./memories.html">Memories</a><a href="#" id="logout" class="hide">Log out</a></nav></div></header>
-<main class="b-wrap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
+<link rel="stylesheet" href="./assets/css/blog.css"><link rel="stylesheet" href="./assets/css/admin.css"><title>Admin · Shovo</title></head><body class="adm">
 
-<section id="loginView" class="panel hide" style="max-width:420px;margin:40px auto">
-  <h2>Admin login</h2>
-  <form id="loginForm">
+<!-- ================= LOGIN ================= -->
+<main id="loginView" class="adm-login hide">
+  <form id="loginForm" class="adm-login-card">
+    <div class="adm-logo"><i class="iconoir-lock"></i></div>
+    <h1>Welcome back</h1><p class="note">Sign in to manage shovo.ca</p>
     <label class="f" for="em">Email</label><input id="em" type="email" autocomplete="username" required>
     <label class="f" for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required>
-    <div class="row"><button class="btn" type="submit">Log in</button><span id="loginMsg" class="err"></span></div>
+    <button class="btn wide" type="submit">Sign in</button>
+    <p id="loginMsg" class="err"></p>
+    <a href="./index.html" class="adm-back">&larr; Back to site</a>
   </form>
-</section>
-
-<section id="app" class="hide">
-  <div class="tabs"><button data-tab="posts" class="on">Blog posts</button><button data-tab="memories">Memories</button></div>
-
-  <div id="tab-posts">
-    <div class="panel">
-      <h2 id="formTitle">New post</h2>
-      <label class="f" for="title">Title</label><input id="title" type="text">
-      <label class="f" for="excerpt">Short summary (shown in the list)</label><input id="excerpt" type="text">
-      <label class="f" for="postDate">Post date (posts are ordered by this &mdash; pick a past date to back-date)</label><input id="postDate" type="date">
-      <label class="f">Cover image (compressed automatically)</label>
-      <div class="row" style="margin-top:0"><input id="coverFile" type="file" accept="image/*"><span id="coverInfo" class="note"></span></div>
-      <img id="coverPrev" class="hide" style="max-height:140px;border-radius:12px;margin-top:10px" alt="">
-      <label class="f" for="body">Body &mdash; blank line = new paragraph. <code>## Heading</code>, <code>**bold**</code>, <code>*italic*</code>, <code>- list</code>, <code>&gt; quote</code>, <code>[text](https://link)</code></label>
-      <div class="split">
-        <textarea id="body"></textarea>
-        <div class="preview"><div class="prose" id="preview"></div></div>
-      </div>
-      <div class="row">
-        <input id="inlineFile" type="file" accept="image/*" multiple class="hide">
-        <button class="btn ghost" type="button" id="insertImg">Insert image</button>
-        <label style="display:flex;gap:8px;align-items:center;color:#ddd"><input type="checkbox" id="published"> Published</label>
-        <button class="btn" type="button" id="savePost">Save post</button>
-        <button class="btn ghost hide" type="button" id="cancelEdit">Cancel edit</button>
-        <span id="postMsg" class="note"></span>
-      </div>
-    </div>
-    <div class="panel"><h2>Your posts</h2><div id="postList"></div></div>
-  </div>
-
-  <div id="tab-memories" class="hide">
-    <div class="panel">
-      <h2>Add memories</h2>
-      <p class="note" style="margin:0 0 8px">Photos are shrunk in your browser to ~1000px WebP at low quality before upload (typically under 150 KB each).</p>
-      <label class="f" for="memFiles">Pictures (you can pick many)</label><input id="memFiles" type="file" accept="image/*" multiple>
-      <label class="f" for="memCap">Caption (optional, applied to all selected)</label><input id="memCap" type="text">
-      <label class="f" for="memDate">Date (optional)</label><input id="memDate" type="date">
-      <div class="row"><button class="btn" id="memUpload" type="button">Upload</button><span id="memMsg" class="note"></span></div>
-    </div>
-    <div class="panel"><h2>Your memories</h2><div id="memList"></div></div>
-  </div>
-</section>
-
-<div id="denied" class="panel hide"><h2>Not allowed</h2><p class="note">This account isn't registered as the site admin.</p></div>
 </main>
+
+<!-- ================= APP ================= -->
+<div id="app" class="adm-shell hide">
+  <aside class="adm-side">
+    <a href="./index.html" class="adm-brand"><span class="adm-brand-dot"></span>shovo<span>.ca</span></a>
+    <nav class="adm-nav">
+      <button data-view="overview" class="on"><i class="iconoir-dashboard-dots"></i> Overview</button>
+      <button data-view="posts"><i class="iconoir-page-edit"></i> Posts</button>
+      <button data-view="memories"><i class="iconoir-media-image"></i> Memories</button>
+      <button data-view="watched"><i class="iconoir-tv"></i> Watched</button>
+      <button data-view="settings"><i class="iconoir-settings"></i> Settings</button>
+    </nav>
+    <div class="adm-side-foot">
+      <div class="adm-user"><span class="adm-avatar"><img src="./assets/images/me.jpeg" alt=""></span><div><b>Shovo</b><small id="whoami">&nbsp;</small></div></div>
+      <button id="logout" class="adm-ghost"><i class="iconoir-log-out"></i> Log out</button>
+    </div>
+  </aside>
+
+  <main class="adm-main">
+    <header class="adm-top"><h1 id="viewTitle">Overview</h1><div class="adm-top-right"><a href="./index.html" target="_blank" class="adm-ghost"><i class="iconoir-open-new-window"></i> View site</a></div></header>
+
+    <!-- ---------- OVERVIEW ---------- -->
+    <section id="view-overview" class="adm-view">
+      <div class="stat-grid">
+        <div class="stat"><i class="iconoir-page-edit"></i><div><b id="st-posts">–</b><small>Posts</small></div></div>
+        <div class="stat"><i class="iconoir-media-image"></i><div><b id="st-mem">–</b><small>Memories</small></div></div>
+        <div class="stat"><i class="iconoir-tv"></i><div><b id="st-watch">–</b><small>Watched</small></div></div>
+        <div class="stat"><i class="iconoir-heart"></i><div><b id="st-react">–</b><small>Reactions</small></div></div>
+      </div>
+      <div class="two">
+        <div class="panel">
+          <h2><i class="iconoir-database"></i> Storage</h2>
+          <p class="note">Supabase free plan: 500 MB database &middot; 1 GB file storage.</p>
+          <div class="meter"><div class="meter-head"><span>Files (photos)</span><b id="m-files">–</b></div><div class="bar"><i id="b-files"></i></div></div>
+          <div class="meter"><div class="meter-head"><span>Database</span><b id="m-db">–</b></div><div class="bar"><i id="b-db"></i></div></div>
+          <div id="st-folders" class="kv"></div>
+          <p class="note" id="st-avg"></p>
+        </div>
+        <div class="panel">
+          <h2><i class="iconoir-table-rows"></i> Tables</h2>
+          <div id="st-tables" class="kv"></div>
+          <h2 style="margin-top:22px"><i class="iconoir-warning-triangle"></i> Largest files</h2>
+          <div id="st-largest" class="kv small"></div>
+        </div>
+      </div>
+      <p class="note" id="st-err" class="err"></p>
+    </section>
+
+    <!-- ---------- POSTS ---------- -->
+    <section id="view-posts" class="adm-view hide">
+      <div class="panel">
+        <div class="panel-head"><h2 id="formTitle">New post</h2><button class="adm-ghost hide" type="button" id="cancelEdit">Cancel edit</button></div>
+        <div class="two">
+          <div><label class="f" for="title">Title</label><input id="title" type="text" placeholder="A good title"></div>
+          <div><label class="f" for="postDate">Post date</label><input id="postDate" type="date"></div>
+        </div>
+        <label class="f" for="excerpt">Short summary (shown in the list)</label><input id="excerpt" type="text">
+        <label class="f">Cover image <span class="note">compressed to ~1200px WebP</span></label>
+        <div class="row" style="margin-top:0"><input id="coverFile" type="file" accept="image/*"><span id="coverInfo" class="note"></span></div>
+        <img id="coverPrev" class="hide cover-prev" alt="">
+        <label class="f" for="body">Body &mdash; blank line = paragraph &middot; <code>## Heading</code> <code>**bold**</code> <code>*italic*</code> <code>- list</code> <code>&gt; quote</code> <code>[text](https://link)</code></label>
+        <div class="split"><textarea id="body" placeholder="Write…"></textarea><div class="preview"><div class="prose" id="preview"></div></div></div>
+        <div class="row">
+          <input id="inlineFile" type="file" accept="image/*" multiple class="hide">
+          <button class="btn ghost" type="button" id="insertImg"><i class="iconoir-media-image-plus"></i> Insert image</button>
+          <label class="chk"><input type="checkbox" id="published"> Published</label>
+          <button class="btn" type="button" id="savePost">Save post</button>
+          <span id="postMsg" class="note"></span>
+        </div>
+      </div>
+      <div class="panel"><h2>Your posts</h2><div id="postList" class="list"></div></div>
+    </section>
+
+    <!-- ---------- MEMORIES ---------- -->
+    <section id="view-memories" class="adm-view hide">
+      <div class="panel">
+        <h2>Add memories</h2>
+        <p class="note">Photos are shrunk in your browser to ~1000px WebP at low quality before upload (typically 50–150 KB each).</p>
+        <label class="f" for="memFiles">Pictures (you can pick many)</label><input id="memFiles" type="file" accept="image/*" multiple>
+        <div class="two">
+          <div><label class="f" for="memCap">Caption (optional, applied to all selected)</label><input id="memCap" type="text"></div>
+          <div><label class="f" for="memDate">Date (optional)</label><input id="memDate" type="date"></div>
+        </div>
+        <div class="row"><button class="btn" id="memUpload" type="button"><i class="iconoir-cloud-upload"></i> Upload</button><span id="memMsg" class="note"></span></div>
+      </div>
+      <div class="panel"><h2>Your memories</h2><div id="memList" class="mem-grid-adm"></div></div>
+    </section>
+
+    <!-- ---------- WATCHED ---------- -->
+    <section id="view-watched" class="adm-view hide">
+      <div class="panel">
+        <h2><i class="iconoir-search"></i> Add something you watched</h2>
+        <div id="omdbWarn" class="warn hide">Add your free OMDb API key in <a href="#" data-goto="settings">Settings</a> to search IMDb data.</div>
+        <div class="row" style="margin-top:0">
+          <input id="wSearch" type="text" placeholder="Exact title… e.g. Interstellar" style="flex:1;min-width:220px">
+          <input id="wYear" type="text" inputmode="numeric" placeholder="Year (optional)" style="width:130px">
+          <select id="wType"><option value="">Movie or series</option><option value="movie">Movie</option><option value="series">Series</option></select>
+          <button class="btn" id="wGo" type="button"><i class="iconoir-search"></i> Look up</button>
+        </div>
+        <p class="note" style="margin:8px 0 0">One request per look-up, nothing else ever calls the API. <span id="reqCount"></span> &middot; Wrong match? Add the year or pick Movie/Series and look up again.</p>
+        <div id="wResults" class="w-results"></div>
+        <div id="wPick" class="w-pick hide">
+          <img id="wpPoster" alt="">
+          <div class="w-pick-body">
+            <div class="w-pick-title"><h3 id="wpTitle"></h3><a id="wpImdb" href="#" target="_blank" rel="noopener" class="imdb-link">IMDb <i class="iconoir-open-new-window"></i></a></div>
+            <p id="wpMeta" class="note"></p>
+            <div class="two">
+              <div><label class="f" for="wpDate">Watched on</label><input id="wpDate" type="date"></div>
+              <div><label class="f" for="wpRating">My rating <span class="note">(optional)</span></label>
+                <div class="stars" id="wpStars"></div><input type="hidden" id="wpRating"></div>
+            </div>
+            <label class="f" for="wpComment">Personal note <span class="note">(optional, max 600 chars)</span></label><textarea id="wpComment" maxlength="600" style="min-height:80px"></textarea>
+            <div class="row"><button class="btn" id="wSave" type="button"><i class="iconoir-plus"></i> Add to watched</button><button class="btn ghost" id="wCancel" type="button">Cancel</button><span id="wMsg" class="note"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2><i class="iconoir-stats-report"></i> Your year in film</h2><div id="yearChips" class="chips"></div></div>
+        <div class="stat-grid small">
+          <div class="stat"><i class="iconoir-movie"></i><div><b id="ys-movies">0</b><small>Movies</small></div></div>
+          <div class="stat"><i class="iconoir-tv"></i><div><b id="ys-series">0</b><small>Series</small></div></div>
+          <div class="stat"><i class="iconoir-clock"></i><div><b id="ys-hours">0h</b><small>Hours (approx.)</small></div></div>
+          <div class="stat"><i class="iconoir-star"></i><div><b id="ys-avg">–</b><small>Your avg rating</small></div></div>
+        </div>
+        <div class="two">
+          <div><h3 class="sub">Genres you watched most</h3><div id="ys-genres" class="bars"></div></div>
+          <div><h3 class="sub">Highlights</h3><div id="ys-high" class="kv small"></div></div>
+        </div>
+      </div>
+
+      <div class="panel"><div class="panel-head"><h2>Watched list</h2><input id="wFilter" type="text" placeholder="Filter…" style="max-width:220px"></div><div id="wList" class="w-list"></div></div>
+    </section>
+
+    <!-- ---------- SETTINGS ---------- -->
+    <section id="view-settings" class="adm-view hide">
+      <div class="panel">
+        <h2><i class="iconoir-key"></i> OMDb API key</h2>
+        <p class="note">Free key from <a href="https://www.omdbapi.com/apikey.aspx" target="_blank" rel="noopener">omdbapi.com/apikey.aspx</a> (choose FREE, 1,000 requests/day). It is saved only in this browser, never in your website code.</p>
+        <div class="row" style="margin-top:0"><input id="omdbKey" type="text" placeholder="e.g. a1b2c3d4" style="max-width:260px"><button class="btn" id="saveKey" type="button">Save key</button><span id="keyMsg" class="note"></span></div>
+      </div>
+      <div class="panel">
+        <h2><i class="iconoir-info-circle"></i> Keeping storage small</h2>
+        <ul class="tips">
+          <li>Memories are compressed to ~1000px WebP (~50–150 KB). 1 GB fits roughly 8,000 photos.</li>
+          <li>Movie posters are stored as links to IMDb images, not files &mdash; a watched entry is well under 1 KB.</li>
+          <li>Deleting a memory here also deletes its file from storage.</li>
+          <li>Reactions are tiny rows; even thousands take a few hundred KB.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="denied" class="adm-login hide"><div class="adm-login-card"><h1>Not allowed</h1><p class="note">This account isn't registered as the site admin.</p><button id="logout2" class="btn ghost">Log out</button></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./assets/js/supabase-config.js"></script>
 <script src="./assets/js/blog.js"></script>
-<script>
-(() => {
-  if (!window.Blog) { document.querySelector("main").innerHTML = '<div class="b-status">Couldn\'t connect right now. Please refresh.</div>'; return; }
-  const { sb, esc, fmtDate, renderBody, uploadImage } = Blog;
-  const $ = id => document.getElementById(id);
-  const show = (id, on) => $(id).classList.toggle('hide', !on);
-  let editingId = null, coverUrl = null;
-  const todayStr = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
-  const toDateInput = iso => { const d = new Date(iso); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
-  const fromDateInput = v => new Date(v + 'T12:00:00').toISOString();   // noon local, so the day never shifts across time zones
-  $('postDate').value = todayStr();
-  $('postDate').addEventListener('click', e => { try { e.target.showPicker(); } catch (err) {} });
-
-  /* ---------- auth ---------- */
-  async function route() {
-    const { data: { session } } = await sb.auth.getSession();
-    show('loginView', !session); show('logout', !!session);
-    show('app', false); show('denied', false);
-    if (!session) return;
-    const { data: ok } = await sb.rpc('is_admin');
-    if (!ok) { show('denied', true); return; }
-    show('app', true); loadPosts(); loadMemories();
-  }
-  $('loginForm').addEventListener('submit', async e => {
-    e.preventDefault(); $('loginMsg').textContent = '';
-    const { error } = await sb.auth.signInWithPassword({ email: $('em').value.trim(), password: $('pw').value });
-    if (error) { $('loginMsg').textContent = 'Wrong email or password.'; return; }
-    $('pw').value = ''; route();
-  });
-  $('logout').addEventListener('click', async e => { e.preventDefault(); await sb.auth.signOut(); route(); });
-  document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('on', x === b));
-    show('tab-posts', b.dataset.tab === 'posts'); show('tab-memories', b.dataset.tab === 'memories');
-  }));
-
-  /* ---------- posts ---------- */
-  const updPreview = () => { $('preview').innerHTML = renderBody($('body').value); };
-  $('body').addEventListener('input', updPreview);
-
-  $('coverFile').addEventListener('change', async e => {
-    const f = e.target.files[0]; if (!f) return;
-    $('coverInfo').textContent = 'Compressing & uploading…';
-    try { const r = await uploadImage(f, 'covers', 1200, 0.6); coverUrl = r.url; $('coverPrev').src = r.url; show('coverPrev', true); $('coverInfo').textContent = Math.round(r.bytes / 1024) + ' KB'; }
-    catch (err) { $('coverInfo').textContent = 'Upload failed: ' + err.message; }
-  });
-
-  $('insertImg').addEventListener('click', () => $('inlineFile').click());
-  $('inlineFile').addEventListener('change', async e => {
-    const files = Array.from(e.target.files); e.target.value = ''; if (!files.length) return;
-    $('postMsg').textContent = 'Uploading image(s)…';
-    try {
-      let md = '';
-      for (const f of files) { const r = await uploadImage(f, 'posts', 1200, 0.6); md += '\n\n![](' + r.url + ')'; }
-      const ta = $('body'), pos = ta.selectionStart == null ? ta.value.length : ta.selectionStart;
-      ta.value = ta.value.slice(0, pos) + md + '\n\n' + ta.value.slice(pos); updPreview();
-      $('postMsg').textContent = 'Image inserted. Put text in the [ ] brackets to add a caption.';
-    } catch (err) { $('postMsg').textContent = 'Upload failed: ' + err.message; }
-  });
-
-  function resetForm() {
-    editingId = null; coverUrl = null;
-    ['title', 'excerpt', 'body'].forEach(i => $(i).value = ''); $('published').checked = false; $('coverFile').value = ''; $('postDate').value = todayStr();
-    show('coverPrev', false); $('coverInfo').textContent = ''; $('formTitle').textContent = 'New post'; show('cancelEdit', false); updPreview();
-  }
-  $('cancelEdit').addEventListener('click', resetForm);
-
-  $('savePost').addEventListener('click', async () => {
-    const title = $('title').value.trim();
-    if (!title) { $('postMsg').textContent = 'Add a title first.'; return; }
-    const row = { title, excerpt: $('excerpt').value.trim() || null, body: $('body').value, cover_url: coverUrl, published: $('published').checked, updated_at: new Date().toISOString(), created_at: fromDateInput($('postDate').value || todayStr()) };
-    $('savePost').disabled = true;
-    const q = editingId ? sb.from('posts').update(row).eq('id', editingId) : sb.from('posts').insert(row);
-    const { error } = await q; $('savePost').disabled = false;
-    if (error) { $('postMsg').textContent = 'Save failed: ' + error.message; return; }
-    $('postMsg').textContent = 'Saved ✔'; resetForm(); loadPosts();
-  });
-
-  async function loadPosts() {
-    const { data, error } = await sb.from('posts').select('*').order('created_at', { ascending: false });
-    if (error) { $('postList').textContent = error.message; return; }
-    window._posts = data;
-    $('postList').innerHTML = data.length ? data.map(p => '<div class="list-item">' + (p.cover_url ? '<img src="' + esc(p.cover_url) + '" alt="">' : '') +
-      '<div class="t">' + esc(p.title) + '<small>' + fmtDate(p.created_at) + ' · ' + (p.published ? '<span class="ok">Published</span>' : 'Draft') + '</small></div>' +
-      '<button class="btn ghost" data-a="edit" data-id="' + p.id + '">Edit</button>' +
-      '<button class="btn ghost" data-a="toggle" data-id="' + p.id + '">' + (p.published ? 'Unpublish' : 'Publish') + '</button>' +
-      '<button class="btn danger" data-a="del" data-id="' + p.id + '">Delete</button></div>').join('') : '<p class="note">No posts yet.</p>';
-  }
-  $('postList').addEventListener('click', async e => {
-    const b = e.target.closest('button'); if (!b) return;
-    const p = (window._posts || []).find(x => x.id === b.dataset.id); if (!p) return;
-    if (b.dataset.a === 'edit') {
-      editingId = p.id; coverUrl = p.cover_url; $('title').value = p.title; $('excerpt').value = p.excerpt || ''; $('body').value = p.body; $('published').checked = p.published; $('postDate').value = toDateInput(p.created_at);
-      if (p.cover_url) { $('coverPrev').src = p.cover_url; show('coverPrev', true); } else show('coverPrev', false);
-      $('formTitle').textContent = 'Editing post'; show('cancelEdit', true); updPreview(); scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (b.dataset.a === 'toggle') {
-      await sb.from('posts').update({ published: !p.published }).eq('id', p.id); loadPosts();
-    } else if (b.dataset.a === 'del' && confirm('Delete "' + p.title + '" permanently?')) {
-      await sb.from('posts').delete().eq('id', p.id); loadPosts();
-    }
-  });
-
-  /* ---------- memories ---------- */
-  $('memUpload').addEventListener('click', async () => {
-    const files = Array.from($('memFiles').files); if (!files.length) { $('memMsg').textContent = 'Pick some pictures first.'; return; }
-    $('memUpload').disabled = true; let done = 0, kb = 0;
-    for (const f of files) {
-      $('memMsg').textContent = 'Uploading ' + (done + 1) + ' of ' + files.length + '…';
-      try {
-        const r = await uploadImage(f, 'memories', 1000, 0.55); kb += r.bytes / 1024;
-        const { error } = await sb.from('memories').insert({ caption: $('memCap').value.trim() || null, image_url: r.url, image_path: r.path, taken_on: $('memDate').value || null });
-        if (error) throw error; done++;
-      } catch (err) { $('memMsg').textContent = 'Failed on ' + f.name + ': ' + err.message; break; }
-    }
-    $('memUpload').disabled = false;
-    if (done === files.length) { $('memMsg').textContent = 'Uploaded ' + done + ' (' + Math.round(kb) + ' KB total) ✔'; $('memFiles').value = ''; $('memCap').value = ''; }
-    loadMemories();
-  });
-  async function loadMemories() {
-    const { data, error } = await sb.from('memories').select('*').order('created_at', { ascending: false }).limit(200);
-    if (error) { $('memList').textContent = error.message; return; }
-    window._mems = data;
-    $('memList').innerHTML = data.length ? data.map(m => '<div class="list-item"><img src="' + esc(m.image_url) + '" alt=""><div class="t">' + esc(m.caption || '(no caption)') + '<small>' + (m.taken_on ? fmtDate(m.taken_on + 'T12:00:00') : fmtDate(m.created_at)) + '</small></div><button class="btn danger" data-id="' + m.id + '">Delete</button></div>').join('') : '<p class="note">No memories yet.</p>';
-  }
-  $('memList').addEventListener('click', async e => {
-    const b = e.target.closest('button'); if (!b) return;
-    const m = (window._mems || []).find(x => x.id === b.dataset.id); if (!m || !confirm('Delete this picture?')) return;
-    await sb.storage.from('media').remove([m.image_path]); await sb.from('memories').delete().eq('id', m.id); loadMemories();
-  });
-
-  // open the calendar when clicking anywhere on the date field
-  $('memDate').addEventListener('click', e => { try { e.target.showPicker(); } catch (err) {} });
-
-  sb.auth.onAuthStateChange((ev) => { if (ev === 'SIGNED_OUT') route(); });
-  route(); updPreview();
-})();
-</script></body></html>
+<script src="./assets/js/admin.js"></script>
+</body></html>
