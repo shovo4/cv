@@ -18,7 +18,7 @@
     if (!session) return;
     const { data: ok } = await sb.rpc('is_admin');
     if (!ok) { show('denied', true); return; }
-    $('whoami').textContent = session.user.email;
+    $('whoami').textContent = session.user.email; $('whoami').title = session.user.email;
     show('app', true); loadOverview(); loadPosts(); loadMemories(); loadWatched(); loadKey();
   }
   $('loginForm').addEventListener('submit', async e => {
