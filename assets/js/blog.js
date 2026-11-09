@@ -193,5 +193,8 @@
     return donut(items, Object.assign({ centerLabel: 'genre tags' }, opts));
   }
 
-  window.Blog = { sb, esc, fmtDate, renderBody, mountReactions, totalReactions, uploadImage, REACTIONS, donut, ratingDonut, kindDonut, genreDonut };
+  /* cover for a post: its cover image, otherwise the first image inside the body */
+  function coverOf(p) { if (p.cover_url) return p.cover_url; const m = /!\[[^\]]*\]\((https:\/\/[^\s)]+)\)/.exec(p.body || ''); return m ? m[1] : null; }
+
+  window.Blog = { coverOf, sb, esc, fmtDate, renderBody, mountReactions, totalReactions, uploadImage, REACTIONS, donut, ratingDonut, kindDonut, genreDonut };
 })();

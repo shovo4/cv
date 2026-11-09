@@ -21,7 +21,7 @@
 <script>
 (async () => {
   if (!window.Blog) { document.querySelector("main").innerHTML = '<div class="b-status">Couldn\'t connect right now. Please refresh.</div>'; return; }
-  const { sb, esc, fmtDate, totalReactions } = Blog, $ = id => document.getElementById(id);
+  const { sb, esc, fmtDate, totalReactions, coverOf } = Blog, $ = id => document.getElementById(id);
   const { data, error } = await sb.from('posts').select('id,title,excerpt,cover_url,created_at,body').eq('published', true).order('created_at', { ascending: false });
   if (error) { $('status').textContent = "Couldn't load posts right now."; return; }
   if (!data.length) { $('status').textContent = 'No posts yet. Check back soon.'; return; }
@@ -33,13 +33,13 @@
   $('meta').innerHTML = '<b>' + data.length + '</b> ' + (data.length === 1 ? 'post' : 'posts') + ' &middot; since ' + new Date(data[data.length - 1].created_at).getFullYear();
   const [f, ...rest] = data;
   $('featured').innerHTML = `<a class="bl-feature" href="${url(f)}">
-    <div class="bl-feature-img">${f.cover_url ? `<img src="${esc(f.cover_url)}" alt="">` : ''}</div>
+    <div class="bl-feature-img">${coverOf(f) ? `<img src="${esc(coverOf(f))}" alt="" onerror="this.remove()">` : ''}</div>
     <div class="bl-feature-body"><span class="bl-tag">Latest</span><h2>${esc(f.title)}</h2>${f.excerpt ? `<p>${esc(f.excerpt)}</p>` : ''}
     <div class="bl-meta">${meta(f)}</div><span class="bl-read">Read the post <span>&rarr;</span></span></div></a>`;
   if (rest.length) {
     $('moreTitle').classList.remove('hide');
     $('list').innerHTML = rest.map(p => `<a class="bl-card" href="${url(p)}">
-      <div class="bl-card-img">${p.cover_url ? `<img loading="lazy" src="${esc(p.cover_url)}" alt="">` : ''}</div>
+      <div class="bl-card-img">${coverOf(p) ? `<img loading="lazy" src="${esc(coverOf(p))}" alt="" onerror="this.remove()">` : ''}</div>
       <div class="bl-card-body"><div class="bl-meta">${meta(p)}</div><h3>${esc(p.title)}</h3>${p.excerpt ? `<p>${esc(p.excerpt)}</p>` : ''}<span class="bl-read">Read <span>&rarr;</span></span></div></a>`).join('');
   }
 })();

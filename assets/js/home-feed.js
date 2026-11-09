@@ -151,13 +151,13 @@
   (async function () {
     var box = document.getElementById('hx-blog'), moreBtn = document.getElementById('hx-blog-more');
     try {
-      var r = await sb.from('posts').select('id,title,excerpt,cover_url,created_at').eq('published', true).order('created_at', { ascending: false }).limit(4);
+      var r = await sb.from('posts').select('id,title,excerpt,cover_url,created_at,body').eq('published', true).order('created_at', { ascending: false }).limit(4);
       if (r.error) throw r.error;
       var rows = r.data || [];
       if (!rows.length) { box.innerHTML = '<p class="hx-status">No posts yet. Check back soon.</p>'; return; }
       box.innerHTML = rows.slice(0, 3).map(function (p) {
         return '<a class="hx-card" href="./post.html?id=' + encodeURIComponent(p.id) + '"><div class="hx-thumb">' +
-          (p.cover_url ? '<img loading="lazy" src="' + esc(p.cover_url) + '" alt="">' : '') + '</div><div class="hx-info"><h3>' + esc(p.title) + '</h3>' +
+          (B.coverOf(p) ? '<img loading="lazy" src="' + esc(B.coverOf(p)) + '" alt="" onerror="this.remove()">' : '') + '</div><div class="hx-info"><h3>' + esc(p.title) + '</h3>' +
           (p.excerpt ? '<p>' + esc(p.excerpt) + '</p>' : '') + '<div class="hx-meta">' + fmt(p.created_at) + '</div></div></a>';
       }).join('');
     } catch (e) { box.innerHTML = '<p class="hx-status">Couldn\'t load posts right now.</p>'; }

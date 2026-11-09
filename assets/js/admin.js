@@ -1,7 +1,7 @@
 /* Admin app: auth, overview/storage, posts, memories, watched (OMDb), settings */
 (() => {
   if (!window.Blog) { document.body.innerHTML = '<div class="b-status">Couldn\'t connect right now. Please refresh.</div>'; return; }
-  const { sb, esc, fmtDate, renderBody, uploadImage, ratingDonut, kindDonut } = Blog;
+  const { sb, esc, fmtDate, renderBody, uploadImage, coverOf, ratingDonut, kindDonut } = Blog;
   const $ = id => document.getElementById(id);
   const show = (id, on) => $(id).classList.toggle('hide', !on);
   const pad = n => String(n).padStart(2, '0');
@@ -90,7 +90,7 @@
   async function loadPosts() {
     const { data, error } = await sb.from('posts').select('*').order('created_at', { ascending: false });
     if (error) { $('postList').textContent = error.message; return; } window._posts = data;
-    $('postList').innerHTML = data.length ? data.map(p => `<div class="list-item">${p.cover_url ? `<img src="${esc(p.cover_url)}" alt="">` : '<span class="thumb-ph"><i class="iconoir-page"></i></span>'}
+    $('postList').innerHTML = data.length ? data.map(p => `<div class="list-item">${coverOf(p) ? `<img src="${esc(coverOf(p))}" alt="">` : '<span class="thumb-ph" title="No cover image">no cover</span>'}
       <div class="t">${esc(p.title)}<small>${fmtDate(p.created_at)} · ${p.published ? '<span class="ok">Published</span>' : 'Draft'}</small></div>
       <button class="adm-ghost" data-a="edit" data-id="${p.id}"><i class="iconoir-edit-pencil"></i> Edit</button>
       <button class="adm-ghost" data-a="toggle" data-id="${p.id}">${p.published ? 'Unpublish' : 'Publish'}</button>
