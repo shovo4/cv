@@ -235,27 +235,49 @@
     bumpReq();
     const r = await fetch(u); const j = await r.json(); if (j.Response === 'False') throw new Error(j.Error || 'Not found'); return j;
   }
-  // ONE request: direct title look-up returns the full record (no separate search + details calls)
+  function fillPick(d) {
+    pick = { imdb_id: d.imdbID, title: d.Title, year: parseInt(d.Year) || null, kind: d.Type === 'series' ? 'series' : 'movie',
+      genres: (d.Genre || '').split(',').map(x => x.trim()).filter(g => g && g !== 'N/A'), runtime_min: parseInt(d.Runtime) || null,
+      imdb_rating: parseFloat(d.imdbRating) || null, poster_url: d.Poster && d.Poster !== 'N/A' ? d.Poster : null };
+    $('wpPoster').src = pick.poster_url || ''; $('wpPoster').style.visibility = pick.poster_url ? 'visible' : 'hidden';
+    $('wpTitle').textContent = pick.title + (pick.year ? ' (' + pick.year + ')' : ''); $('wpImdb').href = 'https://www.imdb.com/title/' + pick.imdb_id + '/';
+    $('wpMeta').textContent = [pick.kind === 'series' ? 'Series' : 'Movie', pick.genres.join(', '), pick.runtime_min ? pick.runtime_min + ' min' : '', pick.imdb_rating ? 'IMDb ' + pick.imdb_rating : '', d.Plot && d.Plot !== 'N/A' ? '— ' + d.Plot : ''].filter(Boolean).join(' · ');
+    $('wpDate').value = today(); $('wpRating').value = ''; $('wpComment').value = ''; drawStars(0);
+    $('wResults').innerHTML = ''; show('wPick', true); $('wPick').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  const imdbIdIn = q => { const m = /tt\d{6,10}/.exec(q); return m ? m[0] : null; };
+  function alreadyHave(q, id) {
+    const w = watched.find(x => (id && x.imdb_id === id) || x.title.toLowerCase() === q.toLowerCase());
+    return w && !confirm('"' + w.title + '" is already in your list. Look it up anyway?');
+  }
+  // Look up: ONE request (exact title, or an IMDb link/ID)
   async function search() {
     if (!omdbKey()) { show('omdbWarn', true); return; }
-    const q = $('wSearch').value.trim(); if (!q) return;
-    const already = watched.find(w => w.title.toLowerCase() === q.toLowerCase());
-    if (already && !confirm('"' + already.title + '" is already in your list. Look it up anyway?')) return;
+    const q = $('wSearch').value.trim(); if (!q) return; const id = imdbIdIn(q);
+    if (alreadyHave(q, id)) return;
     $('wResults').innerHTML = '<p class="note">Looking up…</p>'; show('wPick', false);
-    try {
-      const d = await omdb({ t: q, y: $('wYear').value.trim(), type: $('wType').value });
-      pick = { imdb_id: d.imdbID, title: d.Title, year: parseInt(d.Year) || null, kind: d.Type === 'series' ? 'series' : 'movie',
-        genres: (d.Genre || '').split(',').map(s => s.trim()).filter(g => g && g !== 'N/A'), runtime_min: parseInt(d.Runtime) || null,
-        imdb_rating: parseFloat(d.imdbRating) || null, poster_url: d.Poster && d.Poster !== 'N/A' ? d.Poster : null };
-      $('wpPoster').src = pick.poster_url || ''; $('wpPoster').style.visibility = pick.poster_url ? 'visible' : 'hidden';
-      $('wpTitle').textContent = pick.title + (pick.year ? ' (' + pick.year + ')' : ''); $('wpImdb').href = 'https://www.imdb.com/title/' + pick.imdb_id + '/';
-      $('wpMeta').textContent = [pick.kind === 'series' ? 'Series' : 'Movie', pick.genres.join(', '), pick.runtime_min ? pick.runtime_min + ' min' : '', pick.imdb_rating ? 'IMDb ' + pick.imdb_rating : '', d.Plot && d.Plot !== 'N/A' ? '— ' + d.Plot : ''].filter(Boolean).join(' · ');
-      $('wpDate').value = today(); $('wpRating').value = ''; $('wpComment').value = ''; drawStars(0);
-      $('wResults').innerHTML = ''; show('wPick', true); $('wPick').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    } catch (err) { $('wResults').innerHTML = '<p class="err">' + esc(err.message === 'Movie not found!' ? 'Not found - check the spelling, or add the year.' : err.message) + '</p>'; }
+    try { fillPick(await omdb(id ? { i: id } : { t: q, y: $('wYear').value.trim(), type: $('wType').value })); }
+    catch (err) { $('wResults').innerHTML = '<p class="err">' + esc(/not found/i.test(err.message) ? 'No exact match for that title. Try “Show all matches”, or paste the IMDb link.' : err.message) + '</p>'; }
   }
-  $('wGo').addEventListener('click', search);
+  // Show all matches: 1 request for the list (sequels, remakes, series), +1 when you pick one
+  async function searchAll() {
+    if (!omdbKey()) { show('omdbWarn', true); return; }
+    const q = $('wSearch').value.trim(); if (!q) return; if (imdbIdIn(q)) return search();
+    $('wResults').innerHTML = '<p class="note">Searching…</p>'; show('wPick', false);
+    try {
+      const j = await omdb({ s: q, y: $('wYear').value.trim(), type: $('wType').value });
+      const have = new Set(watched.map(w => w.imdb_id));
+      $('wResults').innerHTML = (j.Search || []).map(r => `<button class="w-res" data-id="${esc(r.imdbID)}">${r.Poster && r.Poster !== 'N/A' ? `<img src="${esc(r.Poster)}" alt="" onerror="this.remove()">` : '<span class="w-nop"><i class="iconoir-movie"></i></span>'}<span><b>${esc(r.Title)}</b><small>${esc(r.Year)} · ${esc(r.Type)}${have.has(r.imdbID) ? ' · <em class="ok">in your list</em>' : ''}</small></span></button>`).join('')
+        + (Number(j.totalResults) > 10 ? `<p class="note" style="grid-column:1/-1">Showing 10 of ${j.totalResults} &mdash; add a year or pick Movie/Series to narrow it down.</p>` : '');
+    } catch (err) { $('wResults').innerHTML = '<p class="err">' + esc(/not found/i.test(err.message) ? 'Nothing found. Check the spelling, or paste the IMDb link.' : err.message) + '</p>'; }
+  }
+  $('wGo').addEventListener('click', search); $('wAll').addEventListener('click', searchAll);
   [$('wSearch'), $('wYear')].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') search(); }));
+  $('wResults').addEventListener('click', async e => {
+    const b = e.target.closest('.w-res'); if (!b) return;
+    $('wResults').querySelectorAll('.w-res').forEach(x => x.disabled = true);
+    try { fillPick(await omdb({ i: b.dataset.id })); } catch (err) { $('wResults').innerHTML = '<p class="err">' + esc(err.message) + '</p>'; }
+  });
   function drawStars(v) { $('wpStars').innerHTML = Array.from({ length: 10 }, (_, i) => `<button type="button" class="star${i < v ? ' on' : ''}" data-v="${i + 1}" aria-label="${i + 1}">★</button>`).join('') + `<span class="note">${v ? v + '/10' : '—'}</span>`; }
   $('wpStars').addEventListener('click', e => { const b = e.target.closest('.star'); if (!b) return; const v = +b.dataset.v === +$('wpRating').value ? 0 : +b.dataset.v; $('wpRating').value = v || ''; drawStars(v); });
   $('wCancel').addEventListener('click', () => { show('wPick', false); pick = null; });
