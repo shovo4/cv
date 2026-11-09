@@ -22,17 +22,22 @@
 
 <!-- Header with Navigation -->
 <header class="header-area">
-    <div class="container">
+    <div class="container hx-bar">
         <nav class="navbar">
             <ul class="menu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experiences & Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
                 <li><a href="#blog">Blog</a></li>
                 <li><a href="#memories">Memories</a></li>
+                <li><a href="#skills-block">Experience &amp; Skills</a></li>
+                <li><a href="#projects-block">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+        <div class="hx-bar-right">
+            <a href="#about" class="hx-avatar" title="About me" aria-label="About me">
+                <img src="./assets/images/me.jpeg" alt="Shovo">
+            </a>
+            <div class="show-menu" role="button" aria-label="Menu" tabindex="0"><span></span><span></span><span></span></div>
+        </div>
     </div>
 </header>
 
@@ -41,65 +46,49 @@
 
 
 
-<!-- About Section (Content from about.html) -->
-<!-- About Section (Content from about.html) -->
-<section id="about" class="about-area">
+<!-- Hero -->
+<section class="hx-hero">
     <div class="container">
-        <div class="d-flex about-me-wrap align-items-start gap-24">
-            <div class="about-details" data-aos="zoom-in">
-                <div class="about-blog-box info-box shadow-box h-full">
-                    <!-- <a href="./assets/files/resume.pdf" target="_blank" rel="noopener noreferrer" class="overlay-link"></a> -->
-                    <img src="./assets/images/bg1.png" alt="BG" class="bg-img">    
-                    <div class="about-details-inner shadow-box">
-                        <img src="./assets/images/icon2.png" alt="Star">
-                        <p>Hey, I'm</p>
-                        <h1>Shovo,</h1>
-                        <p>– your <b class="color-transition">tech problem solver</b>! 🛠️ With a <b class="color-transition">B.Sc. in Computing Science</b> 🎓 from the University of Alberta, I bridge the gap between <b class='color-transition'>IT infrastructure</b> & <b class='color-transition'>software development</b>.</p>
-
-                        <button type="button" id="more-toggle" class="theme-btn hx-btn" aria-expanded="false" aria-controls="more-about">More about me &darr;</button>
-                    </div>
-                </div>    
-            </div>
-            
+        <p class="hx-kicker" data-aos="fade-up">Hey, I'm</p>
+        <h1 class="hx-name" data-aos="fade-up" data-aos-delay="50">Shovo<span>.</span></h1>
+        <p class="hx-tagline" data-aos="fade-up" data-aos-delay="100">Tech problem solver &middot; IT &amp; software developer &middot; Edmonton, Canada</p>
+        <div class="hx-hero-actions" data-aos="fade-up" data-aos-delay="150">
+            <a href="#blog" class="theme-btn hx-btn">Read the blog</a>
+            <a href="#about" class="theme-btn hx-btn hx-ghost">About me</a>
         </div>
-
-        <!-- Job Titles Section -->
-        <div class="job-titles-container d-flex flex-wrap justify-content-around gap-20">
-            <div class="job-box shadow-box">
-                <img src="https://img.icons8.com/?size=100&id=123383&format=png&color=000000" alt="IT Support">
-                <h3>IT Support</h3>
-            </div>
-            
-            <div class="job-box shadow-box">
-                <img src="https://img.icons8.com/?size=100&id=FVDBGC3QPi3J&format=png&color=000000" alt="Software Developer">
-                <h3>Software Developer</h3>
-            </div>
-            <div class="job-box shadow-box">
-                <img src="https://img.icons8.com/?size=100&id=RtciaGLvcpOm&format=png&color=000000" alt="Web Developer">
-                <h3>Web Developer</h3>
-            </div>
-            <div class="job-box shadow-box">
-                <img src="https://img.icons8.com/?size=100&id=gtJlIVpnqQyS&format=png&color=000000" alt="Cloud Architect">
-                <h3>Cloud Architect</h3>
-            </div>
-            <div class="job-box shadow-box">
-                <img src="https://img.icons8.com/?size=100&id=cQ0emn3GZS6M&format=png&color=000000" alt="UX Designer">
-                <h3>UX Designer</h3>
-            </div>
-        </div>
-
     </div>
 </section>
 
+<!-- Latest Blog -->
+<section id="blog" class="hx-section">
+    <div class="container">
+        <h2 class="hx-heading" data-aos="fade-up">Latest from the Blog</h2>
+        <div id="hx-blog" class="hx-blog-grid"><p class="hx-status">Loading&hellip;</p></div>
+        <div class="hx-more-row"><a href="./blogs.html" id="hx-blog-more" class="theme-btn hx-btn" style="display:none">See all posts &rarr;</a></div>
+    </div>
+</section>
 
+<!-- Recent Memories -->
+<section id="memories" class="hx-section">
+    <div class="container">
+        <h2 class="hx-heading" data-aos="fade-up">Memories</h2>
+        <div id="hx-mem" class="hx-mem-grid"><p class="hx-status">Loading&hellip;</p></div>
+        <div class="hx-more-row"><a href="./memories.html" id="hx-mem-more" class="theme-btn hx-btn" style="display:none">See more memories &rarr;</a></div>
+    </div>
+</section>
 
-
-<div id="more-about" class="hx-more">
-<div class="container"><div class="hx-bio">
-<p>At <b class="color-transition">Ketek Group Inc.</b>, I provide <b>IT Support</b>—keeping networks secure, troubleshooting hardware & software, and ensuring smooth operations. 🔧 But my expertise doesn't stop there! From Python 🐍 and Java ☕ to React & Django, I thrive on <b class='color-transition'>building robust solutions</b> and <b class='color-transition'>optimizing tech systems</b>.</p>
-<p>Currently working with <b class='color-transition'>PostgreSQL, MongoDB, and AWS ☁️</b>, I enjoy solving challenges across IT and software engineering. Let’s build & secure something incredible! 🚀 Reach me at <b class="color-transition">msaifulislamshovo2000@gmail.com</b> – let’s make tech magic happen! ✨👨‍💻</p>
-</div></div>
-
+<!-- Experience &amp; Skills (collapsed by default) -->
+<section id="skills-block" class="hx-section hx-collapse">
+    <div class="container">
+        <div class="hx-collapse-head" data-aos="fade-up">
+            <div>
+                <h2 class="hx-heading hx-left">Experience &amp; Skills</h2>
+                <p class="hx-blurb">Where I&rsquo;ve worked, what I studied, certificates and the tools I use.</p>
+            </div>
+            <button type="button" class="theme-btn hx-btn hx-toggle" data-target="skills-panel" aria-expanded="false" aria-controls="skills-panel">Show experience &amp; skills &darr;</button>
+        </div>
+    </div>
+    <div id="skills-panel" class="hx-panel">
 <!-- Experience & Skills Section -->
 <section class="credential-area">
     <div class="container">
@@ -639,11 +628,23 @@
                 
             </div>
 </section>
-</div><!-- /more-about -->
 
+    </div>
+</section>
 
-
-        <!-- Projects Section -->
+<!-- Projects (collapsed by default) -->
+<section id="projects-block" class="hx-section hx-collapse">
+    <div class="container">
+        <div class="hx-collapse-head" data-aos="fade-up">
+            <div>
+                <h2 class="hx-heading hx-left">Projects</h2>
+                <p class="hx-blurb">Things I&rsquo;ve built &mdash; filter by frontend, backend, database, DevOps, ML or design.</p>
+            </div>
+            <button type="button" class="theme-btn hx-btn hx-toggle" data-target="projects-panel" aria-expanded="false" aria-controls="projects-panel">Show projects &darr;</button>
+        </div>
+    </div>
+    <div id="projects-panel" class="hx-panel">
+<!-- Projects Section -->
         <section id="projects" class="projects-area">
             <div class="container">
                 <!-- Sticky Project Navbar -->
@@ -991,21 +992,7 @@
             </div>
         </section>
 
-<!-- Latest Blog -->
-<section id="blog" class="hx-section">
-    <div class="container">
-        <h2 class="hx-heading" data-aos="fade-up">Latest from the Blog</h2>
-        <div id="hx-blog" class="hx-blog-grid"><p class="hx-status">Loading&hellip;</p></div>
-        <div class="hx-more-row"><a href="./blogs.html" id="hx-blog-more" class="theme-btn hx-btn" style="display:none">See all posts &rarr;</a></div>
-    </div>
-</section>
 
-<!-- Recent Memories -->
-<section id="memories" class="hx-section">
-    <div class="container">
-        <h2 class="hx-heading" data-aos="fade-up">Memories</h2>
-        <div id="hx-mem" class="hx-mem-grid"><p class="hx-status">Loading&hellip;</p></div>
-        <div class="hx-more-row"><a href="./memories.html" id="hx-mem-more" class="theme-btn hx-btn" style="display:none">See more memories &rarr;</a></div>
     </div>
 </section>
 
@@ -1063,9 +1050,65 @@
 
 
 
-    </main>
 
-    <!-- Footer -->
+    
+<!-- About Section -->
+<section id="about" class="about-area hx-about">
+    <div class="container"><h2 class="hx-heading" data-aos="fade-up">About Me</h2></div>
+    <div class="container">
+        <div class="d-flex about-me-wrap align-items-start gap-24">
+            <div class="about-details" data-aos="zoom-in">
+                <div class="about-blog-box info-box shadow-box h-full">
+                    <!-- <a href="./assets/files/resume.pdf" target="_blank" rel="noopener noreferrer" class="overlay-link"></a> -->
+                    <img src="./assets/images/bg1.png" alt="BG" class="bg-img">    
+                    <div class="about-details-inner shadow-box">
+                        <img src="./assets/images/icon2.png" alt="Star">
+                        <p>Hey, I'm</p>
+                        <h1>Shovo,</h1>
+                        <p>– your <b class="color-transition">tech problem solver</b>! 🛠️ With a <b class="color-transition">B.Sc. in Computing Science</b> 🎓 from the University of Alberta, I bridge the gap between <b class='color-transition'>IT infrastructure</b> & <b class='color-transition'>software development</b>.</p>
+
+                        <p>At <b class="color-transition">Ketek Group Inc.</b>, I provide <b>IT Support</b>—keeping networks secure, troubleshooting hardware & software, and ensuring smooth operations. 🔧 But my expertise doesn't stop there! From Python 🐍 and Java ☕ to React & Django, I thrive on <b class='color-transition'>building robust solutions</b> and <b class='color-transition'>optimizing tech systems</b>.</p>
+
+                        <p>Currently working with <b class='color-transition'>PostgreSQL, MongoDB, and AWS ☁️</b>, I enjoy solving challenges across IT and software engineering. Let’s build & secure something incredible! 🚀 Reach me at <b class="color-transition">msaifulislamshovo2000@gmail.com</b> – let’s make tech magic happen! ✨👨‍💻</p>
+                    </div>
+                </div>    
+            </div>
+            
+        </div>
+
+        <!-- Job Titles Section -->
+        <div class="job-titles-container d-flex flex-wrap justify-content-around gap-20">
+            <div class="job-box shadow-box">
+                <img src="https://img.icons8.com/?size=100&id=123383&format=png&color=000000" alt="IT Support">
+                <h3>IT Support</h3>
+            </div>
+            
+            <div class="job-box shadow-box">
+                <img src="https://img.icons8.com/?size=100&id=FVDBGC3QPi3J&format=png&color=000000" alt="Software Developer">
+                <h3>Software Developer</h3>
+            </div>
+            <div class="job-box shadow-box">
+                <img src="https://img.icons8.com/?size=100&id=RtciaGLvcpOm&format=png&color=000000" alt="Web Developer">
+                <h3>Web Developer</h3>
+            </div>
+            <div class="job-box shadow-box">
+                <img src="https://img.icons8.com/?size=100&id=gtJlIVpnqQyS&format=png&color=000000" alt="Cloud Architect">
+                <h3>Cloud Architect</h3>
+            </div>
+            <div class="job-box shadow-box">
+                <img src="https://img.icons8.com/?size=100&id=cQ0emn3GZS6M&format=png&color=000000" alt="UX Designer">
+                <h3>UX Designer</h3>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+<!-- Footer -->
     <footer class="footer-area">
         <div class="container">
             <p>&copy; 2024 Shovo4. All rights reserved.</p>

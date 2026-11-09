@@ -64,6 +64,7 @@
 <script src="./assets/js/blog.js"></script>
 <script>
 (() => {
+  if (!window.Blog) { document.querySelector("main").innerHTML = '<div class="b-status">Couldn\'t connect right now. Please refresh.</div>'; return; }
   const { sb, esc, fmtDate, renderBody, uploadImage } = Blog;
   const $ = id => document.getElementById(id);
   const show = (id, on) => $(id).classList.toggle('hide', !on);

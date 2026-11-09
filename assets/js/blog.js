@@ -1,6 +1,7 @@
 /* Shared helpers for blogs / memories / admin pages */
 (function () {
   const cfg = window.SITE_CONFIG;
+  if (!window.supabase || !cfg) { console.warn('Supabase library not loaded'); return; }
   const sb = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_KEY);
 
   /* ---------- small utils ---------- */

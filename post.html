@@ -9,6 +9,7 @@
 <script src="./assets/js/blog.js"></script>
 <script>
 (async () => {
+  if (!window.Blog) { document.querySelector("main").innerHTML = '<div class="b-status">Couldn\'t connect right now. Please refresh.</div>'; return; }
   const { sb, esc, fmtDate, renderBody, mountReactions } = Blog, art = document.getElementById('art');
   const id = new URLSearchParams(location.search).get('id');
   const { data, error } = id ? await sb.from('posts').select('*').eq('id', id).eq('published', true).maybeSingle() : { data: null };

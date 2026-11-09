@@ -14,6 +14,7 @@
 <script src="./assets/js/blog.js"></script>
 <script>
 (async () => {
+  if (!window.Blog) { document.querySelector("main").innerHTML = '<div class="b-status">Couldn\'t connect right now. Please refresh.</div>'; return; }
   const { sb, esc, fmtDate, mountReactions } = Blog, grid = document.getElementById('grid'), status = document.getElementById('status'), more = document.getElementById('more');
   const PAGE = 24; let from = 0;
   async function load() {

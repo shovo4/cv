@@ -1,34 +1,58 @@
-/* Recent blog posts + memories for the home page, plus the "More about me" toggle */
+/* Home page: collapsible sections + recent blog posts and memories */
 (function () {
-  /* ---------- More about me ---------- */
-  var more = document.getElementById('more-about'), btn = document.getElementById('more-toggle');
-  function refreshAnim() { try { if (window.AOS) { (AOS.refreshHard || AOS.refresh)(); } } catch (e) {} }
-  function setOpen(open, scroll) {
-    if (!more || !btn) return;
-    more.classList.toggle('open', open);
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    btn.innerHTML = open ? 'Show less &uarr;' : 'More about me &darr;';
-    refreshAnim();
-    if (open && scroll) setTimeout(function () { more.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
-  }
-  if (btn) btn.addEventListener('click', function () { setOpen(!more.classList.contains('open'), true); });
+  function refreshAnim() { try { if (window.AOS) (AOS.refreshHard || AOS.refresh)(); } catch (e) {} }
 
-  // links that point inside the hidden area (nav "Experiences & Skills", etc.) open it first
-  var inside = ['#experience', '#education', '#certificates', '#skills'];
+  /* ---------- collapsible sections ---------- */
+  var toggles = document.querySelectorAll('.hx-toggle');
+  function setPanel(btn, open) {
+    var panel = document.getElementById(btn.dataset.target); if (!panel) return;
+    panel.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var label = btn.closest('.hx-collapse-head').querySelector('.hx-heading').textContent.trim().toLowerCase();
+    btn.innerHTML = (open ? 'Hide ' : 'Show ') + label + (open ? ' &uarr;' : ' &darr;');
+    refreshAnim();
+  }
+  toggles.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var panel = document.getElementById(btn.dataset.target);
+      setPanel(btn, !panel.classList.contains('open'));
+    });
+  });
+
+  // which anchors live inside which collapsed panel
+  var inside = {
+    '#skills-block': 'skills-panel', '#experience': 'skills-panel', '#education': 'skills-panel', '#certificates': 'skills-panel', '#skills': 'skills-panel',
+    '#projects-block': 'projects-panel', '#projects': 'projects-panel'
+  };
   function openFor(hash, smooth) {
-    if (inside.indexOf(hash) === -1 || !more) return false;
-    setOpen(true, false);
-    setTimeout(function () { var t = document.querySelector(hash); if (t) t.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' }); }, 80);
+    var panelId = inside[hash]; if (!panelId) return false;
+    var btn = document.querySelector('.hx-toggle[data-target="' + panelId + '"]');
+    if (btn) setPanel(btn, true);
+    setTimeout(function () {
+      var t = document.querySelector(hash); if (t) t.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    }, 60);
     return true;
   }
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#"]');
-    if (a && openFor(a.getAttribute('href'), true)) e.preventDefault();
+    if (!a || a.classList.contains('skill-filter')) return;        // project filter tabs stay as they are
+    if (openFor(a.getAttribute('href'), true)) e.preventDefault();
   });
   if (location.hash) openFor(location.hash, false);
 
+  // mobile: close the menu after choosing a link
+  document.querySelectorAll('.header-area .navbar .menu a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      document.querySelector('.header-area .navbar').classList.remove('active');
+      var sm = document.querySelector('.header-area .show-menu'); if (sm) sm.classList.remove('active');
+    });
+  });
+
   /* ---------- recent posts + memories ---------- */
-  if (!window.Blog) return;
+  if (!window.Blog) {
+    ['hx-blog','hx-mem'].forEach(function (id) { var el = document.getElementById(id); if (el) el.innerHTML = '<p class="hx-status">Couldn\'t load right now.</p>'; });
+    return;
+  }
   var B = window.Blog, esc = B.esc, fmt = B.fmtDate, sb = B.sb;
 
   (async function () {

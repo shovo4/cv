@@ -12,6 +12,7 @@
 <script src="./assets/js/blog.js"></script>
 <script>
 (async () => {
+  if (!window.Blog) { document.querySelector("main").innerHTML = '<div class="b-status">Couldn\'t connect right now. Please refresh.</div>'; return; }
   const { sb, esc, fmtDate, totalReactions } = Blog, list = document.getElementById('list');
   const { data, error } = await sb.from('posts').select('id,title,excerpt,cover_url,created_at').eq('published', true).order('created_at', { ascending: false });
   if (error) { list.innerHTML = '<div class="b-status">Couldn\'t load posts right now.</div>'; return; }
