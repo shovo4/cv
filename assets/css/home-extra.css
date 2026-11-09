@@ -485,3 +485,28 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--hx-accent); out
 /* footer tidy */
 .hx-footer { background: #0a0a0a; }
 .hx-footer-line b { font-family: var(--font-display); }
+
+/* ===== project filter bar on phones: one swipeable row, no sliding blob ===== */
+@media (max-width: 767px) {
+  .projects-area .sticky-navbar.pf-bar { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; border-radius: 16px; gap: 6px; padding: 6px; top: 64px; }
+  .projects-area .sticky-navbar.pf-bar::-webkit-scrollbar { display: none; }
+  .pf-bar .skill-filter { flex: 0 0 auto !important; margin: 0 !important; padding: 8px 12px; background: rgba(255,255,255,.04) !important; border: 1px solid rgba(255,255,255,.06); box-shadow: none !important; transform: none !important; }
+  .pf-bar .skill-filter.active { background: linear-gradient(90deg, #5B78F6, #00cfff) !important; border-color: transparent; color: #fff; }
+  .pf-bar .pf-label { display: inline; font-size: 13px; }
+  .pf-glider { display: none !important; }
+  /* project cards: two per row on phones, one on very small screens */
+  .projects-area .projects-wrapper { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .projects-area .project-item > img.project-cover { height: 110px; }
+  .projects-area .project-item .project-info { padding: 10px 12px 2px; }
+  .projects-area .project-item .project-info h1 { font-size: 14px; }
+  .projects-area .project-actions { padding: 8px 12px 12px; }
+  /* collapse header: stack title, blurb and button neatly */
+  .hx-collapse-head { padding: 22px 20px; gap: 14px; }
+  .hx-collapse-head .hx-heading { font-size: 28px; }
+  .hx-collapse-head .hx-blurb { font-size: 14.5px; }
+  /* keep the hamburger fully on screen */
+  .hx-bar { padding-right: 18px; }
+  .header-area .show-menu { width: 24px; }
+}
+@media (max-width: 400px) { .projects-area .projects-wrapper { grid-template-columns: 1fr; } }
+@media (max-width: 767px) { .header-area .hx-bar { padding-left: 18px !important; padding-right: 18px !important; } }
