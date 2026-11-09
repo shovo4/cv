@@ -57,13 +57,20 @@
   }
 
   /* ---------- posts ---------- */
-  let editingId = null, coverUrl = null;
+  let editingId = null, coverUrl = null, origCover = null, pendingCover = null;
+  const pathOf = url => (url && url.includes('/object/public/media/')) ? decodeURIComponent(url.split('/object/public/media/')[1].split('?')[0]) : null;
+  const dropFile = path => { if (path) sb.storage.from('media').remove([path]).catch(() => {}); };
+  const showCover = url => { if (url) { $('coverPrev').src = url; show('coverPrev', true); show('coverRemove', true); } else { $('coverPrev').removeAttribute('src'); show('coverPrev', false); show('coverRemove', false); } };
   const updPreview = () => { $('preview').innerHTML = renderBody($('body').value) || '<p class="note">Preview appears here…</p>'; };
   $('body').addEventListener('input', updPreview); $('postDate').value = today();
   $('coverFile').addEventListener('change', async e => {
     const f = e.target.files[0]; if (!f) return; $('coverInfo').textContent = 'Compressing & uploading…';
-    try { const r = await uploadImage(f, 'covers', 560, 0.4); coverUrl = r.url; $('coverPrev').src = r.url; show('coverPrev', true); $('coverInfo').textContent = Math.round(r.bytes / 1024) + ' KB'; }
+    try { const r = await uploadImage(f, 'covers', 560, 0.4); dropFile(pendingCover); pendingCover = r.path; coverUrl = r.url; showCover(r.url); $('coverInfo').textContent = Math.round(r.bytes / 1024) + ' KB'; }
     catch (err) { $('coverInfo').textContent = 'Upload failed: ' + err.message; }
+  });
+  $('coverRemove').addEventListener('click', () => {
+    dropFile(pendingCover); pendingCover = null; coverUrl = null; $('coverFile').value = ''; showCover(null);
+    $('coverInfo').textContent = editingId && origCover ? 'Cover removed - click Save post to apply.' : 'Cover removed.';
   });
   $('insertImg').addEventListener('click', () => $('inlineFile').click());
   $('inlineFile').addEventListener('change', async e => {
@@ -75,17 +82,18 @@
     } catch (err) { $('postMsg').textContent = 'Upload failed: ' + err.message; }
   });
   function resetForm() {
-    editingId = null; coverUrl = null; ['title', 'excerpt', 'body'].forEach(i => $(i).value = ''); $('published').checked = false; $('coverFile').value = ''; $('postDate').value = today();
-    show('coverPrev', false); $('coverInfo').textContent = ''; $('formTitle').textContent = 'New post'; show('cancelEdit', false); updPreview();
+    editingId = null; coverUrl = null; origCover = null; pendingCover = null; ['title', 'excerpt', 'body'].forEach(i => $(i).value = ''); $('published').checked = false; $('coverFile').value = ''; $('postDate').value = today();
+    showCover(null); $('coverInfo').textContent = ''; $('formTitle').textContent = 'New post'; show('cancelEdit', false); updPreview();
   }
-  $('cancelEdit').addEventListener('click', resetForm);
+  $('cancelEdit').addEventListener('click', () => { dropFile(pendingCover); pendingCover = null; resetForm(); });
   $('savePost').addEventListener('click', async () => {
     const title = $('title').value.trim(); if (!title) { $('postMsg').textContent = 'Add a title first.'; return; }
     const row = { title, excerpt: $('excerpt').value.trim() || null, body: $('body').value, cover_url: coverUrl, published: $('published').checked, updated_at: new Date().toISOString(), created_at: fromDateInput($('postDate').value || today()) };
     $('savePost').disabled = true;
     const { error } = await (editingId ? sb.from('posts').update(row).eq('id', editingId) : sb.from('posts').insert(row)); $('savePost').disabled = false;
     if (error) { $('postMsg').textContent = 'Save failed: ' + error.message; return; }
-    $('postMsg').textContent = 'Saved ✔'; resetForm(); loadPosts(); loadOverview();
+    if (origCover && origCover !== coverUrl) dropFile(pathOf(origCover));
+    pendingCover = null; $('postMsg').textContent = 'Saved ✔'; resetForm(); loadPosts(); loadOverview();
   });
   async function loadPosts() {
     const { data, error } = await sb.from('posts').select('*').order('created_at', { ascending: false });
@@ -100,10 +108,10 @@
     const b = e.target.closest('button'); if (!b) return; const p = (window._posts || []).find(x => x.id === b.dataset.id); if (!p) return;
     if (b.dataset.a === 'edit') {
       editingId = p.id; coverUrl = p.cover_url; $('title').value = p.title; $('excerpt').value = p.excerpt || ''; $('body').value = p.body; $('published').checked = p.published; $('postDate').value = toDateInput(p.created_at);
-      if (p.cover_url) { $('coverPrev').src = p.cover_url; show('coverPrev', true); } else show('coverPrev', false);
+      dropFile(pendingCover); pendingCover = null; origCover = p.cover_url; showCover(p.cover_url); $('coverFile').value = ''; $('coverInfo').textContent = '';
       $('formTitle').textContent = 'Editing post'; show('cancelEdit', true); updPreview(); scrollTo({ top: 0, behavior: 'smooth' });
     } else if (b.dataset.a === 'toggle') { await sb.from('posts').update({ published: !p.published }).eq('id', p.id); loadPosts(); }
-    else if (b.dataset.a === 'del' && confirm('Delete "' + p.title + '" permanently?')) { await sb.from('posts').delete().eq('id', p.id); loadPosts(); loadOverview(); }
+    else if (b.dataset.a === 'del' && confirm('Delete "' + p.title + '" permanently?')) { const { error } = await sb.from('posts').delete().eq('id', p.id); if (!error) dropFile(pathOf(p.cover_url)); loadPosts(); loadOverview(); }
   });
 
   /* ---------- memories ---------- */
