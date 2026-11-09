@@ -3,7 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
-<link rel="stylesheet" href="./assets/css/blog.css?v=20261109c"><link rel="stylesheet" href="./assets/css/admin.css?v=20261109c"><title>Admin · Shovo</title></head><body class="adm">
+<link rel="stylesheet" href="./assets/css/blog.css?v=20261109d"><link rel="stylesheet" href="./assets/css/admin.css?v=20261109d"><title>Admin · Shovo</title></head><body class="adm">
 
 <!-- ================= LOGIN ================= -->
 <main id="loginView" class="adm-login hide">
@@ -159,8 +159,8 @@
     <section id="view-settings" class="adm-view hide">
       <div class="panel">
         <h2><i class="iconoir-key"></i> OMDb API key</h2>
-        <p class="note">Free key from <a href="https://www.omdbapi.com/apikey.aspx" target="_blank" rel="noopener">omdbapi.com/apikey.aspx</a> (choose FREE, 1,000 requests/day). It is saved only in this browser, never in your website code.</p>
-        <div class="row" style="margin-top:0"><input id="omdbKey" type="text" placeholder="e.g. a1b2c3d4" style="max-width:260px"><button class="btn" id="saveKey" type="button">Save key</button><span id="keyMsg" class="note"></span></div>
+        <p class="note">Free key from <a href="https://www.omdbapi.com/apikey.aspx" target="_blank" rel="noopener">omdbapi.com/apikey.aspx</a> (choose FREE, 1,000 requests/day). It is saved privately with your admin account (only you can read it), so it works on any device you log in from &mdash; never in your website code.</p>
+        <div class="row" style="margin-top:0"><input id="omdbKey" type="text" autocomplete="off" spellcheck="false" placeholder="e.g. a1b2c3d4" style="max-width:260px"><button class="btn" id="saveKey" type="button">Save key</button><button class="adm-ghost danger hide" id="removeKey" type="button">Remove key</button><span id="keyMsg" class="note"></span></div>
       </div>
       <div class="panel">
         <h2><i class="iconoir-info-circle"></i> Keeping storage small</h2>
@@ -178,7 +178,7 @@
 <div id="denied" class="adm-login hide"><div class="adm-login-card"><h1>Not allowed</h1><p class="note">This account isn't registered as the site admin.</p><button id="logout2" class="btn ghost">Log out</button></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./assets/js/supabase-config.js?v=20261109c"></script>
-<script src="./assets/js/blog.js?v=20261109c"></script>
-<script src="./assets/js/admin.js?v=20261109c"></script>
+<script src="./assets/js/supabase-config.js?v=20261109d"></script>
+<script src="./assets/js/blog.js?v=20261109d"></script>
+<script src="./assets/js/admin.js?v=20261109d"></script>
 </body></html>

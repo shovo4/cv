@@ -27,7 +27,7 @@
     if (error) { $('loginMsg').textContent = 'Wrong email or password.'; return; }
     $('pw').value = ''; route();
   });
-  ['logout', 'logout2'].forEach(id => $(id).addEventListener('click', async e => { e.preventDefault(); await sb.auth.signOut(); route(); }));
+  ['logout', 'logout2'].forEach(id => $(id).addEventListener('click', async e => { e.preventDefault(); try { localStorage.removeItem('shovo_omdb_key'); localStorage.removeItem('shovo_omdb_req'); } catch (err) {} await sb.auth.signOut(); location.reload(); }));
   sb.auth.onAuthStateChange(ev => { if (ev === 'SIGNED_OUT') route(); });
 
   const titles = { overview: 'Overview', posts: 'Blog posts', memories: 'Memories', watched: 'Watched', settings: 'Settings' };
@@ -138,10 +138,31 @@
     await sb.storage.from('media').remove([m.image_path]); await sb.from('memories').delete().eq('id', m.id); loadMemories(); loadOverview();
   });
 
-  /* ---------- OMDb key (browser-only) ---------- */
-  const KEY = 'shovo_omdb_key'; const omdbKey = () => localStorage.getItem(KEY) || '';
-  function loadKey() { $('omdbKey').value = omdbKey(); show('omdbWarn', !omdbKey()); }
-  $('saveKey').addEventListener('click', () => { localStorage.setItem(KEY, $('omdbKey').value.trim()); $('keyMsg').textContent = 'Saved ✔'; loadKey(); });
+  /* ---------- OMDb key: stored in admin_settings (account-wide), cached in this browser ---------- */
+  const KEY = 'shovo_omdb_key'; let omdbKeyVal = (() => { try { return localStorage.getItem(KEY) || ''; } catch (e) { return ''; } })();
+  const omdbKey = () => omdbKeyVal;
+  const cacheKey = v => { omdbKeyVal = v || ''; try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch (e) {} };
+  function paintKey(msg) {
+    $('omdbKey').value = omdbKeyVal; show('omdbWarn', !omdbKeyVal); show('removeKey', !!omdbKeyVal);
+    if (msg != null) $('keyMsg').textContent = msg;
+  }
+  async function loadKey() {
+    paintKey();
+    const { data, error } = await sb.from('admin_settings').select('value').eq('key', 'omdb_key').maybeSingle();
+    if (error) { paintKey('Key is only saved in this browser - run supabase/05_fix_watched_access_and_settings.sql to save it to your account.'); return; }
+    if (data && data.value) { cacheKey(data.value); paintKey(); }
+    else if (omdbKeyVal) { await sb.from('admin_settings').upsert({ key: 'omdb_key', value: omdbKeyVal, updated_at: new Date().toISOString() }); }   // move an old browser-only key to the account
+  }
+  $('saveKey').addEventListener('click', async () => {
+    const v = $('omdbKey').value.trim(); if (!v) { paintKey('Paste your key first.'); return; }
+    cacheKey(v);
+    const { error } = await sb.from('admin_settings').upsert({ key: 'omdb_key', value: v, updated_at: new Date().toISOString() });
+    paintKey(error ? 'Saved in this browser only (' + error.message + ')' : 'Saved to your account ✔ - works on every device you log in from.');
+  });
+  $('removeKey').addEventListener('click', async () => {
+    if (!confirm('Remove the OMDb key from your account?')) return;
+    cacheKey(''); await sb.from('admin_settings').delete().eq('key', 'omdb_key'); paintKey('Key removed.');
+  });
 
   /* ---------- watched ---------- */
   let pick = null, watched = [], selYear = null;

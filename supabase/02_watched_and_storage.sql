@@ -26,6 +26,10 @@ create policy "admin manages watched" on public.watched
   for all to authenticated using (public.is_admin()) with check (public.is_admin());
 revoke all on public.watched from anon, authenticated;
 grant select, insert, update, delete on public.watched to authenticated;
+-- public can read the list (see watched.html)
+drop policy if exists "public read watched" on public.watched;
+create policy "public read watched" on public.watched for select to anon, authenticated using (true);
+grant select on public.watched to anon;
 
 -- ---------- storage insight (admin only) ----------
 create or replace function public.admin_storage_report()
