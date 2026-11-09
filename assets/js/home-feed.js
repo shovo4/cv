@@ -75,6 +75,72 @@
     card.querySelectorAll('.project-btn').forEach(function (b) { if (!/github/i.test(b.textContent)) b.classList.add('is-drive'); });
   });
 
+  /* ---------- top nav: sliding indicator + scroll-spy ---------- */
+  (function () {
+    var menu = document.querySelector('.header-area .navbar .menu'); if (!menu) return;
+    var links = Array.prototype.slice.call(menu.querySelectorAll('li a[href^="#"]'));
+    var glider = document.createElement('span'); glider.className = 'nav-glider'; menu.appendChild(glider);
+    var current = null, hovering = false;
+    function place(li) {
+      if (!li || innerWidth < 768) { glider.style.opacity = 0; return; }
+      glider.style.width = li.offsetWidth + 'px'; glider.style.transform = 'translateX(' + li.offsetLeft + 'px)'; glider.style.opacity = 1;
+    }
+    function setActive(li) {
+      links.forEach(function (a) { a.parentElement.classList.toggle('is-active', a.parentElement === li); });
+      current = li; if (!hovering) place(li);
+    }
+    // hover: glider follows the pointer, returns to the active item on leave
+    links.forEach(function (a) {
+      a.addEventListener('mouseenter', function () { hovering = true; place(a.parentElement); });
+      a.addEventListener('click', function () { setActive(a.parentElement); });
+    });
+    menu.addEventListener('mouseleave', function () { hovering = false; place(current); });
+    // scroll-spy: which section is on screen
+    var map = {};
+    links.forEach(function (a) { var t = document.querySelector(a.getAttribute('href')); if (t) map[t.id] = a.parentElement; });
+    var visible = {};
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+        var best = null, bestR = 0;
+        Object.keys(visible).forEach(function (id) { if (visible[id] > bestR) { bestR = visible[id]; best = id; } });
+        if (best && map[best] && map[best] !== current) setActive(map[best]);
+        else if (!best && current && scrollY < 200) { links.forEach(function (a) { a.parentElement.classList.remove('is-active'); }); current = null; place(null); }
+      }, { rootMargin: '-35% 0px -45% 0px', threshold: [0, .1, .25, .5, .75, 1] });
+      Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
+    }
+    addEventListener('resize', function () { place(current); });
+  })();
+
+  /* ---------- project filter bar: icons + counts + sliding highlight ---------- */
+  (function () {
+    var bar = document.querySelector('.projects-area .sticky-navbar'); if (!bar) return;
+    var icons = { all: '✦', frontend: '🎨', backend: '⚙️', database: '🗄️', devops: '🚀', ml: '🧠', design: '✏️' };
+    var cards = document.querySelectorAll('.projects-area .project-item');
+    bar.classList.add('pf-bar');
+    var glider = document.createElement('span'); glider.className = 'pf-glider'; bar.appendChild(glider);
+    bar.querySelectorAll('.skill-filter').forEach(function (a) {
+      var k = a.dataset.skill, n = k === 'all' ? cards.length : Array.prototype.filter.call(cards, function (c) { return (c.dataset.skill || '').split(/\s+/).indexOf(k) !== -1; }).length;
+      a.innerHTML = '<span class="pf-ico">' + (icons[k] || '•') + '</span><span class="pf-label">' + a.textContent.trim() + '</span><span class="pf-count">' + n + '</span>';
+    });
+    function moveGlider() {
+      var on = bar.querySelector('.skill-filter.active'); if (!on) return;
+      glider.style.width = on.offsetWidth + 'px'; glider.style.transform = 'translateX(' + on.offsetLeft + 'px)'; glider.style.opacity = 1;
+    }
+    bar.addEventListener('click', function () { setTimeout(moveGlider, 0); });
+    addEventListener('resize', moveGlider);
+    var panel = document.getElementById('projects-panel');
+    if (panel) new MutationObserver(moveGlider).observe(panel, { attributes: true, attributeFilter: ['class'] });
+    setTimeout(moveGlider, 50);
+    // stagger the cards back in whenever the filter changes
+    bar.addEventListener('click', function () {
+      setTimeout(function () {
+        var i = 0;
+        cards.forEach(function (c) { if (c.style.display !== 'none') { c.style.animation = 'none'; void c.offsetWidth; c.style.animation = 'pf-in .4s ' + (i++ * 40) + 'ms both'; } });
+      }, 0);
+    });
+  })();
+
   /* ---------- recent posts + memories ---------- */
   if (!window.Blog) {
     ['hx-blog','hx-mem'].forEach(function (id) { var el = document.getElementById(id); if (el) el.innerHTML = '<p class="hx-status">Couldn\'t load right now.</p>'; });

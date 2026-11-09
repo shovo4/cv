@@ -51,37 +51,15 @@
 
 <!-- Hero -->
 <section class="hx-hero">
+    <canvas id="hx-rain" class="hx-rain" aria-hidden="true"></canvas>
     <div class="container">
         <p class="hx-kicker" data-aos="fade-up">Hey, I'm</p>
         <h1 class="hx-name" data-aos="fade-up" data-aos-delay="50"><span class="hx-word">Shovo<span>.</span></span>
-            <span class="hx-flags" aria-label="Bangladesh and Canada">
-                <svg class="hx-flag" viewBox="0 0 40 40" role="img" aria-label="Bangladesh"><title>Bangladesh</title><circle cx="20" cy="20" r="20" fill="#006a4e"/><circle cx="18" cy="20" r="11" fill="#f42a41"/></svg>
-                <svg class="hx-flag" viewBox="0 0 40 40" role="img" aria-label="Canada"><title>Canada</title><defs><clipPath id="hxc"><circle cx="20" cy="20" r="20"/></clipPath></defs><g clip-path="url(#hxc)"><rect width="40" height="40" fill="#fff"/><rect width="10" height="40" fill="#d80621"/><rect x="30" width="10" height="40" fill="#d80621"/><path fill="#d80621" d="M20 9.5l1.6 3.1 2.2-.6-.5 2.4 2.6 2.1-1.4.6.5 2.3-2.7-.5-.2 1.2 1.6 1.7h-3.3l.3 3.7h-1.4l.3-3.7h-3.3l1.6-1.7-.2-1.2-2.7.5.5-2.3-1.4-.6 2.6-2.1-.5-2.4 2.2.6z"/></g></svg>
-            </span>
         </h1>
-        <p class="hx-tagline" data-aos="fade-up" data-aos-delay="100">IT Systems Administrator &middot; Software developer &middot; Edmonton, Canada</p>
+        <p class="hx-tagline" data-aos="fade-up" data-aos-delay="100"><span class="hx-tag-word">Explorer</span><span class="hx-tag-sep">&middot;</span><span class="hx-tag-word">IT enthusiast</span><span class="hx-tag-sep">&middot;</span><span class="hx-tag-word">Builder of small useful things</span><span class="hx-tag-sep">&middot;</span><span class="hx-tag-word">Edmonton, Canada</span></p>
         <div class="hx-hero-actions" data-aos="fade-up" data-aos-delay="150">
             <a href="#blog" class="theme-btn hx-btn">Read the blog</a>
-            <a href="#about" class="theme-btn hx-btn hx-ghost">About me</a>
         </div>
-    </div>
-</section>
-
-<!-- Latest Blog -->
-<section id="blog" class="hx-section hx-framed">
-    <div class="container">
-        <div class="hx-frame-head" data-aos="fade-up"><span class="hx-eyebrow">Writing</span><h2 class="hx-heading">Latest from the Blog</h2><p class="hx-blurb">Notes, lessons and things I&rsquo;m figuring out.</p></div>
-        <div id="hx-blog" class="hx-blog-grid"><p class="hx-status">Loading&hellip;</p></div>
-        <div class="hx-more-row"><a href="./blogs.html" id="hx-blog-more" class="theme-btn hx-btn">See all posts &rarr;</a></div>
-    </div>
-</section>
-
-<!-- Recent Memories -->
-<section id="memories" class="hx-section hx-framed hx-framed-alt">
-    <div class="container">
-        <div class="hx-frame-head" data-aos="fade-up"><span class="hx-eyebrow">Moments</span><h2 class="hx-heading">Memories</h2><p class="hx-blurb">Small snapshots from along the way.</p></div>
-        <div id="hx-mem" class="hx-mem-grid"><p class="hx-status">Loading&hellip;</p></div>
-        <div class="hx-more-row"><a href="./memories.html" id="hx-mem-more" class="theme-btn hx-btn">See more memories &rarr;</a></div>
     </div>
 </section>
 
@@ -90,21 +68,36 @@
     <div class="container">
         <div class="hx-about-card" data-aos="fade-up">
             <div class="hx-about-media">
-                <div class="hx-portrait">
-                    <img src="./assets/images/me.jpeg" alt="Shovo">
-                    <span class="hx-portrait-badge"><i class="iconoir-map-pin"></i> Edmonton, AB</span>
-                </div>
-                <div class="hx-journey">
-                    <span>🇧🇩 Dhaka</span><i class="iconoir-arrow-right"></i><span>🇨🇦 Edmonton</span>
+                <div class="credential-sidebar text-center sb-card">
+                    <div class="shadow-box">
+                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
+                        <div class="img-box">
+                            <img src="./assets/images/me.jpeg" alt="About Me">
+                        </div>
+                        <h2>MD Saiful Islam Shovo</h2>
+                        <p class="sb-handle">@shovo4</p>
+                        <p class="sb-role">IT Systems Administrator</p>
+                        <p class="sb-loc"><i class="iconoir-map-pin"></i> Edmonton, AB</p>
+                        <div class="sb-flags"><span>🇧🇩</span><span>🇨🇦</span></div>
+
+                        <ul class="social-links d-flex justify-content-center">
+                            <li><a href="https://www.linkedin.com/in/saifulshovo/"><i class="iconoir-linkedin"></i></a></li>
+                            <li><a href="https://github.com/shovo4"><i class="iconoir-github"></i></a></li>
+                            <li><a href="https://instagram.com/shovo_4"><i class="iconoir-instagram"></i></a></li>
+                            <li><a href="https://twitter.com/sshovo4"><i class="iconoir-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/saifulislamshovo4/"><i class="iconoir-facebook-tag"></i></a></li>
+                        </ul>                                
+
+                        <!-- <a href="./assets/files/resume.pdf" target="_blank" class="theme-btn">View Resume</a> -->
+                    </div>
                 </div>
             </div>
 
             <div class="hx-about-body">
                 <span class="hx-eyebrow">About me</span>
-                <h2 class="hx-heading hx-left">Hey, I&rsquo;m Shovo &mdash; I keep tech running <span>and</span> build what&rsquo;s next.</h2>
-                <p class="hx-lead">I&rsquo;m an IT &amp; software person who likes both sides of the stack: the cables, networks and devices that keep a company moving, and the web apps that make the work easier.</p>
-                <p>By day I&rsquo;m an <b>IT Systems Administrator at Ketek Group Inc.</b> in Edmonton &mdash; running servers, VMware and Active Directory, keeping the network secure, and helping people get unstuck. I started there in IT support and was promoted in 2026. Before that I built full-stack apps with <b>Django, React and Next.js</b> for WareMatch and Connection Hub, and ran a Subway store along the way, which taught me more about people and pressure than any textbook.</p>
-                <p>I studied <b>Computing Science (Software Specialization)</b> at the University of Alberta and hold two AWS certifications. Outside work I&rsquo;m usually tinkering with a side project, writing on the blog below, or exploring Alberta with a camera.</p>
+                <h2 class="hx-heading hx-left">I keep the systems running <span>and</span> build what&rsquo;s next.</h2>
+                <p class="hx-lead">IT Systems Administrator at <b>Ketek Group</b> in Edmonton by day &mdash; servers, VMware, Active Directory and a secure network. Full-stack developer at heart, with <b>Django, React and Next.js</b> projects behind me.</p>
+                <p>Dhaka-born, Edmonton-based. UAlberta Computing Science grad, two AWS certifications, and a habit of turning small annoyances into side projects. Off the clock you&rsquo;ll find me writing on the blog or out with a camera.</p>
 
                 <div class="hx-facts">
                     <div class="hx-fact"><i class="iconoir-graduation-cap"></i><div><b>B.Sc. Computing Science</b><small>University of Alberta &middot; 2019&ndash;2023</small></div></div>
@@ -131,6 +124,24 @@
     </div>
 </section>
 
+<!-- Latest Blog -->
+<section id="blog" class="hx-section hx-framed">
+    <div class="container">
+        <div class="hx-frame-head" data-aos="fade-up"><span class="hx-eyebrow">Writing</span><h2 class="hx-heading">Latest from the Blog</h2><p class="hx-blurb">Notes, lessons and things I&rsquo;m figuring out.</p></div>
+        <div id="hx-blog" class="hx-blog-grid"><p class="hx-status">Loading&hellip;</p></div>
+        <div class="hx-more-row"><a href="./blogs.html" id="hx-blog-more" class="theme-btn hx-btn">See all posts &rarr;</a></div>
+    </div>
+</section>
+
+<!-- Recent Memories -->
+<section id="memories" class="hx-section hx-framed hx-framed-alt">
+    <div class="container">
+        <div class="hx-frame-head" data-aos="fade-up"><span class="hx-eyebrow">Moments</span><h2 class="hx-heading">Memories</h2><p class="hx-blurb">Small snapshots from along the way.</p></div>
+        <div id="hx-mem" class="hx-mem-grid"><p class="hx-status">Loading&hellip;</p></div>
+        <div class="hx-more-row"><a href="./memories.html" id="hx-mem-more" class="theme-btn hx-btn">See more memories &rarr;</a></div>
+    </div>
+</section>
+
 <!-- Experience &amp; Skills (collapsed by default) -->
 <section id="skills-block" class="hx-section hx-collapse">
     <div class="container">
@@ -147,28 +158,7 @@
 <section class="credential-area">
     <div class="container">
         <div class="gx-row d-flex">
-            <div class="credential-sidebar-wrap" data-aos="zoom-in">
-                <div class="credential-sidebar text-center">
-                    <div class="shadow-box">
-                        <img src="./assets/images/bg1.png" alt="BG" class="bg-img">
-                        <div class="img-box">
-                            <img src="./assets/images/me.jpeg" alt="About Me">
-                        </div>
-                        <h2>MD Saiful Islam Shovo</h2>
-                        <p>@shovo4</p>
 
-                        <ul class="social-links d-flex justify-content-center">
-                            <li><a href="https://www.linkedin.com/in/saifulshovo/"><i class="iconoir-linkedin"></i></a></li>
-                            <li><a href="https://github.com/shovo4"><i class="iconoir-github"></i></a></li>
-                            <li><a href="https://instagram.com/shovo_4"><i class="iconoir-instagram"></i></a></li>
-                            <li><a href="https://twitter.com/sshovo4"><i class="iconoir-twitter"></i></a></li>
-                            <li><a href="https://www.facebook.com/saifulislamshovo4/"><i class="iconoir-facebook-tag"></i></a></li>
-                        </ul>                                
-
-                        <!-- <a href="./assets/files/resume.pdf" target="_blank" class="theme-btn">View Resume</a> -->
-                    </div>
-                </div>
-            </div>
             
 
             <div class="credential-content flex-1">
@@ -201,14 +191,14 @@
                         <h4>IT Systems Administrator</h4>
                         <span class="xp-dates">Oct 2026 &ndash; <em>Present</em></span>
                     </div>
-                    <ul><li>Managing enterprise servers, storage, networking and VMware virtualization infrastructure.</li><li>Administering VMware Horizon virtual desktop infrastructure (VDI) and thin-client environments.</li><li>Managing Windows imaging, deployment and device provisioning with SmartDeploy.</li><li>Administering Active Directory, authentication systems and IT automation.</li><li>Monitoring data-centre operations, system performance and backup solutions.</li><li>Managing cybersecurity operations, endpoint security and threat prevention.</li><li>Planning and implementing infrastructure upgrades and long-term IT improvements.</li></ul>
+                    <ul><li>Managing enterprise servers, storage, networking and VMware virtualization infrastructure.</li><li>Administering VMware Horizon virtual desktop infrastructure (VDI) and thin-client environments.</li><li>Managing Windows imaging, deployment and device provisioning with SmartDeploy.</li></ul>
                 </div>
                 <div class="xp-role">
                     <div class="xp-role-head">
                         <h4>IT Support Specialist</h4>
                         <span class="xp-dates">Feb 2025 &ndash; Oct 2026</span>
                     </div>
-                    <ul><li>Installed and maintained company data cabling and network infrastructure.</li><li>Installed and serviced hardware: computers, thin clients, laptops, servers, scanners and printers.</li><li>Maintained software across company devices, including VPNs and security applications.</li><li>Helped manage company networks, accounts, email, landlines and mobile devices.</li><li>Troubleshot and resolved software/hardware issues and walked employees through fixes.</li><li>Tested new technologies for business operations and documented solutions.</li></ul>
+                    <ul><li>Installed and maintained company data cabling and network infrastructure.</li><li>Installed and serviced hardware: computers, thin clients, laptops, servers, scanners and printers.</li><li>Maintained software across company devices, including VPNs and security applications.</li></ul>
                 </div>
                 <div class="xp-tags"><span>VMware</span><span>VDI</span><span>Active Directory</span><span>SmartDeploy</span><span>Networking</span><span>Cybersecurity</span><span>Backups</span></div>
             </div>
@@ -336,340 +326,98 @@
     </div>
 </div>
 
-<div id="certificates" class="container about-experience">
-                    <div class="credential-content flex-1">
-                        <h2 data-aos="fade-up" style="color: #fff; margin-bottom: 22px;">Certificates</h2>
-                
-                        <!-- Certificate 1: Bachelors Degree in Computing Science Specialization -->
-                        <div class="about-credentials-wrap" data-aos="zoom-in">
-                            <ul>
-                
-                                <!-- AWS Cloud Practitioner -->
-                                <li class="shadow-box" style="padding: 30px; margin-bottom: 24px; text-align: center;">
-                                    <div class="date" style="color: #BCBCBC; opacity: 0.6; font-size: 16px; font-weight: 500; margin-bottom: 12px;">Dec 2023</div>
-                                    <h2 style="font-size: 18px; color: #fff; opacity: 0.9; margin-bottom: 20px;">AWS Certified Cloud Practitioner</h2>
-                                    <div style="margin-bottom: 20px;">
-                                        <p>Amazon Web Services Training and Certification,
-                                            This validates my fundamental knowledge of AWS cloud services and architecture.</p>
+<div id="certificates" class="xp-section cert-section">
+    <div class="xp-section-head" data-aos="fade-up">
+        <span class="hx-eyebrow">Credentials</span>
+        <h2 class="hx-heading hx-left">Certificates</h2>
+        <p class="hx-blurb">Verified badges and the courses behind them.</p>
+    </div>
+    <div class="cert-grid">
+        <article class="cert-card cert-aws" data-aos="fade-up">
+            <div class="cert-badge"><img src="./assets/images/aws-certified-cloud-practitioner.png" alt="AWS Certified Cloud Practitioner badge"></div>
+            <div class="cert-body">
+                <span class="cert-date">Dec 2023</span>
+                <h3>AWS Certified Cloud Practitioner</h3>
+                <p>Amazon Web Services &middot; Foundational. Core AWS services, architecture, security and pricing.</p>
+                <div class="cert-links">
+                    <a href="https://www.credly.com/badges/1b6b6e75-c438-475d-ad05-51953b479722/public_url" target="_blank" rel="noopener" class="cert-link primary"><i class="iconoir-badge-check"></i> Verify on Credly</a>
+                    <a href="https://udemy-certificate.s3.amazonaws.com/pdf/UC-78fc53d3-d320-416d-9c49-700cb9157e6b.pdf" target="_blank" rel="noopener" class="cert-link">Udemy course</a>
+                    <a href="https://drive.google.com/file/d/19BPEHNqgShfqpJ95fsnc2270gsNAeItY/view?usp=sharing" target="_blank" rel="noopener" class="cert-link">AWS Skill Builder</a>
+                </div>
+            </div>
+        </article>
+        <article class="cert-card cert-aws" data-aos="fade-up" data-aos-delay="60">
+            <div class="cert-badge"><img src="./assets/images/aws-certified-developer-associate.png" alt="AWS Certified Developer Associate badge"></div>
+            <div class="cert-body">
+                <span class="cert-date">Jan 2024</span>
+                <h3>AWS Certified Developer &ndash; Associate</h3>
+                <p>Amazon Web Services &middot; Associate. Designing, building and deploying cloud applications with AWS services and developer tooling.</p>
+                <div class="cert-links">
+                    <a href="https://www.credly.com/badges/8809085e-0360-403d-9708-d442e0e73b18/public_url" target="_blank" rel="noopener" class="cert-link primary"><i class="iconoir-badge-check"></i> Verify on Credly</a>
+                </div>
+            </div>
+        </article>
+        <article class="cert-card cert-course" data-aos="fade-up" data-aos-delay="120">
+            <div class="cert-badge cert-badge-icon"><i class="iconoir-code-brackets"></i></div>
+            <div class="cert-body">
+                <span class="cert-date">Dec 2023</span>
+                <h3>The Complete Web Development Bootcamp</h3>
+                <p>Udemy &middot; Full-stack fundamentals: HTML, CSS, JavaScript, Node, Express, databases and deployment.</p>
+                <div class="cert-links">
+                    <a href="https://www.udemy.com/certificate/UC-64be9f0d-2a6a-4f72-b124-97e411098b48/" target="_blank" rel="noopener" class="cert-link primary"><i class="iconoir-page"></i> View certificate</a>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
 
-                                        <a href="https://www.credly.com/badges/1b6b6e75-c438-475d-ad05-51953b479722/public_url" target="_blank" style="display: inline-block; margin-right: 15px;">View Credly Certificate</a>
-                                    </div>
-                                    <div style="margin-bottom: 20px;">
-                                        <img src="./assets/images/aws-certified-cloud-practitioner.png" alt="AWS Cloud Practitioner Badge" style="width: 100px; margin-bottom: 20px;"/>
-                                    </div>
-                                    <div style="margin-bottom: 20px;">
-                                        <a href="https://udemy-certificate.s3.amazonaws.com/pdf/UC-78fc53d3-d320-416d-9c49-700cb9157e6b.pdf" target="_blank" style="display: block; margin-bottom: 15px;">View Udemy Certificate</a>
-                                    </div>
-                                    <div>
-                                        <a href="https://drive.google.com/file/d/19BPEHNqgShfqpJ95fsnc2270gsNAeItY/view?usp=sharing" target="_blank">View AWS Skill Builder</a>
-                                    </div>
-                                </li>
-                                
-                
-                                <!-- AWS Developer Associate -->
-                                <li class="shadow-box" style="padding: 30px; margin-bottom: 24px; text-align: center;">
-                                    <div class="date" style="color: #BCBCBC; opacity: 0.6; font-size: 16px; font-weight: 500; margin-bottom: 12px;">Jan 2024</div>
-                                    <h2 style="font-size: 18px; color: #fff; opacity: 0.9; margin-bottom: 20px;">AWS Certified Developer Associate</h2>
-                                    <div style="margin-bottom: 20px;">
-                                        <p>This certification signifies my expertise in developing applications on the Amazon Web Services (AWS) platform. It demonstrates my ability to design, build, and deploy cloud-based applications using AWS services. This accomplishment validates my proficiency in cloud application development and showcases my knowledge of AWS development tools and best practices.</p>
-                                        <a href="https://www.credly.com/badges/8809085e-0360-403d-9708-d442e0e73b18/public_url" target="_blank" style="display: block; margin-bottom: 15px;">View Credly Certificate</a>
-                                    </div>
-                                    <div>
-                                        <img src="./assets/images/aws-certified-developer-associate.png" alt="AWS Developer Associate Badge" style="width: 100px;"/>
-                                    </div>
-                                </li>
-                                
-                
-                                <!-- Web Development Bootcamp -->
-                                <li class="shadow-box" style="padding: 30px; margin-bottom: 24px; text-align: center;">
-                                    <div class="date" style="color: #BCBCBC; opacity: 0.6; font-size: 16px; font-weight: 500; margin-bottom: 12px;">Dec 2023</div>
-                                    <h2 style="font-size: 18px; color: #fff; opacity: 0.9; margin-bottom: 20px;">Web Development Bootcamp</h2>
-                                    <div>
-                                        <a href="https://www.udemy.com/certificate/UC-64be9f0d-2a6a-4f72-b124-97e411098b48/" target="_blank" style="display: block; margin-bottom: 15px;">View Web Development Certificate</a>
-                                    </div>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                </div>
-
-                <div class="skills-logo-container">
-                    <!-- Starting with Python -->
-                    <a href="https://www.python.org" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" />
-                    </a>
-                
-                    <!-- JavaScript -->
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" />
-                    </a>
-                
-                    <!-- React -->
-                    <a href="https://reactjs.org/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" />
-                    </a>
-                
-                    <!-- Next.js -->
-                    <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original-wordmark.svg" alt="next.js" />
-                    </a>
-                
-                    <!-- Django -->
-                    <a href="https://www.djangoproject.com/" target="_blank" rel="noreferrer">
-                        <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" />
-                    </a>
-                
-                    <!-- HTML -->
-                    <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" />
-                    </a>
-                
-                    <!-- CSS -->
-                    <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" />
-                    </a>
-                
-                    <!-- AWS -->
-                    <a href="https://aws.amazon.com" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" />
-                    </a>
-                
-                    <!-- PostgreSQL -->
-                    <a href="https://www.postgresql.org" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" />
-                    </a>
-                
-                    <!-- Docker -->
-                    <a href="https://www.docker.com/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" />
-                    </a>
-                
-                    <!-- Node.js -->
-                    <a href="https://nodejs.org" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" />
-                    </a>
-                
-                    <!-- MongoDB -->
-                    <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" />
-                    </a>
-                
-                    <!-- Material UI -->
-                    <a href="https://mui.com/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/materialui/materialui-original.svg" alt="material-ui" />
-                    </a>
-                
-                    <!-- Tailwind CSS -->
-                    <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">
-                        <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" />
-                    </a>
-                
-                    <!-- C -->
-                    <a href="https://www.cprogramming.com/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" />
-                    </a>
-                
-                    <!-- TypeScript -->
-                    <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" />
-                    </a>
-                
-                    <!-- Angular -->
-                    <a href="https://angular.io" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-original-wordmark.svg" alt="angularjs" />
-                    </a>
-                
-                    <!-- Firebase -->
-                    <a href="https://firebase.google.com/" target="_blank" rel="noreferrer">
-                        <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" />
-                    </a>
-                
-                    <!-- Express.js -->
-                    <a href="https://expressjs.com" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" />
-                    </a>
-                
-                    <!-- Redux -->
-                    <a href="https://redux.js.org" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" />
-                    </a>
-                
-                    <!-- Heroku -->
-                    <a href="https://heroku.com" target="_blank" rel="noreferrer">
-                        <img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" alt="heroku" />
-                    </a>
-                
-                    <!-- VS Code -->
-                    <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer">
-                        <img src="https://www.vectorlogo.zone/logos/visualstudio_code/visualstudio_code-icon.svg" alt="vscode" />
-                    </a>
-                
-                    <!-- Linux -->
-                    <a href="https://www.linux.org/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" />
-                    </a>
-                
-                    <!-- MySQL -->
-                    <a href="https://www.mysql.com/" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" />
-                    </a>
-                
-                    <!-- Nginx -->
-                    <a href="https://www.nginx.com" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg" alt="nginx" />
-                    </a>
-                
-                    <!-- Java -->
-                    <a href="https://www.java.com" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" />
-                    </a>
-                
-                    <!-- Bootstrap -->
-                    <a href="https://getbootstrap.com" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" />
-                    </a>
-                
-                    <!-- Jest -->
-                    <a href="https://jestjs.io" target="_blank" rel="noreferrer">
-                        <img src="https://www.vectorlogo.zone/logos/jestjsio/jestjsio-icon.svg" alt="jest" />
-                    </a>
-                
-                    <!-- Cybera -->
-                    <a href="https://www.cybera.ca/" target="_blank" rel="noreferrer">
-                        <img src="https://i0.wp.com/www.cybera.ca/wp-content/uploads/2020/03/cybera_logo_2.png?resize=300%2C155&ssl=1" alt="cybera" />
-                    </a>
-
-                
-                    <!-- SQLite -->
-                    <a href="https://www.sqlite.org/" target="_blank" rel="noreferrer">
-                        <img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" alt="sqlite" />
-                    </a>
-                
-                    <!-- TensorFlow -->
-                    <a href="https://www.tensorflow.org" target="_blank" rel="noreferrer">
-                        <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="tensorflow" />
-                    </a>
-                
-                    <!-- PHP -->
-                    <a href="https://www.php.net" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="php" />
-                    </a>
-                
-                    <!-- Redis -->
-                    <a href="https://redis.io" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg" alt="redis" />
-                    </a>
-                
-                    <!-- Selenium -->
-                    <a href="https://www.selenium.dev" target="_blank" rel="noreferrer">
-                        <img src="https://raw.githubusercontent.com/detain/svg-logos/780f25886640cef088af994181646db2f6b1a3f8/svg/selenium-logo.svg" alt="selenium" />
-                    </a>
-                </div>
-
-                <div id="skills" class="skills-wrap">
-                    <h2 data-aos="fade-up">Skills</h2>
-                    <div class="d-grid skill-items gap-24 flex-wrap">
-                
-                        <!-- Languages -->
-                        <div class="skill-category shadow-box">
-                            <h4 data-aos="zoom-in">Languages</h4>
-                            <p class="hashtag-skill">
-                                <span class="hashtag skyblue">#Python</span>
-                                <span class="hashtag lightgreen">#C</span>
-                                <span class="hashtag pink">#Java</span>
-                                <span class="hashtag skyblue">#JavaScript</span>
-                                <span class="hashtag lightgreen">#TypeScript</span>
-                                <span class="hashtag pink">#PHP</span>
-                                <span class="hashtag skyblue">#MIPS</span>
-                            </p>
-                        </div>
-                
-                        <!-- Cloud -->
-                        <div class="skill-category shadow-box">
-                            <h4 data-aos="zoom-in">Cloud</h4>
-                            <p class="hashtag-skill">
-                                <span class="hashtag skyblue">#AWS</span>
-                                <span class="hashtag lightgreen">#Docker</span>
-                                <span class="hashtag pink">#Cybera</span>
-                                <span class="hashtag skyblue">#Heroku</span>
-                                <span class="hashtag lightgreen">#Nginx</span>
-                            </p>
-                        </div>
-                
-                        <!-- Frontend -->
-                        <div class="skill-category shadow-box">
-                            <h4 data-aos="zoom-in">Frontend</h4>
-                            <p class="hashtag-skill">
-                                <span class="hashtag skyblue">#React.js</span>
-                                <span class="hashtag lightgreen">#Next.js</span>
-                                <span class="hashtag pink">#Angular</span>
-                                <span class="hashtag skyblue">#HTML</span>
-                                <span class="hashtag lightgreen">#CSS</span>
-                            </p>
-                        </div>
-                
-                        <!-- Backend -->
-                        <div class="skill-category shadow-box">
-                            <h4 data-aos="zoom-in">Backend</h4>
-                            <p class="hashtag-skill">
-                                <span class="hashtag skyblue">#Django</span>
-                                <span class="hashtag lightgreen">#Fast API</span>
-                                <span class="hashtag pink">#Express.js</span>
-                                <span class="hashtag skyblue">#Node.js</span>
-                            </p>
-                        </div>
-                
-                        <!-- Databases -->
-                        <div class="skill-category shadow-box">
-                            <h4 data-aos="zoom-in">Databases</h4>
-                            <p class="hashtag-skill">
-                                <span class="hashtag skyblue">#PostgreSQL</span>
-                                <span class="hashtag lightgreen">#MongoDB</span>
-                                <span class="hashtag pink">#Firebase</span>
-                                <span class="hashtag skyblue">#SQLite</span>
-                                <span class="hashtag lightgreen">#MySQL</span>
-                            </p>
-                        </div>
-                
-                        <!-- APIs -->
-                        <div class="skill-category shadow-box">
-                            <h4 data-aos="zoom-in">APIs</h4>
-                            <p class="hashtag-skill">
-                                <span class="hashtag skyblue">#RestAPIs</span>
-                            </p>
-                        </div>
-                
-                        <!-- Libraries -->
-                        <div class="skill-category shadow-box">
-                            <h4 data-aos="zoom-in">Libraries</h4>
-                            <p class="hashtag-skill">
-                                <span class="hashtag skyblue">#MaterialUI</span>
-                                <span class="hashtag lightgreen">#Bootstrap</span>
-                                <span class="hashtag pink">#Tailwind</span>
-                                <span class="hashtag skyblue">#Redux</span>
-                            </p>
-                        </div>
-                
-                        <!-- Developer Tools -->
-                        <div class="skill-category shadow-box">
-                            <h4 data-aos="zoom-in">Developer Tools</h4>
-                            <p class="hashtag-skill">
-                                <span class="hashtag skyblue">#VSCode</span>
-                                <span class="hashtag lightgreen">#AndroidStudio</span>
-                                <span class="hashtag pink">#IntelliJ</span>
-                                <span class="hashtag skyblue">#Git</span>
-                                <span class="hashtag lightgreen">#Linux</span>
-                            </p>
-                        </div>
-                
-                    </div>
-                </div>
-                
-                
-                
+<div id="skills" class="xp-section sk-section">
+    <div class="xp-section-head" data-aos="fade-up">
+        <span class="hx-eyebrow">Toolkit</span>
+        <h2 class="hx-heading hx-left">Skills</h2>
+        <p class="hx-blurb">The languages, frameworks and systems I reach for &mdash; <em class="sk-hint">tap any skill</em> &#10024;</p>
+    </div>
+    <div class="sk-grid">
+        <div class="sk-group" data-aos="fade-up">
+            <div class="sk-head"><i class="iconoir-code"></i><h4>Languages</h4><span class="sk-count">7</span></div>
+            <div class="sk-tags"><button type="button" class="sk-tag" data-confetti="code">Python</button><button type="button" class="sk-tag" data-confetti="code">C</button><button type="button" class="sk-tag" data-confetti="code">Java</button><button type="button" class="sk-tag" data-confetti="code">JavaScript</button><button type="button" class="sk-tag" data-confetti="code">TypeScript</button><button type="button" class="sk-tag" data-confetti="code">PHP</button><button type="button" class="sk-tag" data-confetti="code">MIPS</button></div>
+        </div>
+        <div class="sk-group" data-aos="fade-up">
+            <div class="sk-head"><i class="iconoir-cloud"></i><h4>Cloud</h4><span class="sk-count">5</span></div>
+            <div class="sk-tags"><button type="button" class="sk-tag" data-confetti="rain">AWS</button><button type="button" class="sk-tag" data-confetti="rain">Docker</button><button type="button" class="sk-tag" data-confetti="rain">Cybera</button><button type="button" class="sk-tag" data-confetti="rain">Heroku</button><button type="button" class="sk-tag" data-confetti="rain">Nginx</button></div>
+        </div>
+        <div class="sk-group" data-aos="fade-up">
+            <div class="sk-head"><i class="iconoir-laptop"></i><h4>Frontend</h4><span class="sk-count">5</span></div>
+            <div class="sk-tags"><button type="button" class="sk-tag" data-confetti="stars">React.js</button><button type="button" class="sk-tag" data-confetti="stars">Next.js</button><button type="button" class="sk-tag" data-confetti="stars">Angular</button><button type="button" class="sk-tag" data-confetti="stars">HTML</button><button type="button" class="sk-tag" data-confetti="stars">CSS</button></div>
+        </div>
+        <div class="sk-group" data-aos="fade-up">
+            <div class="sk-head"><i class="iconoir-server"></i><h4>Backend</h4><span class="sk-count">4</span></div>
+            <div class="sk-tags"><button type="button" class="sk-tag" data-confetti="burst">Django</button><button type="button" class="sk-tag" data-confetti="burst">Fast API</button><button type="button" class="sk-tag" data-confetti="burst">Express.js</button><button type="button" class="sk-tag" data-confetti="burst">Node.js</button></div>
+        </div>
+        <div class="sk-group" data-aos="fade-up">
+            <div class="sk-head"><i class="iconoir-database"></i><h4>Databases</h4><span class="sk-count">5</span></div>
+            <div class="sk-tags"><button type="button" class="sk-tag" data-confetti="burst">PostgreSQL</button><button type="button" class="sk-tag" data-confetti="burst">MongoDB</button><button type="button" class="sk-tag" data-confetti="burst">Firebase</button><button type="button" class="sk-tag" data-confetti="burst">SQLite</button><button type="button" class="sk-tag" data-confetti="burst">MySQL</button></div>
+        </div>
+        <div class="sk-group" data-aos="fade-up">
+            <div class="sk-head"><i class="iconoir-plug-type-a"></i><h4>APIs</h4><span class="sk-count">1</span></div>
+            <div class="sk-tags"><button type="button" class="sk-tag" data-confetti="code">RestAPIs</button></div>
+        </div>
+        <div class="sk-group" data-aos="fade-up">
+            <div class="sk-head"><i class="iconoir-book"></i><h4>Libraries</h4><span class="sk-count">4</span></div>
+            <div class="sk-tags"><button type="button" class="sk-tag" data-confetti="stars">MaterialUI</button><button type="button" class="sk-tag" data-confetti="stars">Bootstrap</button><button type="button" class="sk-tag" data-confetti="stars">Tailwind</button><button type="button" class="sk-tag" data-confetti="stars">Redux</button></div>
+        </div>
+        <div class="sk-group" data-aos="fade-up">
+            <div class="sk-head"><i class="iconoir-tools"></i><h4>Developer Tools</h4><span class="sk-count">5</span></div>
+            <div class="sk-tags"><button type="button" class="sk-tag" data-confetti="burst">VSCode</button><button type="button" class="sk-tag" data-confetti="burst">AndroidStudio</button><button type="button" class="sk-tag" data-confetti="burst">IntelliJ</button><button type="button" class="sk-tag" data-confetti="burst">Git</button><button type="button" class="sk-tag" data-confetti="burst">Linux</button></div>
+        </div>
+        <div class="sk-group sk-new" data-aos="fade-up">
+            <div class="sk-head"><i class="iconoir-shield-check"></i><h4>Systems &amp; Infrastructure</h4><span class="sk-count">8</span></div>
+            <div class="sk-tags"><button type="button" class="sk-tag" data-confetti="fireworks">VMware vSphere</button><button type="button" class="sk-tag" data-confetti="fireworks">Horizon VDI</button><button type="button" class="sk-tag" data-confetti="fireworks">Active Directory</button><button type="button" class="sk-tag" data-confetti="fireworks">SmartDeploy</button><button type="button" class="sk-tag" data-confetti="fireworks">Windows Server</button><button type="button" class="sk-tag" data-confetti="fireworks">Backups</button><button type="button" class="sk-tag" data-confetti="fireworks">Endpoint Security</button><button type="button" class="sk-tag" data-confetti="fireworks">Networking</button></div>
+        </div>
+    </div>
+</div>
+            </div>
+            </div>
             </div>
 </section>
 
@@ -1091,6 +839,7 @@
     <script src="./assets/js/blog.js"></script>
     <script src="./assets/js/home-feed.js"></script>
     <script src="./assets/js/confetti.js"></script>
+    <script src="./assets/js/rain.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {

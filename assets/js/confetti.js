@@ -75,6 +75,15 @@
   function fire(kind, el) {
     ensure();
     var r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+    // skill tags: a lighter, local pop in the group's own colours
+    if (el.classList.contains('sk-tag')) {
+      var grp = el.closest('.sk-group'), cs = grp ? getComputedStyle(grp) : null;
+      var c1 = cs && cs.getPropertyValue('--sk-c1').trim(), c2 = cs && cs.getPropertyValue('--sk-c2').trim();
+      var cols = [c1 || '#5B78F6', c2 || '#00cfff', '#ffffff'];
+      for (var i = 0; i < 70; i++) { var a = rnd(-Math.PI, 0) , sp = rnd(3, 10); add({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, shape: pick(['rect', 'circle', 'star']), size: rnd(4, 9), color: pick(cols), decay: rnd(0.012, 0.02) }); }
+      add({ x: x, y: y - 10, vx: 0, vy: -3, g: 0, drag: .96, decay: 0.03, shape: 'text', text: el.textContent.trim(), size: 9, color: c1 || '#fff', vr: 0, rot: 0 });
+      start(); el.classList.remove('hx-pop'); void el.offsetWidth; el.classList.add('hx-pop'); return;
+    }
     (EFFECTS[kind] || EFFECTS.burst)(x, y); start();
     el.classList.remove('hx-pop'); void el.offsetWidth; el.classList.add('hx-pop');
   }
