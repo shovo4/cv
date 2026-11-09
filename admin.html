@@ -3,7 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
-<link rel="stylesheet" href="./assets/css/blog.css?v=20261109d"><link rel="stylesheet" href="./assets/css/admin.css?v=20261109d"><title>Admin · Shovo</title></head><body class="adm">
+<link rel="stylesheet" href="./assets/css/blog.css?v=20261109f"><link rel="stylesheet" href="./assets/css/admin.css?v=20261109f"><title>Admin · Shovo</title></head><body class="adm">
 
 <!-- ================= LOGIN ================= -->
 <main id="loginView" class="adm-login hide">
@@ -27,6 +27,7 @@
       <button data-view="posts"><i class="iconoir-page-edit"></i> Posts</button>
       <button data-view="memories"><i class="iconoir-media-image"></i> Memories</button>
       <button data-view="watched"><i class="iconoir-tv"></i> Watched</button>
+      <button data-view="files"><i class="iconoir-folder"></i> Files</button>
       <button data-view="settings"><i class="iconoir-settings"></i> Settings</button>
     </nav>
     <div class="adm-side-foot">
@@ -43,29 +44,48 @@
 
     <!-- ---------- OVERVIEW ---------- -->
     <section id="view-overview" class="adm-view">
-      <div class="stat-grid">
-        <div class="stat"><i class="iconoir-page-edit"></i><div><b id="st-posts">–</b><small>Posts</small></div></div>
-        <div class="stat"><i class="iconoir-media-image"></i><div><b id="st-mem">–</b><small>Memories</small></div></div>
-        <div class="stat"><i class="iconoir-tv"></i><div><b id="st-watch">–</b><small>Watched</small></div></div>
-        <div class="stat"><i class="iconoir-heart"></i><div><b id="st-react">–</b><small>Reactions</small></div></div>
-      </div>
-      <div class="two">
-        <div class="panel">
-          <h2><i class="iconoir-database"></i> Storage</h2>
-          <p class="note">Supabase free plan: 500 MB database &middot; 1 GB file storage.</p>
-          <div class="meter"><div class="meter-head"><span>Files (photos)</span><b id="m-files">–</b></div><div class="bar"><i id="b-files"></i></div></div>
-          <div class="meter"><div class="meter-head"><span>Database</span><b id="m-db">–</b></div><div class="bar"><i id="b-db"></i></div></div>
-          <div id="st-folders" class="kv"></div>
-          <p class="note" id="st-avg"></p>
+      <div id="stWarn" class="warn hide"></div>
+      <div class="ov-hero">
+        <div class="ov-hero-text">
+          <p class="ov-date" id="ovDate"></p>
+          <h2 class="ov-hello" id="ovHello">Welcome back</h2>
+          <p class="ov-line" id="ovLine"></p>
         </div>
-        <div class="panel">
-          <h2><i class="iconoir-table-rows"></i> Tables</h2>
-          <div id="st-tables" class="kv"></div>
-          <h2 style="margin-top:22px"><i class="iconoir-warning-triangle"></i> Largest files</h2>
-          <div id="st-largest" class="kv small"></div>
+        <div class="ov-quick">
+          <button type="button" class="ov-q" data-goto="posts"><i class="iconoir-page-edit"></i><span>New post</span></button>
+          <button type="button" class="ov-q" data-goto="memories"><i class="iconoir-media-image-plus"></i><span>Add memories</span></button>
+          <button type="button" class="ov-q" data-goto="watched"><i class="iconoir-movie"></i><span>Log a movie</span></button>
         </div>
       </div>
-      <p class="note" id="st-err" class="err"></p>
+
+      <div class="ov-stats">
+        <button type="button" class="ov-stat" data-goto="posts" style="--c1:#5B78F6;--c2:#00cfff"><span class="ov-ic"><i class="iconoir-page-edit"></i></span><b id="st-posts">–</b><span class="ov-lbl">Posts</span><small id="st-posts-sub">&nbsp;</small></button>
+        <button type="button" class="ov-stat" data-goto="memories" style="--c1:#06d6a0;--c2:#00cfff"><span class="ov-ic"><i class="iconoir-media-image"></i></span><b id="st-mem">–</b><span class="ov-lbl">Memories</span><small id="st-mem-sub">&nbsp;</small></button>
+        <button type="button" class="ov-stat" data-goto="watched" style="--c1:#f5c518;--c2:#ef476f"><span class="ov-ic"><i class="iconoir-tv"></i></span><b id="st-watch">–</b><span class="ov-lbl">Watched</span><small id="st-watch-sub">&nbsp;</small></button>
+        <div class="ov-stat" style="--c1:#ff6b6b;--c2:#c77dff"><span class="ov-ic"><i class="iconoir-heart"></i></span><b id="st-react">–</b><span class="ov-lbl">Reactions</span><small>🔥 ❤️ 😮 from visitors</small></div>
+      </div>
+
+      <div class="ov-grid">
+        <div class="panel ov-storage">
+          <div class="panel-head"><h2><i class="iconoir-database"></i> Storage</h2><span class="ov-plan">Free plan</span></div>
+          <div class="ov-gauges"><div id="gFiles"></div><div id="gDb"></div></div>
+          <h3 class="sub">Photos by folder</h3>
+          <div class="ov-stack" id="ovStack"></div>
+          <div class="ov-legend" id="st-folders"></div>
+          <p class="note ov-avg" id="st-avg"></p>
+          <button class="adm-ghost" type="button" data-goto="files"><i class="iconoir-folder"></i> Manage files &rarr;</button>
+        </div>
+        <div class="panel ov-activity">
+          <div class="panel-head"><h2><i class="iconoir-activity"></i> Recent activity</h2></div>
+          <div id="ovActivity" class="ov-feed"><p class="note">Loading…</p></div>
+        </div>
+      </div>
+
+      <div class="ov-grid">
+        <div class="panel"><div class="panel-head"><h2><i class="iconoir-table-rows"></i> Tables</h2></div><div id="st-tables" class="ov-tables"></div></div>
+        <div class="panel"><div class="panel-head"><h2><i class="iconoir-weight"></i> Largest files</h2><button class="adm-ghost" type="button" data-goto="files">All files &rarr;</button></div><div id="st-largest" class="ov-files"></div></div>
+      </div>
+      <p class="note err" id="st-err"></p>
     </section>
 
     <!-- ---------- POSTS ---------- -->
@@ -155,6 +175,21 @@
       <div class="panel"><div class="panel-head"><h2>Watched list</h2><input id="wFilter" type="text" placeholder="Filter…" style="max-width:220px"></div><div id="wList" class="w-list"></div></div>
     </section>
 
+    <!-- ---------- FILES ---------- -->
+    <section id="view-files" class="adm-view hide">
+      <div class="panel">
+        <div class="panel-head"><h2><i class="iconoir-folder"></i> Files</h2><div class="chips" id="fFolders"></div></div>
+        <p class="note" id="fSummary"></p>
+        <div class="row f-actions">
+          <button class="adm-ghost" type="button" id="fSelUnused"><i class="iconoir-check-circle"></i> Select all unused</button>
+          <button class="adm-ghost" type="button" id="fSelNone">Clear selection</button>
+          <button class="btn f-del" type="button" id="fDelete" disabled><i class="iconoir-trash"></i> Delete selected</button>
+          <span class="note" id="fMsg"></span>
+        </div>
+        <div id="fList" class="f-list"></div>
+      </div>
+    </section>
+
     <!-- ---------- SETTINGS ---------- -->
     <section id="view-settings" class="adm-view hide">
       <div class="panel">
@@ -178,7 +213,7 @@
 <div id="denied" class="adm-login hide"><div class="adm-login-card"><h1>Not allowed</h1><p class="note">This account isn't registered as the site admin.</p><button id="logout2" class="btn ghost">Log out</button></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./assets/js/supabase-config.js?v=20261109d"></script>
-<script src="./assets/js/blog.js?v=20261109d"></script>
-<script src="./assets/js/admin.js?v=20261109d"></script>
+<script src="./assets/js/supabase-config.js?v=20261109f"></script>
+<script src="./assets/js/blog.js?v=20261109f"></script>
+<script src="./assets/js/admin.js?v=20261109f"></script>
 </body></html>

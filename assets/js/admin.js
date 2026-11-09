@@ -19,7 +19,7 @@
     const { data: ok } = await sb.rpc('is_admin');
     if (!ok) { show('denied', true); return; }
     $('whoami').textContent = session.user.email; $('whoami').title = session.user.email;
-    show('app', true); loadOverview(); loadPosts(); loadMemories(); loadWatched(); loadKey();
+    show('app', true); loadOverview(); loadPosts(); loadMemories(); loadWatched(); loadKey(); if (location.hash === '#files') loadFiles();
   }
   $('loginForm').addEventListener('submit', async e => {
     e.preventDefault(); $('loginMsg').textContent = '';
@@ -30,30 +30,87 @@
   ['logout', 'logout2'].forEach(id => $(id).addEventListener('click', async e => { e.preventDefault(); try { localStorage.removeItem('shovo_omdb_key'); localStorage.removeItem('shovo_omdb_req'); } catch (err) {} await sb.auth.signOut(); location.reload(); }));
   sb.auth.onAuthStateChange(ev => { if (ev === 'SIGNED_OUT') route(); });
 
-  const titles = { overview: 'Overview', posts: 'Blog posts', memories: 'Memories', watched: 'Watched', settings: 'Settings' };
+  const titles = { overview: 'Overview', posts: 'Blog posts', memories: 'Memories', watched: 'Watched', files: 'Files', settings: 'Settings' };
   function goto(v) {
     document.querySelectorAll('.adm-nav button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
     document.querySelectorAll('.adm-view').forEach(s => s.classList.toggle('hide', s.id !== 'view-' + v));
     $('viewTitle').textContent = titles[v] || v; location.hash = v; window.scrollTo(0, 0);
+    if (v === 'files' && !$('app').classList.contains('hide')) loadFiles();
   }
   document.querySelectorAll('.adm-nav button').forEach(b => b.addEventListener('click', () => goto(b.dataset.view)));
   document.addEventListener('click', e => { const a = e.target.closest('[data-goto]'); if (a) { e.preventDefault(); goto(a.dataset.goto); } });
   if (titles[location.hash.slice(1)]) goto(location.hash.slice(1));
 
-  /* ---------- overview / storage ---------- */
+  /* ---------- overview ---------- */
+  function gauge(pct, title, detail, c1, c2, id) {
+    const r = 46, C = 2 * Math.PI * r, shown = Math.max(pct, pct > 0 ? 0.6 : 0), len = Math.min(100, shown) / 100 * C;
+    const label = pct < 1 ? pct.toFixed(2) : pct < 10 ? pct.toFixed(1) : Math.round(pct);
+    return `<div class="gauge"><svg viewBox="0 0 110 110"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+      <circle cx="55" cy="55" r="${r}" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="10"/>
+      <circle class="gauge-arc" cx="55" cy="55" r="${r}" fill="none" stroke="url(#${id})" stroke-width="10" stroke-linecap="round" stroke-dasharray="${len} ${C}" transform="rotate(-90 55 55)"/></svg>
+      <div class="gauge-c"><b>${label}<small>%</small></b><span>used</span></div><div class="gauge-t"><b>${title}</b><small>${detail}</small></div></div>`;
+  }
+  function ago(iso) {
+    const d = new Date(iso), s = (Date.now() - d) / 1000;
+    if (s < 60) return 'just now'; if (s < 3600) return Math.floor(s / 60) + 'm ago'; if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+    if (s < 172800) return 'yesterday'; if (s < 604800) return Math.floor(s / 86400) + ' days ago';
+    return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: d.getFullYear() === new Date().getFullYear() ? undefined : 'numeric' });
+  }
   async function loadOverview() {
-    const { data, error } = await sb.rpc('admin_storage_report');
-    if (error) { $('st-err').textContent = 'Storage report unavailable - run supabase/02_watched_and_storage.sql (' + error.message + ')'; return; }
-    const c = data.counts || {}; $('st-posts').textContent = c.posts ?? 0; $('st-mem').textContent = c.memories ?? 0; $('st-watch').textContent = c.watched ?? 0; $('st-react').textContent = c.reactions ?? 0;
+    const now = new Date(), h = now.getHours();
+    $('ovHello').textContent = (h < 5 ? 'Up late' : h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ', Shovo';
+    $('ovDate').textContent = now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+    const [rep, pr, mr, wr] = await Promise.all([
+      sb.rpc('admin_storage_report'),
+      sb.from('posts').select('id,title,published,created_at').order('created_at', { ascending: false }),
+      sb.from('memories').select('id,caption,taken_on,created_at').order('created_at', { ascending: false }).limit(50),
+      sb.from('watched').select('title,kind,my_rating,watched_on,created_at').order('created_at', { ascending: false }).limit(500)
+    ]);
+    if (rep.error) { $('st-err').textContent = 'Storage report unavailable - run supabase/02_watched_and_storage.sql (' + rep.error.message + ')'; return; }
+    const data = rep.data, c = data.counts || {}, posts = pr.data || [], mems = mr.data || [], wat = wr.data || [];
     const files = data.files || { bytes: 0, count: 0 }, FILE_CAP = 1073741824, DB_CAP = 524288000;
-    $('m-files').textContent = fmtBytes(files.bytes) + ' / 1 GB · ' + (files.count || 0) + ' files';
-    $('b-files').style.width = Math.min(100, files.bytes / FILE_CAP * 100).toFixed(2) + '%';
-    $('m-db').textContent = fmtBytes(data.db_bytes) + ' / 500 MB';
-    $('b-db').style.width = Math.min(100, data.db_bytes / DB_CAP * 100).toFixed(2) + '%';
-    $('st-folders').innerHTML = (files.by_folder || []).map(f => `<div><span>${esc(f.folder)}</span><b>${f.count} · ${fmtBytes(f.bytes)}</b></div>`).join('') || '<div><span>No files yet</span><b>–</b></div>';
-    if (files.count) $('st-avg').textContent = 'Average file size ' + fmtBytes(files.bytes / files.count) + ' · at this rate 1 GB ≈ ' + Math.floor(FILE_CAP / (files.bytes / files.count)).toLocaleString() + ' photos.';
-    $('st-tables').innerHTML = (data.tables || []).sort((a, b) => b.bytes - a.bytes).map(t => `<div><span>${esc(t.name)}</span><b>${Math.max(0, t.rows)} rows · ${fmtBytes(t.bytes)}</b></div>`).join('');
-    $('st-largest').innerHTML = (files.largest || []).map(l => `<div><span title="${esc(l.name)}">${esc(l.name.split('/').pop())}</span><b>${fmtBytes(l.bytes)}</b></div>`).join('') || '<div><span>–</span><b></b></div>';
+    const pf = files.bytes / FILE_CAP * 100, pd = data.db_bytes / DB_CAP * 100, yr = String(now.getFullYear());
+
+    // stats
+    const pub = posts.filter(p => p.published).length, drafts = posts.length - pub, thisYear = wat.filter(w => (w.watched_on || '').startsWith(yr)).length;
+    $('st-posts').textContent = c.posts ?? posts.length; $('st-posts-sub').textContent = pub + ' published' + (drafts ? ' · ' + drafts + ' draft' + (drafts > 1 ? 's' : '') : '');
+    $('st-mem').textContent = c.memories ?? mems.length; $('st-mem-sub').textContent = mems[0] ? 'latest ' + ago(mems[0].created_at) : 'none yet';
+    $('st-watch').textContent = c.watched ?? wat.length; $('st-watch-sub').textContent = thisYear + ' in ' + yr;
+    $('st-react').textContent = c.reactions ?? 0;
+    $('ovLine').innerHTML = `${c.posts ?? posts.length} posts, ${c.memories ?? mems.length} ${(c.memories ?? mems.length) === 1 ? 'memory' : 'memories'} and ${c.watched ?? wat.length} titles logged. Storage is <b>${pf < 1 ? pf.toFixed(2) : pf.toFixed(1)}%</b> full &mdash; ${pf < 50 ? 'plenty of room.' : pf < 80 ? 'keep an eye on it.' : 'time to clean up.'}`;
+
+    // warning
+    if (pf >= 80 || pd >= 80) { $('stWarn').innerHTML = '<b>Storage is ' + Math.round(Math.max(pf, pd)) + '% full.</b> Free space by deleting unused files or old memories in <a href="#" data-goto="files">Files</a>.'; show('stWarn', true); } else show('stWarn', false);
+
+    // gauges
+    $('gFiles').innerHTML = gauge(pf, 'Photos', fmtBytes(files.bytes) + ' of 1 GB · ' + (files.count || 0) + ' files', '#5B78F6', '#00cfff', 'gfg');
+    $('gDb').innerHTML = gauge(pd, 'Database', fmtBytes(data.db_bytes) + ' of 500 MB', '#06d6a0', '#5B78F6', 'gdg');
+
+    // folders stacked bar
+    const FCOL = { memories: '#00cfff', covers: '#5B78F6', posts: '#c77dff' }, FL = { memories: 'Memories', covers: 'Covers', posts: 'Post images' };
+    const fol = (files.by_folder || []).sort((a, b) => b.bytes - a.bytes), fsum = fol.reduce((a, f) => a + f.bytes, 0) || 1;
+    $('ovStack').innerHTML = fol.map(f => `<i style="width:${f.bytes / fsum * 100}%;background:${FCOL[f.folder] || '#888'}" title="${esc(FL[f.folder] || f.folder)}: ${fmtBytes(f.bytes)}"></i>`).join('') || '<i style="width:100%;background:rgba(255,255,255,.06)"></i>';
+    $('st-folders').innerHTML = fol.map(f => `<div><i style="background:${FCOL[f.folder] || '#888'}"></i><span>${esc(FL[f.folder] || f.folder)}</span><b>${f.count} · ${fmtBytes(f.bytes)}</b></div>`).join('') || '<p class="note">No photos yet.</p>';
+    $('st-avg').textContent = files.count ? 'Average photo ' + fmtBytes(files.bytes / files.count) + ' · room for about ' + Math.floor((FILE_CAP - files.bytes) / (files.bytes / files.count)).toLocaleString() + ' more.' : '';
+
+    // tables
+    const exact = { posts: c.posts, memories: c.memories, watched: c.watched, reactions: c.reactions };
+    const tabs = (data.tables || []).sort((a, b) => b.bytes - a.bytes), tmax = tabs[0] ? tabs[0].bytes : 1;
+    $('st-tables').innerHTML = tabs.map(t => { const n = exact[t.name] != null ? exact[t.name] : (t.rows > 0 ? t.rows : null);
+      return `<div class="ov-trow"><span class="ov-tname">${esc(t.name.replace('_', ' '))}</span><div class="ov-tbar"><i style="width:${Math.max(4, t.bytes / tmax * 100)}%"></i></div><span class="ov-tval">${n != null ? '<b>' + n + '</b> rows · ' : ''}${fmtBytes(t.bytes)}</span></div>`; }).join('');
+
+    // largest files with thumbnails
+    const lg = files.largest || [], lmax = lg[0] ? lg[0].bytes : 1;
+    $('st-largest').innerHTML = lg.slice(0, 6).map(l => `<a class="ov-file" href="${esc(sb.storage.from('media').getPublicUrl(l.name).data.publicUrl)}" target="_blank" rel="noopener">
+      <img loading="lazy" src="${esc(sb.storage.from('media').getPublicUrl(l.name).data.publicUrl)}" alt=""><div><span>${esc(FL[l.name.split('/')[0]] || l.name.split('/')[0])}</span><div class="ov-tbar"><i style="width:${l.bytes / lmax * 100}%"></i></div></div><b>${fmtBytes(l.bytes)}</b></a>`).join('') || '<p class="note">No files yet.</p>';
+
+    // recent activity
+    const ev = [
+      ...posts.map(p => ({ t: p.created_at, icon: 'page-edit', col: '#5B78F6', html: (p.published ? 'Published ' : 'Drafted ') + '<b>' + esc(p.title) + '</b>', go: 'posts' })),
+      ...mems.map(m => ({ t: m.created_at, icon: 'media-image', col: '#06d6a0', html: 'Added a memory' + (m.caption ? ' &mdash; <b>' + esc(m.caption) + '</b>' : ''), go: 'memories' })),
+      ...wat.map(w => ({ t: w.created_at, icon: w.kind === 'series' ? 'tv' : 'movie', col: '#f5c518', html: 'Watched <b>' + esc(w.title) + '</b>' + (w.my_rating ? ' <span class="ov-star">★ ' + w.my_rating + '</span>' : ''), go: 'watched' }))
+    ].filter(e => e.t).sort((a, b) => b.t.localeCompare(a.t)).slice(0, 8);
+    $('ovActivity').innerHTML = ev.length ? ev.map(e => `<button type="button" class="ov-ev" data-goto="${e.go}"><span class="ov-ev-ic" style="--c:${e.col}"><i class="iconoir-${e.icon}"></i></span><span class="ov-ev-txt">${e.html}</span><small>${ago(e.t)}</small></button>`).join('') : '<p class="note">Nothing yet &mdash; write your first post!</p>';
   }
 
   /* ---------- posts ---------- */
@@ -248,6 +305,77 @@
   }
   $('wFilter').addEventListener('input', renderList);
   $('wList').addEventListener('click', async e => { const b = e.target.closest('[data-del]'); if (!b || !confirm('Remove from your watched list?')) return; await sb.from('watched').delete().eq('id', b.dataset.del); loadWatched(); loadOverview(); });
+
+  /* ---------- files manager ---------- */
+  const FOLDERS = ['memories', 'covers', 'posts'], FLABEL = { memories: 'Memories', covers: 'Covers', posts: 'Post images' };
+  let files = [], fView = 'all'; const sel = new Set();
+  async function loadFiles() {
+    $('fList').innerHTML = '<p class="note">Loading files…</p>';
+    const lists = await Promise.all(FOLDERS.map(f => sb.storage.from('media').list(f, { limit: 1000, sortBy: { column: 'created_at', order: 'desc' } })));
+    const bad = lists.find(l => l.error);
+    if (bad) { $('fList').innerHTML = '<p class="err">Could not list files: ' + esc(bad.error.message) + '</p>'; return; }
+    const [pr, mr] = await Promise.all([sb.from('posts').select('id,title,cover_url,body'), sb.from('memories').select('id,caption,image_path')]);
+    const use = {}, add = (k, v) => { if (k) (use[k] = use[k] || []).push(v); };
+    (pr.data || []).forEach(p => { add(pathOf(p.cover_url), { kind: 'cover', post: p }); (p.body || '').replace(/!\[[^\]]*\]\((https:\/\/[^\s)]+)\)/g, (_, u) => add(pathOf(u), { kind: 'inline', post: p })); });
+    (mr.data || []).forEach(m => add(m.image_path, { kind: 'memory', mem: m }));
+    files = [];
+    lists.forEach((l, i) => (l.data || []).filter(o => o.id && o.name !== '.emptyFolderPlaceholder').forEach(o => {
+      const path = FOLDERS[i] + '/' + o.name;
+      files.push({ path, folder: FOLDERS[i], name: o.name, size: (o.metadata && o.metadata.size) || 0, created: o.created_at || '', url: sb.storage.from('media').getPublicUrl(path).data.publicUrl, uses: use[path] || [] });
+    }));
+    files.sort((a, b) => b.created.localeCompare(a.created));
+    if (!files.length) {   // storage says there are files, but we can't list them -> listing permission missing
+      const { data: rep } = await sb.rpc('admin_storage_report');
+      if (rep && rep.files && rep.files.count > 0) { $('fSummary').innerHTML = ''; $('fFolders').innerHTML = ''; $('fList').innerHTML = '<div class="warn" style="margin:12px">Storage has ' + rep.files.count + ' files, but this account can\'t list them yet. Run <b>supabase/06_admin_file_manager.sql</b> in the Supabase SQL Editor, then reload.</div>'; return; }
+    }
+    [...sel].forEach(p => { if (!files.some(f => f.path === p)) sel.delete(p); });
+    renderFiles();
+  }
+  function usage(f) {
+    if (!f.uses.length) return '<span class="f-badge unused">Unused</span>';
+    return f.uses.map(u => u.kind === 'memory' ? `<span class="f-badge mem">Memory${u.mem.caption ? ': ' + esc(u.mem.caption) : ''}</span>`
+      : `<span class="f-badge post">${u.kind === 'cover' ? 'Cover of' : 'In post'} “${esc(u.post.title)}”</span>`).join('');
+  }
+  function renderFiles() {
+    const unused = files.filter(f => !f.uses.length), tot = a => fmtBytes(a.reduce((s, f) => s + f.size, 0));
+    const views = [['all', 'All', files], ...FOLDERS.map(k => [k, FLABEL[k], files.filter(f => f.folder === k)]), ['unused', 'Unused', unused]];
+    $('fFolders').innerHTML = views.map(([k, l, a]) => `<button class="chip${fView === k ? ' on' : ''}" data-f="${k}">${l} · ${a.length}</button>`).join('');
+    $('fSummary').innerHTML = `${files.length} files · ${tot(files)} total · <b>${unused.length} unused (${tot(unused)})</b> can be deleted safely.`;
+    const rows = fView === 'all' ? files : fView === 'unused' ? unused : files.filter(f => f.folder === fView);
+    $('fList').innerHTML = rows.length ? rows.map(f => `<div class="f-row${sel.has(f.path) ? ' sel' : ''}" data-p="${esc(f.path)}">
+      <label class="f-chk"><input type="checkbox" ${sel.has(f.path) ? 'checked' : ''}></label>
+      <a class="f-thumb" href="${esc(f.url)}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(f.url)}" alt=""></a>
+      <div class="f-info"><b title="${esc(f.path)}">${esc(f.name)}</b><small>${FLABEL[f.folder]} · ${f.created ? fmtDate(f.created) : ''}</small><div>${usage(f)}</div></div>
+      <span class="f-size">${fmtBytes(f.size)}</span>
+      <button class="adm-ghost danger" data-del title="Delete this file"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg></button></div>`).join('') : '<p class="note">No files here.</p>';
+    $('fDelete').disabled = !sel.size; $('fDelete').innerHTML = '<i class="iconoir-trash"></i> Delete selected' + (sel.size ? ' (' + sel.size + ')' : '');
+  }
+  async function deleteFiles(list) {
+    if (!list.length) return;
+    const used = list.filter(f => f.uses.length), size = fmtBytes(list.reduce((s, f) => s + f.size, 0));
+    let msg = 'Delete ' + list.length + ' file' + (list.length > 1 ? 's' : '') + ' (' + size + ')? This cannot be undone.';
+    if (used.length) msg += '\n\n' + used.length + ' of them are in use:\n• memories using them will be deleted\n• post covers will be removed\n• images inside posts will stop showing';
+    if (!confirm(msg)) return;
+    $('fMsg').textContent = 'Deleting…';
+    const { error } = await sb.storage.from('media').remove(list.map(f => f.path));
+    if (error) { $('fMsg').textContent = 'Delete failed: ' + error.message; return; }
+    for (const f of used) for (const u of f.uses) {
+      if (u.kind === 'memory') await sb.from('memories').delete().eq('id', u.mem.id);
+      else if (u.kind === 'cover') await sb.from('posts').update({ cover_url: null }).eq('id', u.post.id);
+    }
+    list.forEach(f => sel.delete(f.path));
+    $('fMsg').textContent = 'Deleted ' + list.length + ' · freed ' + size + ' ✔';
+    loadFiles(); loadOverview(); loadMemories(); loadPosts();
+  }
+  $('fFolders').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (b) { fView = b.dataset.f; renderFiles(); } });
+  $('fList').addEventListener('click', e => {
+    const row = e.target.closest('.f-row'); if (!row) return; const f = files.find(x => x.path === row.dataset.p); if (!f) return;
+    if (e.target.closest('[data-del]')) { deleteFiles([f]); return; }
+    if (e.target.closest('.f-chk')) { sel.has(f.path) ? sel.delete(f.path) : sel.add(f.path); renderFiles(); }
+  });
+  $('fSelUnused').addEventListener('click', () => { files.filter(f => !f.uses.length).forEach(f => sel.add(f.path)); renderFiles(); });
+  $('fSelNone').addEventListener('click', () => { sel.clear(); renderFiles(); });
+  $('fDelete').addEventListener('click', () => deleteFiles(files.filter(f => sel.has(f.path))));
 
   route(); updPreview();
 })();
