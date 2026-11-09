@@ -311,22 +311,55 @@
     const months = {}; ys.forEach(w => { const m = w.watched_on.slice(0, 7); months[m] = (months[m] || 0) + 1; }); const busy = Object.entries(months).sort((a, b) => b[1] - a[1])[0];
     $('ys-high').innerHTML = [top[0] && `<div><span>Favourite genre</span><b>${esc(top[0][0])}</b></div>`, fav && `<div><span>Your top pick</span><b>${esc(fav.title)} · ${fav.my_rating}/10</b></div>`, best && `<div><span>Highest IMDb</span><b>${esc(best.title)} · ${best.imdb_rating}</b></div>`, busy && `<div><span>Busiest month</span><b>${new Date(busy[0] + '-15').toLocaleString(undefined, { month: 'long' })} · ${busy[1]}</b></div>`, `<div><span>Total this year</span><b>${ys.length}</b></div>`].filter(Boolean).join('');
   }
+  let editingW = null;
+  const PENCIL = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';
+  const TRASH = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>';
+  const starsHTML = v => Array.from({ length: 10 }, (_, i) => `<button type="button" class="star${i < v ? ' on' : ''}" data-v="${i + 1}" aria-label="${i + 1}">★</button>`).join('') + `<span class="note">${v ? v + '/10' : 'no rating'}</span>`;
   function renderList() {
     const q = $('wFilter').value.trim().toLowerCase();
     const rows = watched.filter(w => w.watched_on.startsWith(selYear) && (!q || (w.title + ' ' + (w.genres || []).join(' ') + ' ' + (w.comment || '')).toLowerCase().includes(q)));
-    $('wList').innerHTML = rows.length ? rows.map(w => `<article class="w-item">
-      <a href="https://www.imdb.com/title/${esc(w.imdb_id)}/" target="_blank" rel="noopener" class="w-poster">${w.poster_url ? `<img src="${esc(w.poster_url)}" alt="" loading="lazy">` : '<span class="w-nop"><i class="iconoir-movie"></i></span>'}</a>
-      <div class="w-body">
-        <div class="w-title"><a href="https://www.imdb.com/title/${esc(w.imdb_id)}/" target="_blank" rel="noopener">${esc(w.title)}</a><span class="kind">${w.kind}</span>${w.year ? `<span class="note">${w.year}</span>` : ''}</div>
+    $('wList').innerHTML = rows.length ? rows.map(w => {
+      const head = `<a href="https://www.imdb.com/title/${esc(w.imdb_id)}/" target="_blank" rel="noopener" class="w-poster">${w.poster_url ? `<img src="${esc(w.poster_url)}" alt="" loading="lazy">` : '<span class="w-nop"><i class="iconoir-movie"></i></span>'}</a>`;
+      const title = `<div class="w-title"><a href="https://www.imdb.com/title/${esc(w.imdb_id)}/" target="_blank" rel="noopener">${esc(w.title)}</a><span class="kind">${w.kind}</span>${w.year ? `<span class="note">${w.year}</span>` : ''}</div>`;
+      if (w.id === editingW) return `<article class="w-item editing" data-id="${w.id}">${head}
+        <div class="w-body">${title}
+          <div class="w-edit">
+            <label class="f">My rating <span class="note">(click the same star again to clear)</span></label><div class="stars" data-v="${w.my_rating || 0}">${starsHTML(w.my_rating || 0)}</div>
+            <label class="f">Watched on <span class="note">(change it if you rewatched)</span></label><input type="date" class="we-date" value="${esc(w.watched_on)}">
+            <label class="f">My note <span class="note">(max 600 characters)</span></label><textarea class="we-note" maxlength="600" style="min-height:80px">${esc(w.comment || '')}</textarea>
+            <div class="row"><button class="btn" type="button" data-save="${w.id}">Save changes</button><button class="btn ghost" type="button" data-cancel>Cancel</button><span class="note we-msg"></span></div>
+          </div>
+        </div></article>`;
+      return `<article class="w-item" data-id="${w.id}">${head}
+      <div class="w-body">${title}
         <div class="w-meta">${(w.genres || []).map(g => `<span class="tag">${esc(g)}</span>`).join('')}${w.imdb_rating ? `<span class="tag imdb">IMDb ${w.imdb_rating}</span>` : ''}</div>
         ${w.comment ? `<p class="w-comment">${esc(w.comment)}</p>` : ''}
         <small class="note">Watched ${fmtDate(w.watched_on + 'T12:00:00')}</small>
       </div>
-      <div class="w-side">${w.my_rating ? `<div class="w-rating">★ ${w.my_rating}<small>/10</small></div>` : '<div class="w-rating dim">unrated</div>'}<button class="adm-ghost danger" data-del="${w.id}" title="Remove"><i class="iconoir-trash"></i></button></div>
-    </article>`).join('') : '<p class="note">Nothing here yet.</p>';
+      <div class="w-side">${w.my_rating ? `<div class="w-rating">★ ${w.my_rating}<small>/10</small></div>` : '<div class="w-rating dim">unrated</div>'}
+        <div class="w-btns"><button class="adm-ghost" data-edit="${w.id}" title="Edit rating, note or date">${PENCIL} Edit</button><button class="adm-ghost danger" data-del="${w.id}" title="Remove">${TRASH}</button></div></div>
+    </article>`; }).join('') : '<p class="note">Nothing here yet.</p>';
+    const ed = $('wList').querySelector('.w-item.editing'); if (ed) { const d = ed.querySelector('.we-date'); d.addEventListener('click', () => { try { d.showPicker(); } catch (err) {} }); }
   }
   $('wFilter').addEventListener('input', renderList);
-  $('wList').addEventListener('click', async e => { const b = e.target.closest('[data-del]'); if (!b || !confirm('Remove from your watched list?')) return; await sb.from('watched').delete().eq('id', b.dataset.del); loadWatched(); loadOverview(); });
+  $('wList').addEventListener('click', async e => {
+    const t = e.target;
+    const star = t.closest('.w-edit .star');
+    if (star) { const box = star.closest('.stars'); const v = +star.dataset.v === +box.dataset.v ? 0 : +star.dataset.v; box.dataset.v = v; box.innerHTML = starsHTML(v); return; }
+    const ed = t.closest('[data-edit]'); if (ed) { editingW = ed.dataset.edit; renderList(); return; }
+    if (t.closest('[data-cancel]')) { editingW = null; renderList(); return; }
+    const sv = t.closest('[data-save]');
+    if (sv) {
+      const item = sv.closest('.w-item'), v = +item.querySelector('.stars').dataset.v || null, date = item.querySelector('.we-date').value, note = item.querySelector('.we-note').value.trim() || null;
+      if (!date) { item.querySelector('.we-msg').textContent = 'Pick a date.'; return; }
+      sv.disabled = true;
+      const { error } = await sb.from('watched').update({ my_rating: v, comment: note, watched_on: date }).eq('id', sv.dataset.save);
+      if (error) { sv.disabled = false; item.querySelector('.we-msg').textContent = 'Save failed: ' + error.message; return; }
+      editingW = null; await loadWatched(); loadOverview(); return;
+    }
+    const del = t.closest('[data-del]');
+    if (del && confirm('Remove from your watched list?')) { await sb.from('watched').delete().eq('id', del.dataset.del); loadWatched(); loadOverview(); }
+  });
 
   /* ---------- files manager ---------- */
   const FOLDERS = ['memories', 'covers', 'posts'], FLABEL = { memories: 'Memories', covers: 'Covers', posts: 'Post images' };

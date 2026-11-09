@@ -198,3 +198,9 @@ button.ov-stat { cursor: pointer; } button.ov-stat:hover { transform: translateY
 .ov-file span { display: block; font-size: 12px; color: #d0d0d8; margin-bottom: 5px; } .ov-file b { font-size: 12.5px; color: #fff; font-weight: 500; font-variant-numeric: tabular-nums; }
 @media (max-width: 1100px) { .ov-stats { grid-template-columns: repeat(2, 1fr); } .ov-grid { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .ov-stats { grid-template-columns: 1fr; } .ov-gauges { grid-template-columns: 1fr; } .ov-hero { padding: 22px; } }
+
+/* watched: edit */
+.w-btns { display: flex; gap: 6px; }
+.w-btns .adm-ghost { padding: 7px 11px; font-size: 12.5px; }
+.w-item.editing { grid-template-columns: 70px 1fr; border-color: rgba(91,120,246,.5); background: rgba(91,120,246,.06); }
+.w-edit { margin-top: 6px; } .w-edit label.f { margin-top: 10px; } .w-edit input[type=date] { max-width: 220px; }
