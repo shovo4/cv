@@ -3,13 +3,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
 <link rel="stylesheet" href="./assets/css/blog.css"><title>Watched | Shovo</title></head><body>
-<header class="b-header"><div class="b-wrap"><a class="b-brand" href="./index.html">&larr; Shovo</a><nav><a href="./blogs.html">Blog</a><a href="./memories.html">Memories</a><a href="./watched.html" class="on">Watched</a></nav></div></header>
+<header class="b-header"><div class="b-wrap"><a class="b-brand" href="./index.html">&larr; Shovo</a><nav><a href="./blogs.html">Blog</a><a href="./memories.html">Memories</a><a href="./watched.html" class="on">Watched</a><a href="./admin.html" class="b-admin" title="Admin" aria-label="Admin panel"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></a></nav></div></header>
 <main class="b-wrap">
   <h1 class="b-title">Watched</h1><p class="b-sub">Movies and series I've watched, year by year. Tap a poster to open it on IMDb.</p>
   <div class="wt-bar">
     <div id="years" class="wt-years"></div>
     <div class="wt-controls">
       <div class="seg" id="kind"><button data-k="" class="on">All</button><button data-k="movie">Movies</button><button data-k="series">Series</button></div>
+      <input id="q" type="search" placeholder="Filter titles…" aria-label="Filter">
       <select id="sort" aria-label="Sort">
         <option value="recent">Recently watched</option>
         <option value="my">My rating</option>
@@ -19,7 +20,10 @@
     </div>
   </div>
   <p id="summary" class="wt-summary"></p>
-  <div id="grid" class="wt-grid"></div>
+
+  <div id="grid" class="wt-list"></div>
+  <h2 class="wt-sec">Year at a glance</h2>
+  <div class="wt-charts"><div class="wt-chart"><h3>By my rating</h3><div id="chRating"></div></div><div class="wt-chart"><h3>Movies vs series</h3><div id="chKind"></div></div><div class="wt-chart"><h3>Genres</h3><div id="chGenre"></div></div></div>
   <div id="status" class="b-status">Loading…</div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -28,7 +32,7 @@
 <script>
 (async () => {
   if (!window.Blog) { document.querySelector("main").innerHTML = '<div class="b-status">Couldn\'t connect right now. Please refresh.</div>'; return; }
-  const { sb, esc, fmtDate } = Blog, $ = id => document.getElementById(id);
+  const { sb, esc, fmtDate, ratingDonut, kindDonut, genreDonut } = Blog, $ = id => document.getElementById(id);
   const { data, error } = await sb.from('watched').select('imdb_id,title,year,kind,genres,runtime_min,imdb_rating,poster_url,my_rating,comment,watched_on,created_at').order('watched_on', { ascending: false });
   if (error) { $('status').textContent = "Couldn't load right now."; return; }
   if (!data.length) { $('status').textContent = 'Nothing logged yet.'; return; }
@@ -39,6 +43,7 @@
   $('years').onclick = e => { const b = e.target.closest('button'); if (!b) return; year = b.dataset.y; [...$('years').children].forEach(c => c.classList.toggle('on', c === b)); draw(); };
   $('kind').onclick = e => { const b = e.target.closest('button'); if (!b) return; kind = b.dataset.k; [...$('kind').children].forEach(c => c.classList.toggle('on', c === b)); draw(); };
   $('sort').onchange = e => { sort = e.target.value; draw(); };
+  $('q').oninput = draw;
   const sorters = {
     recent: (a, b) => b.watched_on.localeCompare(a.watched_on) || b.created_at.localeCompare(a.created_at),
     my: (a, b) => (b.my_rating || 0) - (a.my_rating || 0) || (b.imdb_rating || 0) - (a.imdb_rating || 0),
@@ -51,13 +56,18 @@
     const g = {}; all.forEach(w => (w.genres || []).forEach(x => g[x] = (g[x] || 0) + 1)); const top = Object.entries(g).sort((a, b) => b[1] - a[1])[0];
     const rated = all.filter(w => w.my_rating);
     $('summary').innerHTML = '<b>' + year + '</b> · ' + all.filter(w => w.kind === 'movie').length + ' movies · ' + all.filter(w => w.kind === 'series').length + ' series' + (top ? ' · mostly <b>' + esc(top[0]) + '</b>' : '') + (rated.length ? ' · my average <b>' + (rated.reduce((s, w) => s + w.my_rating, 0) / rated.length).toFixed(1) + '/10</b>' : '');
-    $('grid').innerHTML = rows.map(w => '<a class="wt-card" href="https://www.imdb.com/title/' + esc(w.imdb_id) + '/" target="_blank" rel="noopener">' +
-      '<div class="wt-poster">' + (w.poster_url ? '<img loading="lazy" src="' + esc(w.poster_url) + '" alt="">' : '<span class="wt-nop"><i class="iconoir-movie"></i></span>') +
-      (w.my_rating ? '<span class="wt-my">★ ' + w.my_rating + '</span>' : '') + '<span class="wt-kind">' + w.kind + '</span></div>' +
-      '<div class="wt-info"><h3>' + esc(w.title) + '</h3><div class="wt-meta">' + (w.year || '') + (w.imdb_rating ? ' · IMDb ' + w.imdb_rating : '') + '</div>' +
-      '<div class="wt-genres">' + (w.genres || []).slice(0, 3).map(x => '<span>' + esc(x) + '</span>').join('') + '</div>' +
-      (w.comment ? '<p class="wt-note">“' + esc(w.comment) + '”</p>' : '') +
-      '<small>Watched ' + fmtDate(w.watched_on + 'T12:00:00') + '</small></div></a>').join('') || '<p class="b-status">Nothing in this filter.</p>';
+    const q = $('q').value.trim().toLowerCase();
+    const shown = q ? rows.filter(w => (w.title + ' ' + (w.genres || []).join(' ')).toLowerCase().includes(q)) : rows;
+    $('chRating').innerHTML = ratingDonut(all); $('chKind').innerHTML = kindDonut(all); $('chGenre').innerHTML = genreDonut(all);
+    $('grid').innerHTML = shown.map((w, i) => '<a class="wt-row" href="https://www.imdb.com/title/' + esc(w.imdb_id) + '/" target="_blank" rel="noopener" style="--d:' + Math.min(i, 20) * 18 + 'ms">' +
+      '<span class="wt-n">' + (i + 1) + '</span>' +
+      '<span class="wt-thumb">' + (w.poster_url ? '<img loading="lazy" src="' + esc(w.poster_url) + '" alt="" onerror="this.parentNode.classList.add(\'nop\')">' : '') + '<i class="iconoir-' + (w.kind === 'series' ? 'tv' : 'movie') + '"></i></span>' +
+      '<span class="wt-main"><b>' + esc(w.title) + '</b><small>' + (w.year || '') + ' · <em class="k">' + w.kind + '</em>' + (w.runtime_min ? ' · ' + w.runtime_min + ' min' : '') + '</small>' + (w.comment ? '<span class="wt-c">“' + esc(w.comment) + '”</span>' : '') + '</span>' +
+      '<span class="wt-g">' + (w.genres || []).slice(0, 3).map(x => '<i>' + esc(x) + '</i>').join('') + '</span>' +
+      '<span class="wt-imdb">' + (w.imdb_rating ? '<b>' + w.imdb_rating + '</b><small>IMDb</small>' : '') + '</span>' +
+      '<span class="wt-me">' + (w.my_rating ? '<b>★ ' + w.my_rating + '</b>' : '<small>—</small>') + '</span>' +
+      '<span class="wt-date">' + new Date(w.watched_on + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + '</span>' +
+      '</a>').join('') || '<p class="b-status">Nothing in this filter.</p>';
   }
   draw();
 })();

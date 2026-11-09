@@ -74,7 +74,7 @@
           <div><label class="f" for="postDate">Post date</label><input id="postDate" type="date"></div>
         </div>
         <label class="f" for="excerpt">Short summary (shown in the list)</label><input id="excerpt" type="text">
-        <label class="f">Cover image <span class="note">compressed to ~1200px WebP</span></label>
+        <label class="f">Cover image <span class="note">saved small: ~560px WebP, low quality</span></label>
         <div class="row" style="margin-top:0"><input id="coverFile" type="file" accept="image/*"><span id="coverInfo" class="note"></span></div>
         <img id="coverPrev" class="hide cover-prev" alt="">
         <label class="f" for="body">Body &mdash; blank line = paragraph &middot; <code>## Heading</code> <code>**bold**</code> <code>*italic*</code> <code>- list</code> <code>&gt; quote</code> <code>[text](https://link)</code></label>
@@ -94,7 +94,7 @@
     <section id="view-memories" class="adm-view hide">
       <div class="panel">
         <h2>Add memories</h2>
-        <p class="note">Photos are shrunk in your browser to ~1000px WebP at low quality before upload (typically 50–150 KB each).</p>
+        <p class="note">Photos are shrunk in your browser to ~640px WebP at low quality before upload (typically 15–40 KB each).</p>
         <label class="f" for="memFiles">Pictures (you can pick many)</label><input id="memFiles" type="file" accept="image/*" multiple>
         <div class="two">
           <div><label class="f" for="memCap">Caption (optional, applied to all selected)</label><input id="memCap" type="text"></div>
@@ -142,6 +142,7 @@
           <div class="stat"><i class="iconoir-clock"></i><div><b id="ys-hours">0h</b><small>Hours (approx.)</small></div></div>
           <div class="stat"><i class="iconoir-star"></i><div><b id="ys-avg">–</b><small>Your avg rating</small></div></div>
         </div>
+        <div class="wt-charts adm-charts"><div class="wt-chart"><h3>By my rating</h3><div id="ys-chRating"></div></div><div class="wt-chart"><h3>Movies vs series</h3><div id="ys-chKind"></div></div></div>
         <div class="two">
           <div><h3 class="sub">Genres you watched most</h3><div id="ys-genres" class="bars"></div></div>
           <div><h3 class="sub">Highlights</h3><div id="ys-high" class="kv small"></div></div>
@@ -161,7 +162,7 @@
       <div class="panel">
         <h2><i class="iconoir-info-circle"></i> Keeping storage small</h2>
         <ul class="tips">
-          <li>Memories are compressed to ~1000px WebP (~50–150 KB). 1 GB fits roughly 8,000 photos.</li>
+          <li>Photos are compressed to ~640px WebP at low quality (~15–40 KB). 1 GB fits roughly 30,000+ photos.</li>
           <li>Movie posters are stored as links to IMDb images, not files &mdash; a watched entry is well under 1 KB.</li>
           <li>Deleting a memory here also deletes its file from storage.</li>
           <li>Reactions are tiny rows; even thousands take a few hundred KB.</li>

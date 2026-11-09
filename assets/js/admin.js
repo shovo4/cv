@@ -1,7 +1,7 @@
 /* Admin app: auth, overview/storage, posts, memories, watched (OMDb), settings */
 (() => {
   if (!window.Blog) { document.body.innerHTML = '<div class="b-status">Couldn\'t connect right now. Please refresh.</div>'; return; }
-  const { sb, esc, fmtDate, renderBody, uploadImage } = Blog;
+  const { sb, esc, fmtDate, renderBody, uploadImage, ratingDonut, kindDonut } = Blog;
   const $ = id => document.getElementById(id);
   const show = (id, on) => $(id).classList.toggle('hide', !on);
   const pad = n => String(n).padStart(2, '0');
@@ -62,14 +62,14 @@
   $('body').addEventListener('input', updPreview); $('postDate').value = today();
   $('coverFile').addEventListener('change', async e => {
     const f = e.target.files[0]; if (!f) return; $('coverInfo').textContent = 'Compressing & uploading…';
-    try { const r = await uploadImage(f, 'covers', 1200, 0.6); coverUrl = r.url; $('coverPrev').src = r.url; show('coverPrev', true); $('coverInfo').textContent = Math.round(r.bytes / 1024) + ' KB'; }
+    try { const r = await uploadImage(f, 'covers', 560, 0.4); coverUrl = r.url; $('coverPrev').src = r.url; show('coverPrev', true); $('coverInfo').textContent = Math.round(r.bytes / 1024) + ' KB'; }
     catch (err) { $('coverInfo').textContent = 'Upload failed: ' + err.message; }
   });
   $('insertImg').addEventListener('click', () => $('inlineFile').click());
   $('inlineFile').addEventListener('change', async e => {
     const files = Array.from(e.target.files); e.target.value = ''; if (!files.length) return; $('postMsg').textContent = 'Uploading image(s)…';
     try {
-      let md = ''; for (const f of files) { const r = await uploadImage(f, 'posts', 1200, 0.6); md += '\n\n![](' + r.url + ')'; }
+      let md = ''; for (const f of files) { const r = await uploadImage(f, 'posts', 640, 0.4); md += '\n\n![](' + r.url + ')'; }
       const ta = $('body'), pos = ta.selectionStart == null ? ta.value.length : ta.selectionStart;
       ta.value = ta.value.slice(0, pos) + md + '\n\n' + ta.value.slice(pos); updPreview(); $('postMsg').textContent = 'Image inserted. Put text in the [ ] to add a caption.';
     } catch (err) { $('postMsg').textContent = 'Upload failed: ' + err.message; }
@@ -112,7 +112,7 @@
     $('memUpload').disabled = true; let done = 0, kb = 0;
     for (const f of files) {
       $('memMsg').textContent = 'Uploading ' + (done + 1) + ' of ' + files.length + '…';
-      try { const r = await uploadImage(f, 'memories', 1000, 0.55); kb += r.bytes / 1024;
+      try { const r = await uploadImage(f, 'memories', 640, 0.4); kb += r.bytes / 1024;
         const { error } = await sb.from('memories').insert({ caption: $('memCap').value.trim() || null, image_url: r.url, image_path: r.path, taken_on: $('memDate').value || null }); if (error) throw error; done++;
       } catch (err) { $('memMsg').textContent = 'Failed on ' + f.name + ': ' + err.message; break; }
     }
@@ -193,6 +193,7 @@
     const ys = watched.filter(w => w.watched_on.startsWith(selYear));
     const movies = ys.filter(w => w.kind === 'movie'), series = ys.filter(w => w.kind === 'series');
     $('ys-movies').textContent = movies.length; $('ys-series').textContent = series.length;
+    $('ys-chRating').innerHTML = ratingDonut(ys, { size: 130, stroke: 16 }); $('ys-chKind').innerHTML = kindDonut(ys, { size: 130, stroke: 16 });
     const mins = ys.reduce((a, w) => a + (w.runtime_min || 0) * (w.kind === 'series' ? 8 : 1), 0); $('ys-hours').textContent = Math.round(mins / 60) + 'h';
     const rated = ys.filter(w => w.my_rating); $('ys-avg').textContent = rated.length ? (rated.reduce((a, w) => a + w.my_rating, 0) / rated.length).toFixed(1) : '–';
     const g = {}; ys.forEach(w => (w.genres || []).forEach(x => g[x] = (g[x] || 0) + 1));

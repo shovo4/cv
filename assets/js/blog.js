@@ -56,8 +56,7 @@
 
   /* ---------- reactions ---------- */
   const REACTIONS = [
-    { k: "like", e: "👍", l: "Like" }, { k: "love", e: "❤️", l: "Love" },
-    { k: "haha", e: "😂", l: "Haha" }, { k: "wow", e: "😮", l: "Wow" }, { k: "sad", e: "😢", l: "Sad" }
+    { k: "fire", e: "🔥", l: "Fire" }, { k: "love", e: "❤️", l: "Love" }, { k: "wow", e: "😮", l: "Wow" }
   ];
 
   async function mountReactions(type, containers) {
@@ -125,7 +124,7 @@
     }
   }
   async function compressImage(file, maxDim, quality) {
-    maxDim = maxDim || 1200; quality = quality || 0.6;
+    maxDim = maxDim || 640; quality = quality || 0.4;
     const bmp = await loadBitmap(file);
     const w0 = bmp.width, h0 = bmp.height, s = Math.min(1, maxDim / Math.max(w0, h0));
     const c = document.createElement("canvas");
@@ -145,5 +144,33 @@
     return { path, url, bytes: blob.size };
   }
 
-  window.Blog = { sb, esc, fmtDate, renderBody, mountReactions, totalReactions, uploadImage, REACTIONS };
+  /* ---------- donut chart (SVG) ---------- */
+  function donut(items, opts) {
+    opts = opts || {}; const size = opts.size || 150, sw = opts.stroke || 18, r = (size - sw) / 2, C = 2 * Math.PI * r;
+    const total = items.reduce((a, i) => a + i.value, 0) || 1; let off = 0;
+    const segs = items.filter(i => i.value > 0).map((i, k) => {
+      const len = i.value / total * C, s = `<circle class="dn-seg" r="${r}" cx="${size / 2}" cy="${size / 2}" fill="none" stroke="${i.color}" stroke-width="${sw}" stroke-dasharray="${len} ${C - len}" stroke-dashoffset="${-off}" style="--i:${k}"><title>${esc(i.label)}: ${i.value}</title></circle>`;
+      off += len; return s;
+    }).join('');
+    const legend = items.map(i => `<li${i.value ? '' : ' class="dim"'}><i style="background:${i.color}"></i><span>${esc(i.label)}</span><b>${i.value}</b><small>${Math.round(i.value / total * 100)}%</small></li>`).join('');
+    return `<div class="dn"><svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" style="transform:rotate(-90deg)"><circle r="${r}" cx="${size / 2}" cy="${size / 2}" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="${sw}"/>${segs}</svg>` +
+      `<div class="dn-center"><b>${opts.center != null ? opts.center : total}</b><small>${esc(opts.centerLabel || '')}</small></div><ul class="dn-legend">${legend}</ul></div>`;
+  }
+  const RATING_BUCKETS = [
+    { label: 'Loved · 9–10', test: r => r >= 9, color: '#f5c518' },
+    { label: 'Great · 7–8', test: r => r >= 7 && r < 9, color: '#5B78F6' },
+    { label: 'Okay · 5–6', test: r => r >= 5 && r < 7, color: '#00cfff' },
+    { label: 'Meh · 1–4', test: r => r >= 1 && r < 5, color: '#ef476f' },
+    { label: 'Unrated', test: r => !r, color: '#3a3a44' }
+  ];
+  function ratingDonut(rows, opts) { return donut(RATING_BUCKETS.map(b => ({ label: b.label, color: b.color, value: rows.filter(w => b.test(w.my_rating || 0)).length })), Object.assign({ centerLabel: 'titles' }, opts)); }
+  function kindDonut(rows, opts) { return donut([{ label: 'Movies', color: '#5B78F6', value: rows.filter(w => w.kind === 'movie').length }, { label: 'Series', color: '#00cfff', value: rows.filter(w => w.kind === 'series').length }], Object.assign({ centerLabel: 'watched' }, opts)); }
+  function genreDonut(rows, opts) {
+    const g = {}; rows.forEach(w => (w.genres || []).forEach(x => g[x] = (g[x] || 0) + 1));
+    const top = Object.entries(g).sort((a, b) => b[1] - a[1]); const cols = ['#5B78F6', '#00cfff', '#f5c518', '#ef476f', '#06d6a0', '#c77dff'];
+    const items = top.slice(0, 5).map(([k, v], i) => ({ label: k, value: v, color: cols[i] })); const rest = top.slice(5).reduce((a, [, v]) => a + v, 0); if (rest) items.push({ label: 'Other', value: rest, color: '#3a3a44' });
+    return donut(items, Object.assign({ centerLabel: 'genre tags' }, opts));
+  }
+
+  window.Blog = { sb, esc, fmtDate, renderBody, mountReactions, totalReactions, uploadImage, REACTIONS, donut, ratingDonut, kindDonut, genreDonut };
 })();

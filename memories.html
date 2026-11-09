@@ -1,40 +1,68 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/css/blog.css"><title>Memories | Shovo</title></head><body>
-<header class="b-header"><div class="b-wrap"><a class="b-brand" href="./index.html">&larr; Shovo</a><nav><a href="./blogs.html">Blog</a><a href="./memories.html" class="on">Memories</a><a href="./watched.html">Watched</a></nav></div></header>
+<link rel="stylesheet" href="./assets/css/blog.css"><title>Memories | Shovo</title></head><body class="pg">
+<header class="b-header"><div class="b-wrap"><a class="b-brand" href="./index.html">&larr; Shovo</a><nav><a href="./blogs.html">Blog</a><a href="./memories.html" class="on">Memories</a><a href="./watched.html">Watched</a><a href="./admin.html" class="b-admin" title="Admin" aria-label="Admin panel"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></a></nav></div></header>
 <main class="b-wrap">
-  <h1 class="b-title">Memories</h1><p class="b-sub">Moments worth keeping.</p>
-  <div id="grid" class="mem-grid"></div><div id="status" class="b-status">Loading…</div>
-  <div class="more"><button id="more" class="btn ghost hide">Load more</button></div>
+  <section class="pg-hero">
+    <span class="pg-eyebrow">Gallery</span>
+    <h1 class="b-title">Memories</h1>
+    <p class="b-sub">Small moments worth keeping &mdash; places, people and good light.</p>
+    <div class="pg-meta" id="meta"></div>
+  </section>
+  <nav id="years" class="mm-years"></nav>
+  <div id="wrap"></div>
+  <div id="status" class="b-status">Loading&hellip;</div>
 </main>
-<div class="lightbox" id="lb"><img alt=""></div>
+<div class="mm-lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <span class="mm-count" id="lbCount"></span>
+  <button class="mm-x" aria-label="Close">&times;</button>
+  <button class="mm-prev" aria-label="Previous">&lsaquo;</button>
+  <figure><img alt=""><figcaption></figcaption></figure>
+  <button class="mm-next" aria-label="Next">&rsaquo;</button>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./assets/js/supabase-config.js"></script>
 <script src="./assets/js/blog.js"></script>
 <script>
 (async () => {
   if (!window.Blog) { document.querySelector("main").innerHTML = '<div class="b-status">Couldn\'t connect right now. Please refresh.</div>'; return; }
-  const { sb, esc, fmtDate, mountReactions } = Blog, grid = document.getElementById('grid'), status = document.getElementById('status'), more = document.getElementById('more');
-  const PAGE = 24; let from = 0;
-  async function load() {
-    more.disabled = true;
-    const { data, error } = await sb.from('memories').select('*').order('taken_on', { ascending: false, nullsFirst: false }).order('created_at', { ascending: false }).range(from, from + PAGE - 1);
-    more.disabled = false;
-    if (error) { status.textContent = "Couldn't load memories right now."; return; }
-    if (!from && !data.length) { status.textContent = 'No memories yet.'; return; }
-    status.classList.add('hide');
-    const start = grid.children.length;
-    grid.insertAdjacentHTML('beforeend', data.map(m => '<div class="mem"><img loading="lazy" src="' + esc(m.image_url) + '" alt="' + esc(m.caption || 'Memory') + '">' +
-      (m.caption ? '<div class="cap">' + esc(m.caption) + '</div>' : '') + (m.taken_on ? '<div class="when">' + fmtDate(m.taken_on + 'T12:00:00') + '</div>' : '') +
-      '<div data-id="' + esc(m.id) + '"></div></div>').join(''));
-    mountReactions('memory', Array.from(grid.children).slice(start).map(c => c.querySelector('[data-id]')));
-    from += data.length; more.classList.toggle('hide', data.length < PAGE);
+  const { sb, esc, mountReactions } = Blog, $ = id => document.getElementById(id);
+  const { data, error } = await sb.from('memories').select('id,caption,image_url,taken_on,created_at').limit(1000);
+  if (error) { $('status').textContent = "Couldn't load memories right now."; return; }
+  if (!data.length) { $('status').textContent = 'No memories yet.'; return; }
+  $('status').classList.add('hide');
+  const day = m => m.taken_on || m.created_at.slice(0, 10);
+  const fmt = (d, o) => new Date(d + 'T12:00:00').toLocaleDateString(undefined, o);
+  const rows = data.slice().sort((a, b) => day(b).localeCompare(day(a)));
+  const byYear = {}; rows.forEach((m, i) => { m._i = i; (byYear[day(m).slice(0, 4)] = byYear[day(m).slice(0, 4)] || []).push(m); });
+  const years = Object.keys(byYear).sort().reverse();
+  const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+  $('meta').innerHTML = '<b>' + plural(rows.length, 'moment') + '</b> &middot; ' + plural(years.length, 'year');
+  if (years.length > 1) $('years').innerHTML = years.map(y => `<a href="#y${y}">${y}</a>`).join(''); else $('years').remove();
+  $('wrap').innerHTML = years.map(y => `<section class="mm-year" id="y${y}">
+    <div class="mm-year-head"><h2>${y}</h2><span>${plural(byYear[y].length, 'moment')}</span></div>
+    <div class="mm-grid">${byYear[y].map(m => `<figure class="mm-tile">
+      <button class="mm-img" data-i="${m._i}" aria-label="Open photo"><img loading="lazy" src="${esc(m.image_url)}" alt="${esc(m.caption || 'Memory')}"><span class="mm-date">${fmt(day(m), { month: 'short', day: 'numeric' })}</span></button>
+      <div class="mm-body">${m.caption ? `<p class="mm-cap">${esc(m.caption)}</p>` : ''}<div data-id="${esc(m.id)}"></div></div></figure>`).join('')}</div></section>`).join('');
+  mountReactions('memory', document.querySelectorAll('.mm-body [data-id]'));
+
+  /* lightbox: click, arrows, keyboard, swipe */
+  const lb = $('lb'), img = lb.querySelector('img'), cap = lb.querySelector('figcaption'); let cur = 0;
+  if (rows.length < 2) lb.querySelectorAll('.mm-prev,.mm-next').forEach(b => b.remove());
+  function openAt(i) {
+    cur = (i + rows.length) % rows.length; const m = rows[cur];
+    img.src = m.image_url; img.alt = m.caption || '';
+    cap.innerHTML = (m.caption ? esc(m.caption) : '') + '<small>' + fmt(day(m), { year: 'numeric', month: 'long', day: 'numeric' }) + '</small>';
+    $('lbCount').textContent = (cur + 1) + ' / ' + rows.length; lb.classList.add('open'); document.body.style.overflow = 'hidden';
   }
-  more.onclick = load; load();
-  const lb = document.getElementById('lb');
-  grid.addEventListener('click', e => { if (e.target.tagName === 'IMG') { lb.querySelector('img').src = e.target.src; lb.classList.add('open'); } });
-  lb.onclick = () => lb.classList.remove('open');
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+  const close = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
+  $('wrap').addEventListener('click', e => { const b = e.target.closest('.mm-img'); if (b) openAt(+b.dataset.i); });
+  lb.querySelector('.mm-x').onclick = close;
+  lb.querySelectorAll('.mm-prev,.mm-next').forEach(b => b.onclick = e => { e.stopPropagation(); openAt(cur + (b.classList.contains('mm-next') ? 1 : -1)); });
+  lb.addEventListener('click', e => { if (e.target === lb || e.target.tagName === 'FIGURE') close(); });
+  document.addEventListener('keydown', e => { if (!lb.classList.contains('open')) return; if (e.key === 'Escape') close(); if (rows.length > 1 && e.key === 'ArrowLeft') openAt(cur - 1); if (rows.length > 1 && e.key === 'ArrowRight') openAt(cur + 1); });
+  let sx = null; lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => { if (sx == null) return; const dx = e.changedTouches[0].clientX - sx; if (rows.length > 1 && Math.abs(dx) > 50) openAt(cur + (dx < 0 ? 1 : -1)); sx = null; });
 })();
 </script></body></html>
