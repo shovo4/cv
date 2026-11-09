@@ -1,0 +1,29 @@
+/* Home page: collapsible "more about me", recent blog + memories */
+.hx-btn { border: 0; cursor: pointer; font-family: inherit; margin-top: 8px; }
+.hx-more { display: none; }
+.hx-more.open { display: block; }
+.hx-bio { max-width: 1170px; margin: 0 auto 40px; padding: 30px 40px; border-radius: 30px; background: #161616; border: 1px solid rgba(255,255,255,.1); font-size: 18px; line-height: 1.6; color: #cfcfcf; }
+.hx-bio p + p { margin-top: 16px; }
+.hx-bio .color-transition { color: #9fc5c5; }
+
+.hx-section { padding: 70px 0 20px; }
+.hx-heading { color: #fff; font-size: clamp(30px, 5vw, 56px); font-weight: 600; letter-spacing: -1px; text-align: center; margin-bottom: 36px; }
+.hx-status { color: #9f9f9f; text-align: center; grid-column: 1 / -1; padding: 30px 0; }
+.hx-more-row { text-align: center; margin-top: 30px; }
+
+.hx-blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.hx-card { display: flex; flex-direction: column; background: #161616; border: 1px solid rgba(255,255,255,.1); border-radius: 24px; overflow: hidden; transition: transform .25s, border-color .25s; color: inherit; }
+.hx-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.28); text-decoration: none; }
+.hx-card .hx-thumb { aspect-ratio: 16/9; background: linear-gradient(120deg, #2a2a2a, #181818); overflow: hidden; }
+.hx-card .hx-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.hx-card .hx-info { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 8px; }
+.hx-card h3 { color: #fff; font-size: 20px; line-height: 1.3; }
+.hx-card p { color: #9f9f9f; font-size: 14px; margin: 0; }
+.hx-card .hx-meta { font-size: 13px; color: #7d7d7d; }
+
+.hx-mem-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+.hx-mem { position: relative; display: block; border-radius: 18px; overflow: hidden; background: #222; aspect-ratio: 1; }
+.hx-mem img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+.hx-mem:hover img { transform: scale(1.06); }
+.hx-mem span { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 10px 8px; font-size: 12px; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.75)); opacity: 0; transition: opacity .25s; }
+.hx-mem:hover span { opacity: 1; }

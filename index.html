@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/aos.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/home-extra.css">
 </head>
 <body>
 
@@ -28,8 +29,8 @@
                 <li><a href="#experience">Experiences & Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="./blogs.html" class="hidden-blog-link">Blogs</a></li>
-                <li><a href="./memories.html" class="hidden-blog-link">Memories</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#memories">Memories</a></li>
             </ul>
         </nav>
     </div>
@@ -54,10 +55,8 @@
                         <p>Hey, I'm</p>
                         <h1>Shovo,</h1>
                         <p>– your <b class="color-transition">tech problem solver</b>! 🛠️ With a <b class="color-transition">B.Sc. in Computing Science</b> 🎓 from the University of Alberta, I bridge the gap between <b class='color-transition'>IT infrastructure</b> & <b class='color-transition'>software development</b>.</p>
-            
-                        <p>At <b class="color-transition">Ketek Group Inc.</b>, I provide <b>IT Support</b>—keeping networks secure, troubleshooting hardware & software, and ensuring smooth operations. 🔧 But my expertise doesn't stop there! From Python 🐍 and Java ☕ to React & Django, I thrive on <b class='color-transition'>building robust solutions</b> and <b class='color-transition'>optimizing tech systems</b>.</p>
-            
-                        <p>Currently working with <b class='color-transition'>PostgreSQL, MongoDB, and AWS ☁️</b>, I enjoy solving challenges across IT and software engineering. Let’s build & secure something incredible! 🚀 Reach me at <b class="color-transition">msaifulislamshovo2000@gmail.com</b> – let’s make tech magic happen! ✨👨‍💻</p>
+
+                        <button type="button" id="more-toggle" class="theme-btn hx-btn" aria-expanded="false" aria-controls="more-about">More about me &darr;</button>
                     </div>
                 </div>    
             </div>
@@ -94,6 +93,12 @@
 
 
 
+
+<div id="more-about" class="hx-more">
+<div class="container"><div class="hx-bio">
+<p>At <b class="color-transition">Ketek Group Inc.</b>, I provide <b>IT Support</b>—keeping networks secure, troubleshooting hardware & software, and ensuring smooth operations. 🔧 But my expertise doesn't stop there! From Python 🐍 and Java ☕ to React & Django, I thrive on <b class='color-transition'>building robust solutions</b> and <b class='color-transition'>optimizing tech systems</b>.</p>
+<p>Currently working with <b class='color-transition'>PostgreSQL, MongoDB, and AWS ☁️</b>, I enjoy solving challenges across IT and software engineering. Let’s build & secure something incredible! 🚀 Reach me at <b class="color-transition">msaifulislamshovo2000@gmail.com</b> – let’s make tech magic happen! ✨👨‍💻</p>
+</div></div>
 
 <!-- Experience & Skills Section -->
 <section class="credential-area">
@@ -633,9 +638,8 @@
                 
                 
             </div>
-        </div>
-    </div>
 </section>
+</div><!-- /more-about -->
 
 
 
@@ -987,6 +991,24 @@
             </div>
         </section>
 
+<!-- Latest Blog -->
+<section id="blog" class="hx-section">
+    <div class="container">
+        <h2 class="hx-heading" data-aos="fade-up">Latest from the Blog</h2>
+        <div id="hx-blog" class="hx-blog-grid"><p class="hx-status">Loading&hellip;</p></div>
+        <div class="hx-more-row"><a href="./blogs.html" id="hx-blog-more" class="theme-btn hx-btn" style="display:none">See all posts &rarr;</a></div>
+    </div>
+</section>
+
+<!-- Recent Memories -->
+<section id="memories" class="hx-section">
+    <div class="container">
+        <h2 class="hx-heading" data-aos="fade-up">Memories</h2>
+        <div id="hx-mem" class="hx-mem-grid"><p class="hx-status">Loading&hellip;</p></div>
+        <div class="hx-more-row"><a href="./memories.html" id="hx-mem-more" class="theme-btn hx-btn" style="display:none">See more memories &rarr;</a></div>
+    </div>
+</section>
+
 <!-- Contact Section -->
 <!-- Contact Section -->
 <section id="contact" class="contact-section shadow-box">
@@ -1055,6 +1077,10 @@
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/aos.js"></script>
     <script src="./assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./assets/js/supabase-config.js"></script>
+    <script src="./assets/js/blog.js"></script>
+    <script src="./assets/js/home-feed.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
