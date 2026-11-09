@@ -80,7 +80,20 @@
         <label class="f">Cover image <span class="note">saved small: ~560px WebP, low quality</span></label>
         <div class="row" style="margin-top:0"><input id="coverFile" type="file" accept="image/*"><span id="coverInfo" class="note"></span></div>
         <img id="coverPrev" class="hide cover-prev" alt="">
-        <label class="f" for="body">Body &mdash; blank line = paragraph &middot; <code>## Heading</code> <code>**bold**</code> <code>*italic*</code> <code>- list</code> <code>&gt; quote</code> <code>[text](https://link)</code></label>
+        <label class="f" for="body">Body <span class="note">&mdash; select text and use the toolbar, or ⌘B / ⌘I / ⌘K. Leave an empty line between paragraphs.</span></label>
+        <div class="ed-bar" id="edBar" role="toolbar" aria-label="Formatting">
+          <button type="button" data-cmd="h1" title="Big heading">H1</button>
+          <button type="button" data-cmd="h2" title="Small heading">H2</button>
+          <span class="ed-sep"></span>
+          <button type="button" data-cmd="bold" title="Bold (⌘B)"><b>B</b></button>
+          <button type="button" data-cmd="italic" title="Italic (⌘I)"><i>I</i></button>
+          <button type="button" data-cmd="code" title="Inline code">&lt;/&gt;</button>
+          <span class="ed-sep"></span>
+          <button type="button" data-cmd="list" title="Bullet list">&bull;&nbsp;List</button>
+          <button type="button" data-cmd="quote" title="Quote">&ldquo;&nbsp;Quote</button>
+          <button type="button" data-cmd="link" title="Link (⌘K)">Link</button>
+          <button type="button" data-cmd="image" title="Insert image">Image</button>
+        </div>
         <div class="split"><textarea id="body" placeholder="Write…"></textarea><div class="preview"><div class="prose" id="preview"></div></div></div>
         <div class="row">
           <input id="inlineFile" type="file" accept="image/*" multiple class="hide">
