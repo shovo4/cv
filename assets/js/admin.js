@@ -65,37 +65,6 @@
     try { const r = await uploadImage(f, 'covers', 560, 0.4); coverUrl = r.url; $('coverPrev').src = r.url; show('coverPrev', true); $('coverInfo').textContent = Math.round(r.bytes / 1024) + ' KB'; }
     catch (err) { $('coverInfo').textContent = 'Upload failed: ' + err.message; }
   });
-  /* ---------- editor toolbar ---------- */
-  const ta = $('body');
-  function wrapSel(before, after, placeholder) {
-    const s = ta.selectionStart, e = ta.selectionEnd, had = e > s, sel = had ? ta.value.slice(s, e) : placeholder;
-    ta.setRangeText(before + sel + after, s, e, 'end');
-    if (!had) ta.setSelectionRange(s + before.length, s + before.length + sel.length);
-    ta.focus(); updPreview();
-  }
-  function blockPrefix(prefix) {
-    const v = ta.value, s = ta.selectionStart, e = ta.selectionEnd;
-    const start = v.lastIndexOf('\n', s - 1) + 1; let end = v.indexOf('\n', e); if (end === -1) end = v.length;
-    const lines = v.slice(start, end).split('\n'), allHave = lines.every(l => l.startsWith(prefix));
-    let block = lines.map(l => allHave ? l.slice(prefix.length) : (l.replace(/^(#{1,2} |- |> )/, '') ? prefix + l.replace(/^(#{1,2} |- |> )/, '') : prefix)).join('\n');
-    // keep blocks separated by blank lines so they render as their own element
-    const pre = start > 0 && v.slice(Math.max(0, start - 2), start) !== '\n\n' ? (v[start - 1] === '\n' ? '\n' : '\n\n') : '';
-    const post = end < v.length && v.slice(end, end + 2) !== '\n\n' ? '\n' : '';
-    ta.setRangeText(pre + block + post, start, end, 'end'); ta.focus(); updPreview();
-  }
-  const cmds = {
-    h1: () => blockPrefix('# '), h2: () => blockPrefix('## '),
-    bold: () => wrapSel('**', '**', 'bold text'), italic: () => wrapSel('*', '*', 'italic text'), code: () => wrapSel('`', '`', 'code'),
-    list: () => blockPrefix('- '), quote: () => blockPrefix('> '),
-    link: () => { const url = prompt('Link address', 'https://'); if (url && /^https?:\/\//.test(url)) wrapSel('[', '](' + url.trim() + ')', 'link text'); },
-    image: () => $('inlineFile').click()
-  };
-  $('edBar').addEventListener('click', e => { const b = e.target.closest('button[data-cmd]'); if (b) cmds[b.dataset.cmd](); });
-  ta.addEventListener('keydown', e => {
-    if (!(e.metaKey || e.ctrlKey)) return; const k = e.key.toLowerCase();
-    if (k === 'b') { e.preventDefault(); cmds.bold(); } else if (k === 'i') { e.preventDefault(); cmds.italic(); } else if (k === 'k') { e.preventDefault(); cmds.link(); }
-  });
-
   $('insertImg').addEventListener('click', () => $('inlineFile').click());
   $('inlineFile').addEventListener('change', async e => {
     const files = Array.from(e.target.files); e.target.value = ''; if (!files.length) return; $('postMsg').textContent = 'Uploading image(s)…';
