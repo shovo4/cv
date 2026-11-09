@@ -80,3 +80,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 80px; }
   .header-area .navbar .menu li a { color: #fff; }
 }
 @media (max-width: 767px) { .hx-bar { justify-content: flex-end; } .hx-bar-right { margin-left: auto; } }
+
+/* admin shortcut (top-right, subtle) */
+.hx-admin { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; color: #6a6a6a; border: 1px solid transparent; transition: color .25s, border-color .25s, background .25s; }
+.hx-admin:hover { color: #fff; border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.06); text-decoration: none; }
