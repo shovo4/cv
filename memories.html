@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/blog.css"><title>Memories | Shovo</title></head><body>
+<header class="b-header"><div class="b-wrap"><a class="b-brand" href="./index.html">&larr; Shovo</a><nav><a href="./blogs.html">Blog</a><a href="./memories.html" class="on">Memories</a></nav></div></header>
+<main class="b-wrap">
+  <h1 class="b-title">Memories</h1><p class="b-sub">Moments worth keeping.</p>
+  <div id="grid" class="mem-grid"></div><div id="status" class="b-status">Loading…</div>
+  <div class="more"><button id="more" class="btn ghost hide">Load more</button></div>
+</main>
+<div class="lightbox" id="lb"><img alt=""></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./assets/js/supabase-config.js"></script>
+<script src="./assets/js/blog.js"></script>
+<script>
+(async () => {
+  const { sb, esc, fmtDate, mountReactions } = Blog, grid = document.getElementById('grid'), status = document.getElementById('status'), more = document.getElementById('more');
+  const PAGE = 24; let from = 0;
+  async function load() {
+    more.disabled = true;
+    const { data, error } = await sb.from('memories').select('*').order('taken_on', { ascending: false, nullsFirst: false }).order('created_at', { ascending: false }).range(from, from + PAGE - 1);
+    more.disabled = false;
+    if (error) { status.textContent = "Couldn't load memories right now."; return; }
+    if (!from && !data.length) { status.textContent = 'No memories yet.'; return; }
+    status.classList.add('hide');
+    const start = grid.children.length;
+    grid.insertAdjacentHTML('beforeend', data.map(m => '<div class="mem"><img loading="lazy" src="' + esc(m.image_url) + '" alt="' + esc(m.caption || 'Memory') + '">' +
+      (m.caption ? '<div class="cap">' + esc(m.caption) + '</div>' : '') + (m.taken_on ? '<div class="when">' + fmtDate(m.taken_on + 'T12:00:00') + '</div>' : '') +
+      '<div data-id="' + esc(m.id) + '"></div></div>').join(''));
+    mountReactions('memory', Array.from(grid.children).slice(start).map(c => c.querySelector('[data-id]')));
+    from += data.length; more.classList.toggle('hide', data.length < PAGE);
+  }
+  more.onclick = load; load();
+  const lb = document.getElementById('lb');
+  grid.addEventListener('click', e => { if (e.target.tagName === 'IMG') { lb.querySelector('img').src = e.target.src; lb.classList.add('open'); } });
+  lb.onclick = () => lb.classList.remove('open');
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+})();
+</script></body></html>

@@ -2735,4 +2735,13 @@ body {
     color: #fff;
 }
 
+.hidden-blog-link {
+    opacity: 0.25;
+    transition: opacity 0.3s ease;
+}
+
+.hidden-blog-link:hover {
+    opacity: 1;
+}
+
 

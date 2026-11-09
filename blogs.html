@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/blog.css"><title>Blog | Shovo</title></head><body>
+<header class="b-header"><div class="b-wrap"><a class="b-brand" href="./index.html">&larr; Shovo</a><nav><a href="./blogs.html" class="on">Blog</a><a href="./memories.html">Memories</a></nav></div></header>
+<main class="b-wrap">
+  <h1 class="b-title">Blog</h1><p class="b-sub">Thoughts, notes and things I'm learning.</p>
+  <div id="list" class="post-list"><div class="b-status">Loading…</div></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./assets/js/supabase-config.js"></script>
+<script src="./assets/js/blog.js"></script>
+<script>
+(async () => {
+  const { sb, esc, fmtDate, totalReactions } = Blog, list = document.getElementById('list');
+  const { data, error } = await sb.from('posts').select('id,title,excerpt,cover_url,created_at').eq('published', true).order('created_at', { ascending: false });
+  if (error) { list.innerHTML = '<div class="b-status">Couldn\'t load posts right now.</div>'; return; }
+  if (!data.length) { list.innerHTML = '<div class="b-empty">No posts yet. Check back soon.</div>'; return; }
+  const totals = await totalReactions('post', data.map(p => p.id));
+  list.innerHTML = data.map(p => '<a class="post-card" href="./post.html?id=' + encodeURIComponent(p.id) + '">' +
+    '<div class="thumb">' + (p.cover_url ? '<img loading="lazy" src="' + esc(p.cover_url) + '" alt="">' : '') + '</div>' +
+    '<div class="info"><h2>' + esc(p.title) + '</h2>' + (p.excerpt ? '<p>' + esc(p.excerpt) + '</p>' : '') +
+    '<div class="meta">' + fmtDate(p.created_at) + (totals[p.id] ? ' · ' + totals[p.id] + ' reaction' + (totals[p.id] > 1 ? 's' : '') : '') + '</div></div></a>').join('');
+})();
+</script></body></html>

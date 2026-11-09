@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/blog.css"><title>Blog | Shovo</title></head><body>
+<header class="b-header"><div class="b-wrap"><a class="b-brand" href="./index.html">&larr; Shovo</a><nav><a href="./blogs.html" class="on">Blog</a><a href="./memories.html">Memories</a></nav></div></header>
+<main class="b-wrap"><article class="article" id="art"><div class="b-status">Loading…</div></article></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./assets/js/supabase-config.js"></script>
+<script src="./assets/js/blog.js"></script>
+<script>
+(async () => {
+  const { sb, esc, fmtDate, renderBody, mountReactions } = Blog, art = document.getElementById('art');
+  const id = new URLSearchParams(location.search).get('id');
+  const { data, error } = id ? await sb.from('posts').select('*').eq('id', id).eq('published', true).maybeSingle() : { data: null };
+  if (error || !data) { art.innerHTML = '<div class="b-empty">Post not found. <a href="./blogs.html">Back to blog</a></div>'; return; }
+  document.title = data.title + ' | Shovo';
+  art.innerHTML = '<h1 class="b-title">' + esc(data.title) + '</h1><div class="meta">' + fmtDate(data.created_at) + '</div>' +
+    (data.cover_url ? '<img class="cover" src="' + esc(data.cover_url) + '" alt="">' : '') +
+    '<div class="prose">' + renderBody(data.body) + '</div><div data-id="' + esc(data.id) + '" id="rx"></div>';
+  mountReactions('post', [document.getElementById('rx')]);
+})();
+</script></body></html>
