@@ -23,6 +23,7 @@
       <h2 id="formTitle">New post</h2>
       <label class="f" for="title">Title</label><input id="title" type="text">
       <label class="f" for="excerpt">Short summary (shown in the list)</label><input id="excerpt" type="text">
+      <label class="f" for="postDate">Post date (posts are ordered by this &mdash; pick a past date to back-date)</label><input id="postDate" type="date">
       <label class="f">Cover image (compressed automatically)</label>
       <div class="row" style="margin-top:0"><input id="coverFile" type="file" accept="image/*"><span id="coverInfo" class="note"></span></div>
       <img id="coverPrev" class="hide" style="max-height:140px;border-radius:12px;margin-top:10px" alt="">
@@ -69,6 +70,11 @@
   const $ = id => document.getElementById(id);
   const show = (id, on) => $(id).classList.toggle('hide', !on);
   let editingId = null, coverUrl = null;
+  const todayStr = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  const toDateInput = iso => { const d = new Date(iso); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  const fromDateInput = v => new Date(v + 'T12:00:00').toISOString();   // noon local, so the day never shifts across time zones
+  $('postDate').value = todayStr();
+  $('postDate').addEventListener('click', e => { try { e.target.showPicker(); } catch (err) {} });
 
   /* ---------- auth ---------- */
   async function route() {
@@ -118,7 +124,7 @@
 
   function resetForm() {
     editingId = null; coverUrl = null;
-    ['title', 'excerpt', 'body'].forEach(i => $(i).value = ''); $('published').checked = false; $('coverFile').value = '';
+    ['title', 'excerpt', 'body'].forEach(i => $(i).value = ''); $('published').checked = false; $('coverFile').value = ''; $('postDate').value = todayStr();
     show('coverPrev', false); $('coverInfo').textContent = ''; $('formTitle').textContent = 'New post'; show('cancelEdit', false); updPreview();
   }
   $('cancelEdit').addEventListener('click', resetForm);
@@ -126,7 +132,7 @@
   $('savePost').addEventListener('click', async () => {
     const title = $('title').value.trim();
     if (!title) { $('postMsg').textContent = 'Add a title first.'; return; }
-    const row = { title, excerpt: $('excerpt').value.trim() || null, body: $('body').value, cover_url: coverUrl, published: $('published').checked, updated_at: new Date().toISOString() };
+    const row = { title, excerpt: $('excerpt').value.trim() || null, body: $('body').value, cover_url: coverUrl, published: $('published').checked, updated_at: new Date().toISOString(), created_at: fromDateInput($('postDate').value || todayStr()) };
     $('savePost').disabled = true;
     const q = editingId ? sb.from('posts').update(row).eq('id', editingId) : sb.from('posts').insert(row);
     const { error } = await q; $('savePost').disabled = false;
@@ -148,7 +154,7 @@
     const b = e.target.closest('button'); if (!b) return;
     const p = (window._posts || []).find(x => x.id === b.dataset.id); if (!p) return;
     if (b.dataset.a === 'edit') {
-      editingId = p.id; coverUrl = p.cover_url; $('title').value = p.title; $('excerpt').value = p.excerpt || ''; $('body').value = p.body; $('published').checked = p.published;
+      editingId = p.id; coverUrl = p.cover_url; $('title').value = p.title; $('excerpt').value = p.excerpt || ''; $('body').value = p.body; $('published').checked = p.published; $('postDate').value = toDateInput(p.created_at);
       if (p.cover_url) { $('coverPrev').src = p.cover_url; show('coverPrev', true); } else show('coverPrev', false);
       $('formTitle').textContent = 'Editing post'; show('cancelEdit', true); updPreview(); scrollTo({ top: 0, behavior: 'smooth' });
     } else if (b.dataset.a === 'toggle') {
