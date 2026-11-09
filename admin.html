@@ -78,12 +78,12 @@
         </div>
         <label class="f" for="excerpt">Short summary (shown in the list)</label><input id="excerpt" type="text">
         <label class="f">Cover image <span class="note">saved small: ~560px WebP, low quality</span></label>
-        <div class="row" style="margin-top:0"><input id="coverFile" type="file" accept="image/*"><span id="coverInfo" class="note"></span></div>
+        <div class="row" style="margin-top:0"><input id="coverFile" type="file" accept="image/*,.heic,.heif"><span id="coverInfo" class="note"></span></div>
         <img id="coverPrev" class="hide cover-prev" alt="">
         <label class="f" for="body">Body &mdash; blank line = paragraph &middot; <code>## Heading</code> <code>**bold**</code> <code>*italic*</code> <code>- list</code> <code>&gt; quote</code> <code>[text](https://link)</code></label>
         <div class="split"><textarea id="body" placeholder="Write…"></textarea><div class="preview"><div class="prose" id="preview"></div></div></div>
         <div class="row">
-          <input id="inlineFile" type="file" accept="image/*" multiple class="hide">
+          <input id="inlineFile" type="file" accept="image/*,.heic,.heif" multiple class="hide">
           <button class="btn ghost" type="button" id="insertImg"><i class="iconoir-media-image-plus"></i> Insert image</button>
           <label class="chk"><input type="checkbox" id="published"> Published</label>
           <button class="btn" type="button" id="savePost">Save post</button>
@@ -98,7 +98,7 @@
       <div class="panel">
         <h2>Add memories</h2>
         <p class="note">Photos are shrunk in your browser to ~640px WebP at low quality before upload (typically 15–40 KB each).</p>
-        <label class="f" for="memFiles">Pictures (you can pick many)</label><input id="memFiles" type="file" accept="image/*" multiple>
+        <label class="f" for="memFiles">Pictures (you can pick many)</label><input id="memFiles" type="file" accept="image/*,.heic,.heif" multiple>
         <div class="two">
           <div><label class="f" for="memCap">Caption (optional, applied to all selected)</label><input id="memCap" type="text"></div>
           <div><label class="f" for="memDate">Date (optional)</label><input id="memDate" type="date"></div>

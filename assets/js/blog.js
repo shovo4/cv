@@ -123,9 +123,30 @@
       });
     }
   }
+  /* iPhone HEIC/HEIF support: Safari decodes it natively; elsewhere load a converter on demand */
+  const isHeic = f => /image\/hei[cf]/i.test(f.type || '') || /\.(heic|heif)$/i.test(f.name || '');
+  let heicLib = null;
+  function loadHeicLib() {
+    if (window.heic2any) return Promise.resolve(window.heic2any);
+    if (!heicLib) heicLib = new Promise((res, rej) => {
+      const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js';
+      sc.onload = () => res(window.heic2any); sc.onerror = () => { heicLib = null; rej(new Error('Could not load the iPhone photo converter. Check your connection and try again.')); };
+      document.head.appendChild(sc);
+    });
+    return heicLib;
+  }
+  async function toDecodable(file) {
+    if (!isHeic(file)) return file;
+    try { const b = await createImageBitmap(file); if (b.close) b.close(); return file; } catch (e) { /* not natively supported */ }
+    const h = await loadHeicLib();
+    const out = await h({ blob: file, toType: 'image/jpeg', quality: 0.85 });
+    return Array.isArray(out) ? out[0] : out;
+  }
   async function compressImage(file, maxDim, quality) {
     maxDim = maxDim || 640; quality = quality || 0.4;
-    const bmp = await loadBitmap(file);
+    let bmp;
+    try { bmp = await loadBitmap(await toDecodable(file)); }
+    catch (e) { throw new Error(e && e.message && /converter/.test(e.message) ? e.message : 'Could not read "' + (file.name || 'image') + '". Try a JPG, PNG or HEIC photo.'); }
     const w0 = bmp.width, h0 = bmp.height, s = Math.min(1, maxDim / Math.max(w0, h0));
     const c = document.createElement("canvas");
     c.width = Math.round(w0 * s); c.height = Math.round(h0 * s);
