@@ -71,3 +71,5 @@ textarea { min-height:280px; resize:vertical; font-family:ui-monospace,Menlo,mon
 .list-item img { width:56px; height:56px; object-fit:cover; border-radius:10px; }
 .note { font-size:13px; color:var(--muted); margin-top:8px; } .ok { color:#6c6; } .err { color:#e88; }
 .hide { display:none !important; }
+input[type=date] { color-scheme: dark; cursor: pointer; }
+input[type=date]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .9; }

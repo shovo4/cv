@@ -185,6 +185,9 @@
     await sb.storage.from('media').remove([m.image_path]); await sb.from('memories').delete().eq('id', m.id); loadMemories();
   });
 
+  // open the calendar when clicking anywhere on the date field
+  $('memDate').addEventListener('click', e => { try { e.target.showPicker(); } catch (err) {} });
+
   sb.auth.onAuthStateChange((ev) => { if (ev === 'SIGNED_OUT') route(); });
   route(); updPreview();
 })();
